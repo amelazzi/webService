@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database Connection Settings -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+
+        <property name="connection.url">jdbc:postgresql://localhost:5432/rmidb</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">toor</property>
+
+        <!-- SQL Dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+        <!-- Echo All Executed SQL to stdout -->
+        <property name="show_sql">true</property>
+
+        <!-- DB schema will be updated if needed -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+		
+		<property name="hibernate.current_session_context_class">thread</property>
+		
+        <!-- mapping entities -->
+        <mapping class="com.server.entities.impl.Product"/>
+        <!-- <mapping class="Entities.PostgreSQL.Admin"/>
+        <mapping class="Entities.PostgreSQL.PageAdmin"/>
+        <mapping class="Entities.PostgreSQL.Message"/>
+        <mapping class="Entities.PostgreSQL.Publication"/>
+        <mapping class="Entities.PostgreSQL.Post"/>
+        <mapping class="Entities.PostgreSQL.Picture"/>
+        <mapping class="Entities.PostgreSQL.Video"/>
+        <mapping class="Entities.PostgreSQL.Reaction"/>
+        <mapping class="Entities.PostgreSQL.Wall"/>
+        <mapping class="Entities.PostgreSQL.Page"/>
+        <mapping class="Entities.PostgreSQL.Group"/>-->
+
+    </session-factory>
+</hibernate-configuration>
