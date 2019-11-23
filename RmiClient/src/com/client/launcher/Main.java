@@ -18,7 +18,7 @@ public class Main {
 				stubProduct = (IProductRmi) Naming.lookup("productService");
 				System.out.print("Client OK");
 				
-				Product product1 = new Product();
+				/*Product product1 = new Product();
 		        product1.setTitle("Livre Java");
 				product1.setQuantity(5);
 				product1.setPrice(23);
@@ -43,13 +43,13 @@ public class Main {
 		        System.out.println("*** Add product - start ***");
 		        stubProduct.add(product1);
 		        stubProduct.add(product2);
-		        stubProduct.add(product3);
+		        stubProduct.add(product3);*/
 				
 				
 				System.out.print("***List Product****");
 				List<Product> list = stubProduct.findAll();
 				for(Product p:list) {
-					System.out.print("Title "+ p.getTitle()+" Price "+p.getPrice());
+					System.out.println("-"+ p.toString());
 				}
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.server.entities.interfaces.IComment;
 
@@ -23,7 +25,13 @@ public class Comment implements Serializable, IComment {
 	private long idComment;
 	private String content;
 	private Date createdAt;
+	
+	@ManyToOne
+	@JoinColumn(name="idProduct")
 	private Product product;
+	
+	@ManyToOne
+	@JoinColumn(name="idUser")
 	private User user;
 	
 	@Override

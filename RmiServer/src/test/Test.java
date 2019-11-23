@@ -1,11 +1,12 @@
 package test;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.server.entities.impl.Product;
 import com.server.service.impl.ProductService;
-
-import antlr.collections.List;
+import com.server.service.impl.ProduitServiceImpl;
 
 public class Test {
 
@@ -14,7 +15,8 @@ public class Test {
 	}
 
 	public static void main(String[] args) throws RemoteException {
-		ProductService prodService = new ProductService();
+		ProduitServiceImpl service2 = new ProduitServiceImpl();
+		ProductService service1 = new ProductService();
 		
         Product product1 = new Product();
         product1.setTitle("Livre Java");
@@ -24,14 +26,14 @@ public class Test {
 		product1.setAvailable(true);
 		
 		Product product2 = new Product();
-        product2.setTitle("Livre Java");
+        product2.setTitle("Livre C");
 		product2.setQuantity(5);
 		product2.setPrice(23);
 		product2.setDescription("ceci est une description du produit");
 		product2.setAvailable(true);
 		
 		Product product3 = new Product();
-        product3.setTitle("Livre Java");
+        product3.setTitle("Livre Python");
 		product3.setQuantity(5);
 		product3.setPrice(23);
 		product3.setDescription("ceci est une description du produit");
@@ -39,9 +41,16 @@ public class Test {
 		
 		
         System.out.println("*** Persist - start ***");
-        prodService.save(product1);
-        prodService.save(product2);
-        prodService.save(product3);
+        service1.save(product1);
+        service1.save(product2);
+        service1.save(product3);
+		
+		/*List<Product> products = new ArrayList<Product>();
+		products = service2.findAll();
+        System.out.println("Products Persisted are :");
+        for (Product p : products) {
+          System.out.println("-" + p.toString());
+        }*/
         
         
         //List<Product> books1 = bookService.findAll();

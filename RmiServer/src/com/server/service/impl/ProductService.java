@@ -86,10 +86,10 @@ public class ProductService implements IProductService{
     @Override
     public List<Product> findAll() {
     	try {
-    		productDao.openCurrentSession();
-            List<Product> books = productDao.findAll();
-            productDao.closeCurrentSession();
-            return books;
+    		//productDao.openCurrentSession();
+            List<Product> products = productDao.findAll();
+            //productDao.closeCurrentSession();
+            return products;
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}

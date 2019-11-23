@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.server.entities.interfaces.IMedia;
 
@@ -30,6 +32,9 @@ public class Media implements Serializable, IMedia {
 	private String url;
 	private Date uploadedAt;
 	private String type;
+	
+	@ManyToOne
+	@JoinColumn(name="idProduct")
 	private Product product;
 	
 	@Override

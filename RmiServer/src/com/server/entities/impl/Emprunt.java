@@ -7,11 +7,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.server.entities.interfaces.IEmprunt;
 
 @SuppressWarnings("serial")
 @Entity
+@Table(
+		uniqueConstraints = {@UniqueConstraint(columnNames={"idEmprunt","idproduct","iduser", "createdAt"})}
+)
 public class Emprunt implements Serializable, IEmprunt{
 	
 	@Id
@@ -19,7 +26,13 @@ public class Emprunt implements Serializable, IEmprunt{
 	private long idEmprunt;
 	private Date createdAt;
 	private Boolean isReturned;
+	
+	@ManyToOne
+	@JoinColumn(name="idProduct")
 	private Product product;
+	
+	@ManyToOne
+	@JoinColumn(name="idUser")
 	private User user;
 	
 	public Emprunt() {

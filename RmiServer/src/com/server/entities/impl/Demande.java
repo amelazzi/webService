@@ -7,11 +7,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.server.entities.interfaces.IDemande;
 
 @SuppressWarnings("serial")
 @Entity
+@Table(
+		uniqueConstraints = {@UniqueConstraint(columnNames={"idDemande","idproduct","iduser", "createdAt"})}
+)
 public class Demande implements Serializable, IDemande{
 
 	public Demande() {
@@ -25,7 +32,13 @@ public class Demande implements Serializable, IDemande{
 	private Date createdAt;
 	private Date desiredAt;
 	private Boolean isDone;
+	
+	@ManyToOne
+	@JoinColumn(name="idProduct")
 	private Product product;
+	
+	@ManyToOne
+	@JoinColumn(name="idUser")
 	private User user;
 	
 	@Override

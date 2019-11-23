@@ -1,5 +1,6 @@
 package com.server.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -83,10 +84,11 @@ public class ProductDaoImpl implements IProductDao<Product, String> {
     }
  
     @SuppressWarnings("unchecked")
-    @Override
+	@Override
     public List<Product> findAll() {
-        List<Product> books = (List<Product>) getCurrentSession().createQuery("from Product").list();
-        return books;
+    	List<Product> products = (List<Product>) getCurrentSession().createQuery("from Product").list();
+        
+        return products;
     }
     
     @Override

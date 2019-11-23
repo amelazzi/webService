@@ -1,13 +1,16 @@
 package com.server.entities.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.server.entities.interfaces.IProduct;
 
@@ -25,15 +28,30 @@ public class Product implements IProduct, Serializable {
 	private Boolean available;
 	private Date createdAt;
 	private int quantity;
+	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<Rate> rates;
+	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<Comment> comments;
+	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<Emprunt> emprunts;
+	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<Demande> demandes;
+	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<Media> medias;
 	
 	
 	public Product(){
 		this.createdAt = new Date();
+		this.rates = new ArrayList<Rate>();
+		this.comments = new ArrayList<Comment>();
+		this.emprunts = new ArrayList<Emprunt>();
+		this.demandes = new ArrayList<Demande>();
+		this.medias = new ArrayList<Media>();
 	}
 	
 	@Override

@@ -1,13 +1,16 @@
 package com.server.entities.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.server.entities.interfaces.IUser;
 
@@ -19,6 +22,9 @@ public class User implements Serializable, IUser{
 		this.registeredAt = new Date();
 		this.role = Role.user.name();
 		this.status =Status.student.name();
+		this.comments = new ArrayList<Comment>();
+		this.demandes = new ArrayList<Demande>();
+		this.emprunts = new ArrayList<Emprunt>();
 	}
 	
 	public enum Role{
@@ -44,8 +50,14 @@ public class User implements Serializable, IUser{
 	private String domain;
 	private String graduate;
 	private Date registeredAt;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Emprunt> emprunts;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Demande> demandes;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Comment> comments;
 	
 	@Override

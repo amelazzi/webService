@@ -24,17 +24,12 @@
 		
         <!-- mapping entities -->
         <mapping class="com.server.entities.impl.Product"/>
-        <!-- <mapping class="Entities.PostgreSQL.Admin"/>
-        <mapping class="Entities.PostgreSQL.PageAdmin"/>
-        <mapping class="Entities.PostgreSQL.Message"/>
-        <mapping class="Entities.PostgreSQL.Publication"/>
-        <mapping class="Entities.PostgreSQL.Post"/>
-        <mapping class="Entities.PostgreSQL.Picture"/>
-        <mapping class="Entities.PostgreSQL.Video"/>
-        <mapping class="Entities.PostgreSQL.Reaction"/>
-        <mapping class="Entities.PostgreSQL.Wall"/>
-        <mapping class="Entities.PostgreSQL.Page"/>
-        <mapping class="Entities.PostgreSQL.Group"/>-->
-
+        <mapping class="com.server.entities.impl.Comment"/>
+        <mapping class="com.server.entities.impl.Demande"/>
+        <mapping class="com.server.entities.impl.Emprunt"/>
+        <mapping class="com.server.entities.impl.Media"/>
+        <mapping class="com.server.entities.impl.Rate"/>
+        <mapping class="com.server.entities.impl.User"/>
+        
     </session-factory>
 </hibernate-configuration>

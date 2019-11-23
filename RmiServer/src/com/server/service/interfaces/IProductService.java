@@ -3,7 +3,6 @@ package com.server.service.interfaces;
 import java.util.List;
 
 import com.server.entities.impl.Product;
-import com.server.exceptions.MyExceptions;
 
 public interface IProductService {
 	public Product save(Product entity);
