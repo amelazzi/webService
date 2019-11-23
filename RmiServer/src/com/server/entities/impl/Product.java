@@ -1,8 +1,8 @@
 package com.server.entities.impl;
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,13 +11,9 @@ import javax.persistence.Id;
 
 import com.server.entities.interfaces.IProduct;
 
+@SuppressWarnings("serial")
 @Entity
 public class Product implements IProduct, Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,9 +25,14 @@ public class Product implements IProduct, Serializable {
 	private Boolean available;
 	private Date createdAt;
 	private int quantity;
+	private List<Rate> rates;
+	private List<Comment> comments;
+	private List<Emprunt> emprunts;
+	private List<Demande> demandes;
+	private List<Media> medias;
 	
 	
-	public Product() throws RemoteException {
+	public Product(){
 		this.createdAt = new Date();
 	}
 	
@@ -49,11 +50,7 @@ public class Product implements IProduct, Serializable {
 	public long getIdProduct() {
 		return idProduct;
 	}
-	
-	@Override
-	public void setIdProduct(long idProduct) {
-		this.idProduct = idProduct;
-	}
+
 	
 	@Override
 	public float getPrice() {
@@ -104,12 +101,63 @@ public class Product implements IProduct, Serializable {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+	
+	@Override
+	public List<Rate> getRates() {
+		return rates;
+	}
+	
+	@Override
+	public void setRates(List<Rate> rates) {
+		this.rates = rates;
+	}
+	
+	@Override
+	public List<Comment> getComments() {
+		return comments;
+	}
+	
+	@Override
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
+	@Override
+	public List<Emprunt> getEmprunts() {
+		return emprunts;
+	}
+	
+	@Override
+	public void setEmprunts(List<Emprunt> emprunts) {
+		this.emprunts = emprunts;
+	}
+	
+	@Override
+	public List<Demande> getDemandes() {
+		return demandes;
+	}
+	
+	@Override
+	public void setDemandes(List<Demande> demandes) {
+		this.demandes = demandes;
+	}
+	
+	@Override
+	public List<Media> getMedias() {
+		return medias;
+	}
+	
+	@Override
+	public void setMedias(List<Media> medias) {
+		this.medias = medias;
+	}
 
 	@Override
 	public String toString() {
 		return "Product [idProduct=" + idProduct + ", price=" + price + ", title=" + title + ", description="
 				+ description + ", available=" + available + ", createdAt=" + createdAt + ", quantity=" + quantity
-				+ "]";
+				+ ", rates=" + rates + ", comments=" + comments + ", emprunts=" + emprunts + ", demandes=" + demandes
+				+ ", medias=" + medias + "]";
 	}
 
 	
