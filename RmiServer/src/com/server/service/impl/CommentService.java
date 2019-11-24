@@ -4,7 +4,6 @@ import java.util.List;
 import org.hibernate.HibernateException;
 
 import com.server.dao.impl.CommentDaoImpl;
-import com.server.dao.impl.CommentDaoImpl;
 import com.server.entities.impl.Comment;
 import com.server.service.interfaces.ICommentService;
 
