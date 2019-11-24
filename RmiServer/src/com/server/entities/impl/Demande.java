@@ -39,7 +39,7 @@ public class Demande implements Serializable, IDemande{
 	
 	@ManyToOne
 	@JoinColumn(name="idUser")
-	private User user;
+	private UserImpl user;
 	
 	@Override
 	public Date getCreatedAt() {
@@ -82,12 +82,12 @@ public class Demande implements Serializable, IDemande{
 	}
 	
 	@Override
-	public User getUser() {
+	public UserImpl getUser() {
 		return user;
 	}
 	
 	@Override
-	public void setUser(User user) {
+	public void setUser(UserImpl user) {
 		this.user = user;
 	}
 	

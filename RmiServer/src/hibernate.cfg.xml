@@ -18,7 +18,7 @@
         <property name="show_sql">true</property>
 
         <!-- DB schema will be updated if needed -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
 		
 		<property name="hibernate.current_session_context_class">thread</property>
 		
@@ -29,7 +29,7 @@
         <mapping class="com.server.entities.impl.Emprunt"/>
         <mapping class="com.server.entities.impl.Media"/>
         <mapping class="com.server.entities.impl.Rate"/>
-        <mapping class="com.server.entities.impl.User"/>
+        <mapping class="com.server.entities.impl.UserImpl"/>
         
     </session-factory>
 </hibernate-configuration>

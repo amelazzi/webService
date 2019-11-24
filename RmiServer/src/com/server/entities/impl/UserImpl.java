@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,9 +16,9 @@ import com.server.entities.interfaces.IUser;
 
 @SuppressWarnings("serial")
 @Entity
-public class User implements Serializable, IUser{
+public class UserImpl implements Serializable, IUser{
 	
-	public User() {
+	public UserImpl() {
 		this.registeredAt = new Date();
 		this.role = Role.user.name();
 		this.status =Status.student.name();
@@ -51,13 +51,13 @@ public class User implements Serializable, IUser{
 	private String graduate;
 	private Date registeredAt;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Emprunt> emprunts;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Demande> demandes;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Comment> comments;
 	
 	@Override
@@ -220,8 +220,7 @@ public class User implements Serializable, IUser{
 		return "User [idUser=" + idUser + ", matricule=" + matricule + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", email=" + email + ", password=" + password + ", phone=" + phone + ", role=" + role
 				+ ", status=" + status + ", birthday=" + birthday + ", domain=" + domain + ", graduate=" + graduate
-				+ ", registeredAt=" + registeredAt + ", emprunts=" + emprunts + ", demandes=" + demandes + ", comments="
-				+ comments + "]";
+				+ ", registeredAt=" + registeredAt  + "]";
 	}
 
 }

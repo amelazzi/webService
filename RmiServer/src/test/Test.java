@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.server.entities.impl.Product;
 import com.server.service.impl.ProductService;
-import com.server.service.impl.ProduitServiceImpl;
 
 public class Test {
 
@@ -15,8 +14,7 @@ public class Test {
 	}
 
 	public static void main(String[] args) throws RemoteException {
-		ProduitServiceImpl service2 = new ProduitServiceImpl();
-		ProductService service1 = new ProductService();
+		ProductService service = new ProductService();
 		
         Product product1 = new Product();
         product1.setTitle("Livre Java");
@@ -41,17 +39,21 @@ public class Test {
 		
 		
         System.out.println("*** Persist - start ***");
-        service1.save(product1);
-        service1.save(product2);
-        service1.save(product3);
+        service.save(product1);
+        service.save(product2);
+        service.save(product3);
 		
-		/*List<Product> products = new ArrayList<Product>();
-		products = service2.findAll();
+        System.out.println("*** select all***");
+		List<Product> products = new ArrayList<Product>();
+		products = service.findAll();
         System.out.println("Products Persisted are :");
         for (Product p : products) {
           System.out.println("-" + p.toString());
-        }*/
+        }
         
+		/*System.out.println("*** select one***");
+		Product produit = service.findOneById((long) 1);
+		System.out.println("-"+produit.toString());*/
         
         //List<Product> books1 = bookService.findAll();
         //System.out.println("Products Persisted are :");

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,19 +29,19 @@ public class Product implements IProduct, Serializable {
 	private Date createdAt;
 	private int quantity;
 	
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private List<Rate> rates;
 	
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private List<Comment> comments;
 	
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private List<Emprunt> emprunts;
 	
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private List<Demande> demandes;
 	
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private List<Media> medias;
 	
 	
@@ -173,9 +173,7 @@ public class Product implements IProduct, Serializable {
 	@Override
 	public String toString() {
 		return "Product [idProduct=" + idProduct + ", price=" + price + ", title=" + title + ", description="
-				+ description + ", available=" + available + ", createdAt=" + createdAt + ", quantity=" + quantity
-				+ ", rates=" + rates + ", comments=" + comments + ", emprunts=" + emprunts + ", demandes=" + demandes
-				+ ", medias=" + medias + "]";
+				+ description + ", available=" + available + ", createdAt=" + createdAt + ", quantity=" + quantity + "]";
 	}
 
 	

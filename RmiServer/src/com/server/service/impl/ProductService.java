@@ -58,7 +58,7 @@ public class ProductService implements IProductService{
 		try {
 			if(id!=0L) {
 				productDao.openCurrentSessionwithTransaction();
-		        Product book = productDao.findOneById(id.toString());
+		        Product book = productDao.findOneById(id);
 		        productDao.delete(book);
 		        productDao.closeCurrentSessionwithTransaction();
 			}
@@ -73,7 +73,7 @@ public class ProductService implements IProductService{
 		try {
 			if(id!=0L) {
 				productDao.openCurrentSession();
-		        Product product = productDao.findOneById(id.toString());
+		        Product product = productDao.findOneById(id);
 		        productDao.closeCurrentSession();
 		        return product;
 			}
@@ -86,9 +86,9 @@ public class ProductService implements IProductService{
     @Override
     public List<Product> findAll() {
     	try {
-    		//productDao.openCurrentSession();
+    		productDao.openCurrentSession();
             List<Product> products = productDao.findAll();
-            //productDao.closeCurrentSession();
+            productDao.closeCurrentSession();
             return products;
 		} catch (HibernateException e) {
 			e.printStackTrace();

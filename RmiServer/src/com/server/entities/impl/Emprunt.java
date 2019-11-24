@@ -33,7 +33,7 @@ public class Emprunt implements Serializable, IEmprunt{
 	
 	@ManyToOne
 	@JoinColumn(name="idUser")
-	private User user;
+	private UserImpl user;
 	
 	public Emprunt() {
 		this.createdAt = new Date();
@@ -71,12 +71,12 @@ public class Emprunt implements Serializable, IEmprunt{
 	}
 	
 	@Override
-	public User getUser() {
+	public UserImpl getUser() {
 		return user;
 	}
 	
 	@Override
-	public void setUser(User user) {
+	public void setUser(UserImpl user) {
 		this.user = user;
 	}
 	

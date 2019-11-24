@@ -3,7 +3,7 @@ package com.server.entities.interfaces;
 import java.util.Date;
 
 import com.server.entities.impl.Product;
-import com.server.entities.impl.User;
+import com.server.entities.impl.UserImpl;
 
 public interface IDemande {
 	public Date getCreatedAt();
@@ -14,7 +14,7 @@ public interface IDemande {
 	public void setIsDone(Boolean isDone);
 	public Product getProduct();
 	public void setProduct(Product product);
-	public User getUser();
-	public void setUser(User user);
+	public UserImpl getUser();
+	public void setUser(UserImpl user);
 	public long getIdDemande();
 }

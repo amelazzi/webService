@@ -1,6 +1,5 @@
 package com.server.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -11,7 +10,7 @@ import com.server.dao.interfaces.IProductDao;
 import com.server.entities.impl.Product;
  
  
-public class ProductDaoImpl implements IProductDao<Product, String> {
+public class ProductDaoImpl implements IProductDao<Product, Long> {
  
     private Session currentSession;
      
@@ -73,7 +72,7 @@ public class ProductDaoImpl implements IProductDao<Product, String> {
     }
     
     @Override
-    public Product findOneById(String id) {
+    public Product findOneById(Long id) {
     	Product produit = (Product) getCurrentSession().get(Product.class, id);
         return produit; 
     }

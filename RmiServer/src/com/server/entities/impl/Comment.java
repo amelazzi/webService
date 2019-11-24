@@ -32,7 +32,7 @@ public class Comment implements Serializable, IComment {
 	
 	@ManyToOne
 	@JoinColumn(name="idUser")
-	private User user;
+	private UserImpl user;
 	
 	@Override
 	public String getContent() {
@@ -65,12 +65,12 @@ public class Comment implements Serializable, IComment {
 	}
 	
 	@Override
-	public User getUser() {
+	public UserImpl getUser() {
 		return user;
 	}
 	
 	@Override
-	public void setUser(User user) {
+	public void setUser(UserImpl user) {
 		this.user = user;
 	}
 	
