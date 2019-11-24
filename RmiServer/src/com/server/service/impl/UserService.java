@@ -8,11 +8,11 @@ import com.server.entities.impl.Product;
 import com.server.service.interfaces.IProductService;
 
  
-public class ProductService implements IProductService{
+public class UserService implements IProductService{
  
     private static ProductDaoImpl productDao;
  
-    public ProductService() {
+    public UserService() {
         productDao = new ProductDaoImpl();
     }
     
