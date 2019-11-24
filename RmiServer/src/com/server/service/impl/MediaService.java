@@ -3,25 +3,25 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 
-import com.server.dao.impl.ProductDaoImpl;
-import com.server.entities.impl.Product;
-import com.server.service.interfaces.IProductService;
+import com.server.dao.impl.MediaDaoImpl;
+import com.server.entities.impl.Media;
+import com.server.service.interfaces.IMediaService;
 
  
-public class MediaService implements IProductService{
+public class MediaService implements IMediaService{
  
-    private static ProductDaoImpl productDao;
+    private static MediaDaoImpl productDao;
  
     public MediaService() {
-        productDao = new ProductDaoImpl();
+        productDao = new MediaDaoImpl();
     }
     
-    public ProductDaoImpl productDao() {
+    public MediaDaoImpl productDao() {
         return productDao;
     }
     
     @Override
-    public Product save(Product entity) {
+    public Media save(Media entity) {
     	try {
     		if(entity!=null) {
     			productDao.openCurrentSessionwithTransaction();
@@ -36,10 +36,10 @@ public class MediaService implements IProductService{
     }
     
     @Override
-    public Product update(Product entity) {
+    public Media update(Media entity) {
     	try {
     		if(entity!=null) {
-    			if(entity.getIdProduct()!=0L) {
+    			if(entity.getIdMedia()!=0L) {
     				productDao.openCurrentSessionwithTransaction();
     	            productDao.update(entity);
     	            productDao.closeCurrentSessionwithTransaction();
@@ -58,8 +58,8 @@ public class MediaService implements IProductService{
 		try {
 			if(id!=0L) {
 				productDao.openCurrentSessionwithTransaction();
-		        Product book = productDao.findOneById(id);
-		        productDao.delete(book);
+		        Media media = productDao.findOneById(id);
+		        productDao.delete(media);
 		        productDao.closeCurrentSessionwithTransaction();
 			}
 			
@@ -69,11 +69,11 @@ public class MediaService implements IProductService{
 	}
 
 	@Override
-	public Product findOneById(Long id) {
+	public Media findOneById(Long id) {
 		try {
 			if(id!=0L) {
 				productDao.openCurrentSession();
-		        Product product = productDao.findOneById(id);
+		        Media product = productDao.findOneById(id);
 		        productDao.closeCurrentSession();
 		        return product;
 			}
@@ -84,10 +84,10 @@ public class MediaService implements IProductService{
 	}
 
     @Override
-    public List<Product> findAll() {
+    public List<Media> findAll() {
     	try {
     		productDao.openCurrentSession();
-            List<Product> products = productDao.findAll();
+            List<Media> products = productDao.findAll();
             productDao.closeCurrentSession();
             return products;
 		} catch (HibernateException e) {
@@ -108,19 +108,19 @@ public class MediaService implements IProductService{
     }
 
 	@Override
-	public List<Product> findBy(String field, String value) {
+	public List<Media> findBy(String field, String value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> findBy(String[] fields, Object[] values) {
+	public List<Media> findBy(String[] fields, Object[] values) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> findAllSortedBy(String field, String order) {
+	public List<Media> findAllSortedBy(String field, String order) {
 		// TODO Auto-generated method stub
 		return null;
 	}

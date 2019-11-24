@@ -58,8 +58,8 @@ public class CommentService implements ICommentService{
 		try {
 			if(id!=0L) {
 				commentDao.openCurrentSessionwithTransaction();
-		        Comment book = commentDao.findOneById(id);
-		        commentDao.delete(book);
+		        Comment comment = commentDao.findOneById(id);
+		        commentDao.delete(comment);
 		        commentDao.closeCurrentSessionwithTransaction();
 			}
 			
@@ -73,9 +73,9 @@ public class CommentService implements ICommentService{
 		try {
 			if(id!=0L) {
 				commentDao.openCurrentSession();
-		        Comment product = commentDao.findOneById(id);
+		        Comment comment = commentDao.findOneById(id);
 		        commentDao.closeCurrentSession();
-		        return product;
+		        return comment;
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -87,9 +87,9 @@ public class CommentService implements ICommentService{
     public List<Comment> findAll() {
     	try {
     		commentDao.openCurrentSession();
-            List<Comment> products = commentDao.findAll();
+            List<Comment> comment = commentDao.findAll();
             commentDao.closeCurrentSession();
-            return products;
+            return comment;
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}

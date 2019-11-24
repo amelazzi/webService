@@ -3,30 +3,30 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 
-import com.server.dao.impl.ProductDaoImpl;
-import com.server.entities.impl.Product;
-import com.server.service.interfaces.IProductService;
+import com.server.dao.impl.DemandeDaoImpl;
+import com.server.entities.impl.Demande;
+import com.server.service.interfaces.IDemandeService;
 
  
-public class DemandeService implements IProductService{
+public class DemandeService implements IDemandeService{
  
-    private static ProductDaoImpl productDao;
+    private static DemandeDaoImpl demandeDao;
  
     public DemandeService() {
-        productDao = new ProductDaoImpl();
+        demandeDao = new DemandeDaoImpl();
     }
     
-    public ProductDaoImpl productDao() {
-        return productDao;
+    public DemandeDaoImpl demandeDao() {
+        return demandeDao;
     }
     
     @Override
-    public Product save(Product entity) {
+    public Demande save(Demande entity) {
     	try {
     		if(entity!=null) {
-    			productDao.openCurrentSessionwithTransaction();
-                productDao.persist(entity);
-                productDao.closeCurrentSessionwithTransaction();
+    			demandeDao.openCurrentSessionwithTransaction();
+                demandeDao.persist(entity);
+                demandeDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
 		} catch (HibernateException e) {
@@ -36,13 +36,13 @@ public class DemandeService implements IProductService{
     }
     
     @Override
-    public Product update(Product entity) {
+    public Demande update(Demande entity) {
     	try {
     		if(entity!=null) {
-    			if(entity.getIdProduct()!=0L) {
-    				productDao.openCurrentSessionwithTransaction();
-    	            productDao.update(entity);
-    	            productDao.closeCurrentSessionwithTransaction();
+    			if(entity.getIdDemande()!=0L) {
+    				demandeDao.openCurrentSessionwithTransaction();
+    	            demandeDao.update(entity);
+    	            demandeDao.closeCurrentSessionwithTransaction();
     	            return entity;
     			}
     		}
@@ -57,10 +57,10 @@ public class DemandeService implements IProductService{
 	public void delete(Long id) {
 		try {
 			if(id!=0L) {
-				productDao.openCurrentSessionwithTransaction();
-		        Product book = productDao.findOneById(id);
-		        productDao.delete(book);
-		        productDao.closeCurrentSessionwithTransaction();
+				demandeDao.openCurrentSessionwithTransaction();
+		        Demande demande = demandeDao.findOneById(id);
+		        demandeDao.delete(demande);
+		        demandeDao.closeCurrentSessionwithTransaction();
 			}
 			
 		} catch (HibernateException e) {
@@ -69,13 +69,13 @@ public class DemandeService implements IProductService{
 	}
 
 	@Override
-	public Product findOneById(Long id) {
+	public Demande findOneById(Long id) {
 		try {
 			if(id!=0L) {
-				productDao.openCurrentSession();
-		        Product product = productDao.findOneById(id);
-		        productDao.closeCurrentSession();
-		        return product;
+				demandeDao.openCurrentSession();
+		        Demande demande = demandeDao.findOneById(id);
+		        demandeDao.closeCurrentSession();
+		        return demande;
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -84,12 +84,12 @@ public class DemandeService implements IProductService{
 	}
 
     @Override
-    public List<Product> findAll() {
+    public List<Demande> findAll() {
     	try {
-    		productDao.openCurrentSession();
-            List<Product> products = productDao.findAll();
-            productDao.closeCurrentSession();
-            return products;
+    		demandeDao.openCurrentSession();
+            List<Demande> demandes = demandeDao.findAll();
+            demandeDao.closeCurrentSession();
+            return demandes;
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
@@ -99,28 +99,28 @@ public class DemandeService implements IProductService{
     @Override
     public void deleteAll() {
     	try {
-    		productDao.openCurrentSessionwithTransaction();
-            productDao.deleteAll();
-            productDao.closeCurrentSessionwithTransaction();
+    		demandeDao.openCurrentSessionwithTransaction();
+            demandeDao.deleteAll();
+            demandeDao.closeCurrentSessionwithTransaction();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
     }
 
 	@Override
-	public List<Product> findBy(String field, String value) {
+	public List<Demande> findBy(String field, String value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> findBy(String[] fields, Object[] values) {
+	public List<Demande> findBy(String[] fields, Object[] values) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> findAllSortedBy(String field, String order) {
+	public List<Demande> findAllSortedBy(String field, String order) {
 		// TODO Auto-generated method stub
 		return null;
 	}
