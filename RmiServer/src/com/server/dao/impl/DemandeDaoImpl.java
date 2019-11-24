@@ -6,17 +6,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.server.dao.interfaces.IProductDao;
-import com.server.entities.impl.Product;
+import com.server.dao.interfaces.IDemandeDao;
+import com.server.entities.impl.Demande;
  
  
-public class ProductDaoImpl implements IProductDao<Product, Long> {
+public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
  
     private Session currentSession;
      
     private Transaction currentTransaction;
  
-    public ProductDaoImpl() {
+    public DemandeDaoImpl() {
     }
     
     public Session openCurrentSession() {
@@ -62,56 +62,56 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
     }
     
     @Override
-    public void persist(Product entity) {
+    public void persist(Demande entity) {
         getCurrentSession().save(entity);
     }
     
     @Override
-    public void update(Product entity) {
+    public void update(Demande entity) {
         getCurrentSession().update(entity);
     }
     
     @Override
-    public Product findOneById(Long id) {
-    	Product produit = (Product) getCurrentSession().get(Product.class, id);
+    public Demande findOneById(Long id) {
+    	Demande produit = (Demande) getCurrentSession().get(Demande.class, id);
         return produit; 
     }
     
     @Override
-    public void delete(Product entity) {
+    public void delete(Demande entity) {
         getCurrentSession().delete(entity);
     }
  
     @SuppressWarnings("unchecked")
 	@Override
-    public List<Product> findAll() {
-    	List<Product> products = (List<Product>) getCurrentSession().createQuery("from Product").list();
+    public List<Demande> findAll() {
+    	List<Demande> products = (List<Demande>) getCurrentSession().createQuery("from demande").list();
         
         return products;
     }
     
     @Override
     public void deleteAll() {
-        List<Product> entityList = findAll();
-        for (Product entity : entityList) {
+        List<Demande> entityList = findAll();
+        for (Demande entity : entityList) {
             delete(entity);
         }
     }
 
 	@Override
-	public List<Product> findBy(String field, String value) {
+	public List<Demande> findBy(String field, String value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> findBy(String[] fields, Object[] values) {
+	public List<Demande> findBy(String[] fields, Object[] values) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> findAllSortedBy(String field, String order) {
+	public List<Demande> findAllSortedBy(String field, String order) {
 		// TODO Auto-generated method stub
 		return null;
 	}

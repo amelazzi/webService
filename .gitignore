@@ -1,0 +1,2 @@
+#ignore hbernate configuration
+RmiServer/src/hibernate.cfg.xml

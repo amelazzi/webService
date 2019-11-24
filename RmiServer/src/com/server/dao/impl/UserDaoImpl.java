@@ -6,17 +6,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.server.dao.interfaces.IProductDao;
-import com.server.entities.impl.Product;
+import com.server.dao.interfaces.IUserDao;
+import com.server.entities.impl.UserImpl;
  
  
-public class ProductDaoImpl implements IProductDao<Product, Long> {
+public class UserDaoImpl implements IUserDao<UserImpl, Long> {
  
     private Session currentSession;
      
     private Transaction currentTransaction;
  
-    public ProductDaoImpl() {
+    public UserDaoImpl() {
     }
     
     public Session openCurrentSession() {
@@ -62,56 +62,56 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
     }
     
     @Override
-    public void persist(Product entity) {
+    public void persist(UserImpl entity) {
         getCurrentSession().save(entity);
     }
     
     @Override
-    public void update(Product entity) {
+    public void update(UserImpl entity) {
         getCurrentSession().update(entity);
     }
     
     @Override
-    public Product findOneById(Long id) {
-    	Product produit = (Product) getCurrentSession().get(Product.class, id);
+    public UserImpl findOneById(Long id) {
+    	UserImpl produit = (UserImpl) getCurrentSession().get(UserImpl.class, id);
         return produit; 
     }
     
     @Override
-    public void delete(Product entity) {
+    public void delete(UserImpl entity) {
         getCurrentSession().delete(entity);
     }
  
     @SuppressWarnings("unchecked")
 	@Override
-    public List<Product> findAll() {
-    	List<Product> products = (List<Product>) getCurrentSession().createQuery("from Product").list();
+    public List<UserImpl> findAll() {
+    	List<UserImpl> products = (List<UserImpl>) getCurrentSession().createQuery("from UserImpl").list();
         
         return products;
     }
     
     @Override
     public void deleteAll() {
-        List<Product> entityList = findAll();
-        for (Product entity : entityList) {
+        List<UserImpl> entityList = findAll();
+        for (UserImpl entity : entityList) {
             delete(entity);
         }
     }
 
 	@Override
-	public List<Product> findBy(String field, String value) {
+	public List<UserImpl> findBy(String field, String value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> findBy(String[] fields, Object[] values) {
+	public List<UserImpl> findBy(String[] fields, Object[] values) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> findAllSortedBy(String field, String order) {
+	public List<UserImpl> findAllSortedBy(String field, String order) {
 		// TODO Auto-generated method stub
 		return null;
 	}

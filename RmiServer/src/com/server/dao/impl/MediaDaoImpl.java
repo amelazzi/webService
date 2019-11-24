@@ -6,17 +6,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.server.dao.interfaces.IProductDao;
-import com.server.entities.impl.Product;
+import com.server.dao.interfaces.IMediaDao;
+import com.server.entities.impl.Media;
  
  
-public class ProductDaoImpl implements IProductDao<Product, Long> {
+public class MediaDaoImpl implements IMediaDao<Media, Long> {
  
     private Session currentSession;
      
     private Transaction currentTransaction;
  
-    public ProductDaoImpl() {
+    public MediaDaoImpl() {
     }
     
     public Session openCurrentSession() {
@@ -62,56 +62,56 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
     }
     
     @Override
-    public void persist(Product entity) {
+    public void persist(Media entity) {
         getCurrentSession().save(entity);
     }
     
     @Override
-    public void update(Product entity) {
+    public void update(Media entity) {
         getCurrentSession().update(entity);
     }
     
     @Override
-    public Product findOneById(Long id) {
-    	Product produit = (Product) getCurrentSession().get(Product.class, id);
+    public Media findOneById(Long id) {
+    	Media produit = (Media) getCurrentSession().get(Media.class, id);
         return produit; 
     }
     
     @Override
-    public void delete(Product entity) {
+    public void delete(Media entity) {
         getCurrentSession().delete(entity);
     }
  
     @SuppressWarnings("unchecked")
 	@Override
-    public List<Product> findAll() {
-    	List<Product> products = (List<Product>) getCurrentSession().createQuery("from Product").list();
+    public List<Media> findAll() {
+    	List<Media> products = (List<Media>) getCurrentSession().createQuery("from Media").list();
         
         return products;
     }
     
     @Override
     public void deleteAll() {
-        List<Product> entityList = findAll();
-        for (Product entity : entityList) {
+        List<Media> entityList = findAll();
+        for (Media entity : entityList) {
             delete(entity);
         }
     }
 
 	@Override
-	public List<Product> findBy(String field, String value) {
+	public List<Media> findBy(String field, String value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> findBy(String[] fields, Object[] values) {
+	public List<Media> findBy(String[] fields, Object[] values) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> findAllSortedBy(String field, String order) {
+	public List<Media> findAllSortedBy(String field, String order) {
 		// TODO Auto-generated method stub
 		return null;
 	}
