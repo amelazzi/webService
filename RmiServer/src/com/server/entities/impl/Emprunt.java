@@ -26,6 +26,8 @@ public class Emprunt implements Serializable, IEmprunt{
 	private long idEmprunt;
 	private Date createdAt;
 	private Boolean isReturned;
+	private Date returnedAt;
+	private Date toGiveBackAt;
 	
 	@ManyToOne
 	@JoinColumn(name="idProduct")
@@ -34,10 +36,10 @@ public class Emprunt implements Serializable, IEmprunt{
 	@ManyToOne
 	@JoinColumn(name="idUser")
 	private UserImpl user;
-	
 	public Emprunt() {
 		this.createdAt = new Date();
 		this.isReturned = false;
+		this.setToGiveBackAt(this.returnIn(15));
 	}
 	
 	@Override
@@ -83,6 +85,28 @@ public class Emprunt implements Serializable, IEmprunt{
 	@Override
 	public long getIdEmprunt() {
 		return idEmprunt;
+	}
+	
+	public Date returnIn(int days) {
+		int d = days*24;
+		Date today = new Date();
+		return new Date(today.getTime() + (1000 * 60 * 60 * d));
+	}
+
+	public Date getReturnedAt() {
+		return returnedAt;
+	}
+
+	public void setReturnedAt(Date returnedAt) {
+		this.returnedAt = returnedAt;
+	}
+
+	public Date getToGiveBackAt() {
+		return toGiveBackAt;
+	}
+
+	public void setToGiveBackAt(Date toGiveBackAt) {
+		this.toGiveBackAt = toGiveBackAt;
 	}
 
 	@Override

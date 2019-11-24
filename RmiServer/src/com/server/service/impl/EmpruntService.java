@@ -4,16 +4,23 @@ import java.util.List;
 import org.hibernate.HibernateException;
 
 import com.server.dao.impl.EmpruntDaoImpl;
+import com.server.entities.impl.Demande;
 import com.server.entities.impl.Emprunt;
+import com.server.entities.impl.Product;
+import com.server.entities.impl.UserImpl;
 import com.server.service.interfaces.IEmpruntService;
 
  
 public class EmpruntService implements IEmpruntService{
  
     private static EmpruntDaoImpl empruntDao;
+    private static ProductService productService;
+    private static DemandeService demandeService;
  
     public EmpruntService() {
         empruntDao = new EmpruntDaoImpl();
+        productService= new ProductService();
+        demandeService= new DemandeService();
     }
     
     public EmpruntDaoImpl empruntDao() {
@@ -33,6 +40,38 @@ public class EmpruntService implements IEmpruntService{
 			e.printStackTrace();	
 		}
     	return null;
+    }
+    
+    public int emprunter(Product p, UserImpl u) {
+    	if(p.getQuantity()>=1) {
+    		//procedure d'emprunt
+    		Emprunt emprunt = new Emprunt();
+    		emprunt.setProduct(p);
+    		emprunt.setUser(u);
+    		
+    		try {
+        		this.save(emprunt);
+        		p.setQuantity(p.getQuantity()-1);
+        		productService.update(p);
+        		return 1;
+			} catch (Exception e) {
+				System.out.println("Impossible d'emprunter");
+				return 0;
+			}
+    	}else {
+    		//procedure de mise en attente parmis les demandes
+    		Demande demande = new Demande();
+    		demande.setProduct(p);
+    		demande.setUser(u);
+    		
+    		try {
+				demandeService.save(demande);
+			} catch (Exception e) {
+				System.out.println("Impossible de le mettre dans les attentes");
+				return 0;
+			}
+    		return -1;
+    	}
     }
     
     @Override
