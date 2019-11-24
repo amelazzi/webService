@@ -10,6 +10,8 @@ public interface IUserDao<T, Id extends Serializable> {
     public void update(T entity);
      
     public T findOneById(Id id);
+    
+    public Boolean checkLogin(String email, String password);
      
     public List<T> findBy(String field, String value);
     

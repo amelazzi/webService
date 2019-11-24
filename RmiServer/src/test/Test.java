@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.server.entities.impl.Product;
+import com.server.entities.impl.UserImpl;
 import com.server.service.impl.ProductService;
+import com.server.service.impl.UserService;
 
 public class Test {
 
@@ -14,7 +16,16 @@ public class Test {
 	}
 
 	public static void main(String[] args) throws RemoteException {
-		ProductService service = new ProductService();
+		UserService service = new UserService();
+		
+		UserImpl user = new UserImpl();
+		user.setEmail("ea_azzi@esi.dz");
+		user.setPassword("amel");
+		
+		System.out.println("*** Persist - start ***");
+        service.save(user);
+        System.out.println("*** User Saved ***");
+		/*ProductService service = new ProductService();
 		
         Product product1 = new Product();
         product1.setTitle("Livre Java");
@@ -49,7 +60,7 @@ public class Test {
         System.out.println("Products Persisted are :");
         for (Product p : products) {
           System.out.println("-" + p.toString());
-        }
+        }*/
         
 		/*System.out.println("*** select one***");
 		Product produit = service.findOneById((long) 1);

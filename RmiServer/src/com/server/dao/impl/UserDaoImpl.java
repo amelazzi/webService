@@ -2,12 +2,15 @@ package com.server.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import com.server.dao.interfaces.IUserDao;
 import com.server.entities.impl.UserImpl;
+import com.server.utils.EncodeSha;
  
  
 public class UserDaoImpl implements IUserDao<UserImpl, Long> {
@@ -114,5 +117,19 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
 	public List<UserImpl> findAllSortedBy(String field, String order) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Boolean checkLogin(String email, String password) {
+		Criteria criteria = getCurrentSession().createCriteria(UserImpl.class);
+		UserImpl user = (UserImpl) criteria.add(Restrictions.eq("email", email))
+                .uniqueResult();
+
+		if(user.getPassword().equals(EncodeSha.getHash(password))) {
+			return true;
+		}else
+			return false;
+		//System.out.print("this is the email" + user.getPassword());
+	
 	}
 }

@@ -9,7 +9,7 @@
 
         <property name="connection.url">jdbc:postgresql://localhost:5432/rmidb</property>
         <property name="connection.username">postgres</property>
-        <property name="connection.password">toor</property>
+        <property name="connection.password"></property>
 
         <!-- SQL Dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
