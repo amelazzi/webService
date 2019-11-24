@@ -66,6 +66,6 @@ public class ProductRmi extends UnicastRemoteObject implements IProductRmi {
 	public void removeAll() throws RemoteException {
 		service.deleteAll();
 	}
-
+	
 
 }

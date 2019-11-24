@@ -3,30 +3,30 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 
-import com.server.dao.impl.ProductDaoImpl;
-import com.server.entities.impl.Product;
-import com.server.service.interfaces.IProductService;
+import com.server.dao.impl.UserDaoImpl;
+import com.server.entities.impl.UserImpl;
+import com.server.service.interfaces.IUserService;
 
  
-public class UserService implements IProductService{
+public class UserService implements IUserService{
  
-    private static ProductDaoImpl productDao;
+    private static UserDaoImpl userDao;
  
     public UserService() {
-        productDao = new ProductDaoImpl();
+        userDao = new UserDaoImpl();
     }
     
-    public ProductDaoImpl productDao() {
-        return productDao;
+    public UserDaoImpl userDao() {
+        return userDao;
     }
     
     @Override
-    public Product save(Product entity) {
+    public UserImpl save(UserImpl entity) {
     	try {
     		if(entity!=null) {
-    			productDao.openCurrentSessionwithTransaction();
-                productDao.persist(entity);
-                productDao.closeCurrentSessionwithTransaction();
+    			userDao.openCurrentSessionwithTransaction();
+                userDao.persist(entity);
+                userDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
 		} catch (HibernateException e) {
@@ -36,13 +36,13 @@ public class UserService implements IProductService{
     }
     
     @Override
-    public Product update(Product entity) {
+    public UserImpl update(UserImpl entity) {
     	try {
     		if(entity!=null) {
-    			if(entity.getIdProduct()!=0L) {
-    				productDao.openCurrentSessionwithTransaction();
-    	            productDao.update(entity);
-    	            productDao.closeCurrentSessionwithTransaction();
+    			if(entity.getIdUser()!=0L) {
+    				userDao.openCurrentSessionwithTransaction();
+    	            userDao.update(entity);
+    	            userDao.closeCurrentSessionwithTransaction();
     	            return entity;
     			}
     		}
@@ -57,10 +57,10 @@ public class UserService implements IProductService{
 	public void delete(Long id) {
 		try {
 			if(id!=0L) {
-				productDao.openCurrentSessionwithTransaction();
-		        Product book = productDao.findOneById(id);
-		        productDao.delete(book);
-		        productDao.closeCurrentSessionwithTransaction();
+				userDao.openCurrentSessionwithTransaction();
+		        UserImpl user = userDao.findOneById(id);
+		        userDao.delete(user);
+		        userDao.closeCurrentSessionwithTransaction();
 			}
 			
 		} catch (HibernateException e) {
@@ -69,13 +69,13 @@ public class UserService implements IProductService{
 	}
 
 	@Override
-	public Product findOneById(Long id) {
+	public UserImpl findOneById(Long id) {
 		try {
 			if(id!=0L) {
-				productDao.openCurrentSession();
-		        Product product = productDao.findOneById(id);
-		        productDao.closeCurrentSession();
-		        return product;
+				userDao.openCurrentSession();
+		        UserImpl user = userDao.findOneById(id);
+		        userDao.closeCurrentSession();
+		        return user;
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -84,12 +84,12 @@ public class UserService implements IProductService{
 	}
 
     @Override
-    public List<Product> findAll() {
+    public List<UserImpl> findAll() {
     	try {
-    		productDao.openCurrentSession();
-            List<Product> products = productDao.findAll();
-            productDao.closeCurrentSession();
-            return products;
+    		userDao.openCurrentSession();
+            List<UserImpl> users = userDao.findAll();
+            userDao.closeCurrentSession();
+            return users;
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
@@ -99,28 +99,28 @@ public class UserService implements IProductService{
     @Override
     public void deleteAll() {
     	try {
-    		productDao.openCurrentSessionwithTransaction();
-            productDao.deleteAll();
-            productDao.closeCurrentSessionwithTransaction();
+    		userDao.openCurrentSessionwithTransaction();
+            userDao.deleteAll();
+            userDao.closeCurrentSessionwithTransaction();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
     }
 
 	@Override
-	public List<Product> findBy(String field, String value) {
+	public List<UserImpl> findBy(String field, String value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> findBy(String[] fields, Object[] values) {
+	public List<UserImpl> findBy(String[] fields, Object[] values) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> findAllSortedBy(String field, String order) {
+	public List<UserImpl> findAllSortedBy(String field, String order) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -58,8 +58,8 @@ public class ProductService implements IProductService{
 		try {
 			if(id!=0L) {
 				productDao.openCurrentSessionwithTransaction();
-		        Product book = productDao.findOneById(id);
-		        productDao.delete(book);
+		        Product product = productDao.findOneById(id);
+		        productDao.delete(product);
 		        productDao.closeCurrentSessionwithTransaction();
 			}
 			

@@ -3,30 +3,37 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 
-import com.server.dao.impl.ProductDaoImpl;
+import com.server.dao.impl.EmpruntDaoImpl;
+import com.server.entities.impl.Demande;
+import com.server.entities.impl.Emprunt;
 import com.server.entities.impl.Product;
-import com.server.service.interfaces.IProductService;
+import com.server.entities.impl.UserImpl;
+import com.server.service.interfaces.IEmpruntService;
 
  
-public class EmpruntService implements IProductService{
+public class EmpruntService implements IEmpruntService{
  
-    private static ProductDaoImpl productDao;
+    private static EmpruntDaoImpl empruntDao;
+    private static ProductService productService;
+    private static DemandeService demandeService;
  
     public EmpruntService() {
-        productDao = new ProductDaoImpl();
+        empruntDao = new EmpruntDaoImpl();
+        productService= new ProductService();
+        demandeService= new DemandeService();
     }
     
-    public ProductDaoImpl productDao() {
-        return productDao;
+    public EmpruntDaoImpl empruntDao() {
+        return empruntDao;
     }
     
     @Override
-    public Product save(Product entity) {
+    public Emprunt save(Emprunt entity) {
     	try {
     		if(entity!=null) {
-    			productDao.openCurrentSessionwithTransaction();
-                productDao.persist(entity);
-                productDao.closeCurrentSessionwithTransaction();
+    			empruntDao.openCurrentSessionwithTransaction();
+                empruntDao.persist(entity);
+                empruntDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
 		} catch (HibernateException e) {
@@ -35,14 +42,46 @@ public class EmpruntService implements IProductService{
     	return null;
     }
     
+    public int emprunter(Product p, UserImpl u) {
+    	if(p.getQuantity()>=1) {
+    		//procedure d'emprunt
+    		Emprunt emprunt = new Emprunt();
+    		emprunt.setProduct(p);
+    		emprunt.setUser(u);
+    		
+    		try {
+        		this.save(emprunt);
+        		p.setQuantity(p.getQuantity()-1);
+        		productService.update(p);
+        		return 1;
+			} catch (Exception e) {
+				System.out.println("Impossible d'emprunter");
+				return 0;
+			}
+    	}else {
+    		//procedure de mise en attente parmis les demandes
+    		Demande demande = new Demande();
+    		demande.setProduct(p);
+    		demande.setUser(u);
+    		
+    		try {
+				demandeService.save(demande);
+			} catch (Exception e) {
+				System.out.println("Impossible de le mettre dans les attentes");
+				return 0;
+			}
+    		return -1;
+    	}
+    }
+    
     @Override
-    public Product update(Product entity) {
+    public Emprunt update(Emprunt entity) {
     	try {
     		if(entity!=null) {
-    			if(entity.getIdProduct()!=0L) {
-    				productDao.openCurrentSessionwithTransaction();
-    	            productDao.update(entity);
-    	            productDao.closeCurrentSessionwithTransaction();
+    			if(entity.getIdEmprunt()!=0L) {
+    				empruntDao.openCurrentSessionwithTransaction();
+    	            empruntDao.update(entity);
+    	            empruntDao.closeCurrentSessionwithTransaction();
     	            return entity;
     			}
     		}
@@ -57,10 +96,10 @@ public class EmpruntService implements IProductService{
 	public void delete(Long id) {
 		try {
 			if(id!=0L) {
-				productDao.openCurrentSessionwithTransaction();
-		        Product book = productDao.findOneById(id);
-		        productDao.delete(book);
-		        productDao.closeCurrentSessionwithTransaction();
+				empruntDao.openCurrentSessionwithTransaction();
+		        Emprunt emprunt = empruntDao.findOneById(id);
+		        empruntDao.delete(emprunt);
+		        empruntDao.closeCurrentSessionwithTransaction();
 			}
 			
 		} catch (HibernateException e) {
@@ -69,13 +108,13 @@ public class EmpruntService implements IProductService{
 	}
 
 	@Override
-	public Product findOneById(Long id) {
+	public Emprunt findOneById(Long id) {
 		try {
 			if(id!=0L) {
-				productDao.openCurrentSession();
-		        Product product = productDao.findOneById(id);
-		        productDao.closeCurrentSession();
-		        return product;
+				empruntDao.openCurrentSession();
+		        Emprunt emprunt = empruntDao.findOneById(id);
+		        empruntDao.closeCurrentSession();
+		        return emprunt;
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -84,12 +123,12 @@ public class EmpruntService implements IProductService{
 	}
 
     @Override
-    public List<Product> findAll() {
+    public List<Emprunt> findAll() {
     	try {
-    		productDao.openCurrentSession();
-            List<Product> products = productDao.findAll();
-            productDao.closeCurrentSession();
-            return products;
+    		empruntDao.openCurrentSession();
+            List<Emprunt> emprunts = empruntDao.findAll();
+            empruntDao.closeCurrentSession();
+            return emprunts;
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
@@ -99,28 +138,28 @@ public class EmpruntService implements IProductService{
     @Override
     public void deleteAll() {
     	try {
-    		productDao.openCurrentSessionwithTransaction();
-            productDao.deleteAll();
-            productDao.closeCurrentSessionwithTransaction();
+    		empruntDao.openCurrentSessionwithTransaction();
+            empruntDao.deleteAll();
+            empruntDao.closeCurrentSessionwithTransaction();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
     }
 
 	@Override
-	public List<Product> findBy(String field, String value) {
+	public List<Emprunt> findBy(String field, String value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> findBy(String[] fields, Object[] values) {
+	public List<Emprunt> findBy(String[] fields, Object[] values) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> findAllSortedBy(String field, String order) {
+	public List<Emprunt> findAllSortedBy(String field, String order) {
 		// TODO Auto-generated method stub
 		return null;
 	}

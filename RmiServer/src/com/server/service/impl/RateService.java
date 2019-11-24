@@ -3,30 +3,30 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 
-import com.server.dao.impl.ProductDaoImpl;
-import com.server.entities.impl.Product;
-import com.server.service.interfaces.IProductService;
+import com.server.dao.impl.RateDaoImpl;
+import com.server.entities.impl.Rate;
+import com.server.service.interfaces.IRateService;
 
  
-public class RateService implements IProductService{
+public class RateService implements IRateService{
  
-    private static ProductDaoImpl productDao;
+    private static RateDaoImpl rateDao;
  
     public RateService() {
-        productDao = new ProductDaoImpl();
+        rateDao = new RateDaoImpl();
     }
     
-    public ProductDaoImpl productDao() {
-        return productDao;
+    public RateDaoImpl rateDao() {
+        return rateDao;
     }
     
     @Override
-    public Product save(Product entity) {
+    public Rate save(Rate entity) {
     	try {
     		if(entity!=null) {
-    			productDao.openCurrentSessionwithTransaction();
-                productDao.persist(entity);
-                productDao.closeCurrentSessionwithTransaction();
+    			rateDao.openCurrentSessionwithTransaction();
+                rateDao.persist(entity);
+                rateDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
 		} catch (HibernateException e) {
@@ -36,13 +36,13 @@ public class RateService implements IProductService{
     }
     
     @Override
-    public Product update(Product entity) {
+    public Rate update(Rate entity) {
     	try {
     		if(entity!=null) {
-    			if(entity.getIdProduct()!=0L) {
-    				productDao.openCurrentSessionwithTransaction();
-    	            productDao.update(entity);
-    	            productDao.closeCurrentSessionwithTransaction();
+    			if(entity.getIdRate()!=0L) {
+    				rateDao.openCurrentSessionwithTransaction();
+    	            rateDao.update(entity);
+    	            rateDao.closeCurrentSessionwithTransaction();
     	            return entity;
     			}
     		}
@@ -57,10 +57,10 @@ public class RateService implements IProductService{
 	public void delete(Long id) {
 		try {
 			if(id!=0L) {
-				productDao.openCurrentSessionwithTransaction();
-		        Product book = productDao.findOneById(id);
-		        productDao.delete(book);
-		        productDao.closeCurrentSessionwithTransaction();
+				rateDao.openCurrentSessionwithTransaction();
+		        Rate rate = rateDao.findOneById(id);
+		        rateDao.delete(rate);
+		        rateDao.closeCurrentSessionwithTransaction();
 			}
 			
 		} catch (HibernateException e) {
@@ -69,13 +69,13 @@ public class RateService implements IProductService{
 	}
 
 	@Override
-	public Product findOneById(Long id) {
+	public Rate findOneById(Long id) {
 		try {
 			if(id!=0L) {
-				productDao.openCurrentSession();
-		        Product product = productDao.findOneById(id);
-		        productDao.closeCurrentSession();
-		        return product;
+				rateDao.openCurrentSession();
+		        Rate rate = rateDao.findOneById(id);
+		        rateDao.closeCurrentSession();
+		        return rate;
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -84,12 +84,12 @@ public class RateService implements IProductService{
 	}
 
     @Override
-    public List<Product> findAll() {
+    public List<Rate> findAll() {
     	try {
-    		productDao.openCurrentSession();
-            List<Product> products = productDao.findAll();
-            productDao.closeCurrentSession();
-            return products;
+    		rateDao.openCurrentSession();
+            List<Rate> rates = rateDao.findAll();
+            rateDao.closeCurrentSession();
+            return rates;
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
@@ -99,28 +99,28 @@ public class RateService implements IProductService{
     @Override
     public void deleteAll() {
     	try {
-    		productDao.openCurrentSessionwithTransaction();
-            productDao.deleteAll();
-            productDao.closeCurrentSessionwithTransaction();
+    		rateDao.openCurrentSessionwithTransaction();
+            rateDao.deleteAll();
+            rateDao.closeCurrentSessionwithTransaction();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
     }
 
 	@Override
-	public List<Product> findBy(String field, String value) {
+	public List<Rate> findBy(String field, String value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> findBy(String[] fields, Object[] values) {
+	public List<Rate> findBy(String[] fields, Object[] values) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> findAllSortedBy(String field, String order) {
+	public List<Rate> findAllSortedBy(String field, String order) {
 		// TODO Auto-generated method stub
 		return null;
 	}
