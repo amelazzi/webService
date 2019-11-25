@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class EncodeSha {
 
-	public String getHash(String plainText) 
+	public static String getHash(String plainText) 
     { 
         try { 
             // getInstance() method is called with algorithm SHA-512 

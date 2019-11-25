@@ -14,6 +14,8 @@ public class Main {
 			IProductRmi productRmiService = new ProductRmi();
 			Naming.rebind("productService", productRmiService);	
 			System.out.print("Server OK");
+	
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
