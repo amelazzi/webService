@@ -20,6 +20,8 @@ public interface IUserService {
     public List<UserImpl> findAll();
     
     public List<UserImpl> findAllSortedBy(String field, String order);
+    
+    public Boolean checkLogin(String email, String password);
 	
 	public void deleteAll();
 	

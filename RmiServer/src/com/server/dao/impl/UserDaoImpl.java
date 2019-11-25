@@ -121,13 +121,16 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
 
 	@Override
 	public Boolean checkLogin(String email, String password) {
+		openCurrentSession();
 		Criteria criteria = getCurrentSession().createCriteria(UserImpl.class);
 		UserImpl user = (UserImpl) criteria.add(Restrictions.eq("email", email))
                 .uniqueResult();
-
+		closeCurrentSession();
 		if(user.getPassword().equals(EncodeSha.getHash(password))) {
+			System.out.println("OK");
 			return true;
 		}else
+			System.out.println("KO");
 			return false;
 		//System.out.print("this is the email" + user.getPassword());
 	

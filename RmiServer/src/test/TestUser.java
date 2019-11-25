@@ -18,7 +18,12 @@ public class TestUser
 		//TestSelectAll();
 		//TestUpdate();
 		//TestAdd();
+		testLoginCheck("user@mail.com","password");
 		
+	}
+	
+	public static boolean testLoginCheck(String email, String password) {
+		return userService.checkLogin(email, password);
 	}
 	
 	public void TestAdd() {
@@ -30,8 +35,7 @@ public class TestUser
 		user.setLastName("Mamadou");
 		user.setGraduate("Master2");
 		user.setMatricule(1234);
-		EncodeSha hash = new EncodeSha();
-		user.setPassword(hash.getHash("password"));
+		user.setPassword(EncodeSha.getHash("password"));
 		user.setPhone("0612345678");
 		
 		userService.save(user);

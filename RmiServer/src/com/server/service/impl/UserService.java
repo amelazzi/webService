@@ -6,12 +6,13 @@ import org.hibernate.HibernateException;
 import com.server.dao.impl.UserDaoImpl;
 import com.server.entities.impl.UserImpl;
 import com.server.service.interfaces.IUserService;
+import com.server.utils.EncodeSha;
 
  
 public class UserService implements IUserService{
  
     private static UserDaoImpl userDao;
- 
+    EncodeSha hash = new EncodeSha(); 
     public UserService() {
         userDao = new UserDaoImpl();
     }
@@ -24,6 +25,7 @@ public class UserService implements IUserService{
     public UserImpl save(UserImpl entity) {
     	try {
     		if(entity!=null) {
+    			entity.setPassword(EncodeSha.getHash(entity.getPassword()));
     			userDao.openCurrentSessionwithTransaction();
                 userDao.persist(entity);
                 userDao.closeCurrentSessionwithTransaction();
@@ -105,6 +107,11 @@ public class UserService implements IUserService{
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
+    }
+    
+    @Override
+    public Boolean checkLogin(String email, String password) {
+    	return userDao.checkLogin(email, password);
     }
 
 	@Override
