@@ -1,13 +1,18 @@
 package com.server.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import com.server.dao.interfaces.IDemandeDao;
 import com.server.entities.impl.Demande;
+import com.server.entities.impl.Product;
+import com.server.entities.impl.UserImpl;
  
  
 public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
@@ -73,8 +78,8 @@ public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
     
     @Override
     public Demande findOneById(Long id) {
-    	Demande produit = (Demande) getCurrentSession().get(Demande.class, id);
-        return produit; 
+    	Demande demande = (Demande) getCurrentSession().get(Demande.class, id);
+        return demande; 
     }
     
     @Override
@@ -85,9 +90,9 @@ public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
     @SuppressWarnings("unchecked")
 	@Override
     public List<Demande> findAll() {
-    	List<Demande> products = (List<Demande>) getCurrentSession().createQuery("from demande").list();
+    	List<Demande> demandes = getCurrentSession().createQuery("select d from Demande d").list();
         
-        return products;
+        return demandes;
     }
     
     @Override
@@ -114,5 +119,38 @@ public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
 	public List<Demande> findAllSortedBy(String field, String order) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Demande> findByProduct(Product product) {
+		openCurrentSession();
+		List<Demande> demandes = null;
+		
+		try {
+			@SuppressWarnings("deprecation")
+			Criteria criteria = getCurrentSession().createCriteria(Demande.class);
+			criteria.add(Restrictions.eq("product", product));
+			criteria.add(Restrictions.eq("isDone", false));
+			demandes = criteria.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		closeCurrentSession();
+		return demandes;
+	}
+	
+	@Override
+	public List<UserImpl> findWaitingUserByProduct(Product product){
+		List<Demande> demandes = this.findByProduct(product);
+		List<UserImpl> users = new ArrayList<UserImpl>();
+		if(demandes!=null) {
+			for(Demande d:demandes) {
+				users.add(d.getUser());
+			}
+		}
+		
+		return users;
 	}
 }

@@ -3,6 +3,8 @@ package com.server.service.interfaces;
 import java.util.List;
 
 import com.server.entities.impl.Demande;
+import com.server.entities.impl.Product;
+import com.server.entities.impl.UserImpl;
 
 public interface IDemandeService {
 	public Demande save(Demande entity);
@@ -20,6 +22,10 @@ public interface IDemandeService {
     public List<Demande> findAll();
     
     public List<Demande> findAllSortedBy(String field, String order);
+    
+    public List<Demande> findByProduct(Product product);
+    
+    public List<UserImpl> findWaitingUserByProduct(Product product);
 	
 	public void deleteAll();
 	

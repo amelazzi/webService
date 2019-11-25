@@ -3,6 +3,8 @@ package com.server.service.interfaces;
 import java.util.List;
 
 import com.server.entities.impl.Emprunt;
+import com.server.entities.impl.Product;
+import com.server.entities.impl.UserImpl;
 
 public interface IEmpruntService {
 	public Emprunt save(Emprunt entity);
@@ -22,5 +24,9 @@ public interface IEmpruntService {
     public List<Emprunt> findAllSortedBy(String field, String order);
 	
 	public void deleteAll();
+	
+	public int emprunter(Product product, UserImpl user);
+	
+	public boolean restituer(Emprunt emprunt);
 	
 }

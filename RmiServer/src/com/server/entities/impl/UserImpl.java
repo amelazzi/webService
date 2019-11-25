@@ -11,11 +11,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import com.server.entities.interfaces.IUser;
 
 @SuppressWarnings("serial")
 @Entity
+@Table(
+		uniqueConstraints = {@UniqueConstraint(columnNames={"email"})}
+)
 public class UserImpl implements Serializable, IUser{
 	
 	public UserImpl() {
@@ -59,6 +64,13 @@ public class UserImpl implements Serializable, IUser{
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private List<Comment> comments;
+	
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Notification> notifications;
+	
+	public int getTotalEmprunt() {
+		return this.emprunts.size();
+	}
 	
 	@Override
 	public int getMatricule() {
@@ -213,6 +225,14 @@ public class UserImpl implements Serializable, IUser{
 	@Override
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public List<Notification> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(List<Notification> notifications) {
+		this.notifications = notifications;
 	}
 	
 	@Override

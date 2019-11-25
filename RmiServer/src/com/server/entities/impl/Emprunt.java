@@ -21,6 +21,12 @@ import com.server.entities.interfaces.IEmprunt;
 )
 public class Emprunt implements Serializable, IEmprunt{
 	
+	public Emprunt() {
+		this.createdAt = new Date();
+		this.isReturned = false;
+		this.setToGiveBackAt(this.returnIn(15));
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idEmprunt;
@@ -36,11 +42,6 @@ public class Emprunt implements Serializable, IEmprunt{
 	@ManyToOne
 	@JoinColumn(name="idUser")
 	private UserImpl user;
-	public Emprunt() {
-		this.createdAt = new Date();
-		this.isReturned = false;
-		this.setToGiveBackAt(this.returnIn(15));
-	}
 	
 	@Override
 	public Date getCreatedAt() {

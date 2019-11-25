@@ -124,5 +124,17 @@ public class UserService implements IUserService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public int totalEmprunt(List<UserImpl> listUser) {
+		/*
+		 SELECT count(*)
+		 FROM `user` u, emprunt e 
+		 WHERE u.iduser = e.idemprunt
+		 		and e.isdone=false;
+		 */
+		
+		
+		return 0;
+	}
 }
 

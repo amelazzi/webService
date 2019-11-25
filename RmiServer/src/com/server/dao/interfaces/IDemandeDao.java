@@ -2,6 +2,10 @@ package com.server.dao.interfaces;
 
 import java.io.Serializable;
 import java.util.List;
+
+import com.server.entities.impl.Demande;
+import com.server.entities.impl.Product;
+import com.server.entities.impl.UserImpl;
  
 public interface IDemandeDao<T, Id extends Serializable> {
  
@@ -18,6 +22,10 @@ public interface IDemandeDao<T, Id extends Serializable> {
     public List<T> findAll();
     
     public List<T> findAllSortedBy(String field, String order);
+    
+    public List<Demande> findByProduct(Product product);
+    
+    public List<UserImpl> findWaitingUserByProduct(Product product);
      
     public void delete(T entity);
     

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,6 +25,7 @@ public class Demande implements Serializable, IDemande{
 	public Demande() {
 		this.createdAt = new Date();
 		this.isDone = false;
+		this.desiredAt=new Date();
 	}
 	
 	@Id
@@ -33,11 +35,11 @@ public class Demande implements Serializable, IDemande{
 	private Date desiredAt;
 	private Boolean isDone;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="idProduct")
 	private Product product;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="idUser")
 	private UserImpl user;
 	

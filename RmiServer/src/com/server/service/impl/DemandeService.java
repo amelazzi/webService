@@ -5,6 +5,8 @@ import org.hibernate.HibernateException;
 
 import com.server.dao.impl.DemandeDaoImpl;
 import com.server.entities.impl.Demande;
+import com.server.entities.impl.Product;
+import com.server.entities.impl.UserImpl;
 import com.server.service.interfaces.IDemandeService;
 
  
@@ -123,6 +125,16 @@ public class DemandeService implements IDemandeService{
 	public List<Demande> findAllSortedBy(String field, String order) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public List<Demande> findByProduct(Product product){
+		return demandeDao.findByProduct(product);
+	}
+	
+	@Override
+	public List<UserImpl> findWaitingUserByProduct(Product product){
+		return demandeDao.findWaitingUserByProduct(product);
 	}
 }
 

@@ -6,17 +6,18 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.server.dao.interfaces.IEmpruntDao;
-import com.server.entities.impl.Emprunt;
+import com.server.dao.interfaces.INotificationDao;
+import com.server.entities.impl.Notification;
+import com.server.entities.impl.UserImpl;
  
  
-public class EmpruntDaoImpl implements IEmpruntDao<Emprunt, Long> {
+public class NotificationDaoImpl implements INotificationDao<Notification, Long> {
  
     private Session currentSession;
      
     private Transaction currentTransaction;
  
-    public EmpruntDaoImpl() {
+    public NotificationDaoImpl() {
     }
     
     public Session openCurrentSession() {
@@ -62,57 +63,46 @@ public class EmpruntDaoImpl implements IEmpruntDao<Emprunt, Long> {
     }
     
     @Override
-    public void persist(Emprunt entity) {
+    public void persist(Notification entity) {
         getCurrentSession().save(entity);
     }
     
     @Override
-    public void update(Emprunt entity) {
+    public void update(Notification entity) {
         getCurrentSession().update(entity);
     }
     
     @Override
-    public Emprunt findOneById(Long id) {
-    	Emprunt emprunt = (Emprunt) getCurrentSession().get(Emprunt.class, id);
-        return emprunt; 
+    public Notification findOneById(Long id) {
+    	Notification produit = (Notification) getCurrentSession().get(Notification.class, id);
+        return produit; 
     }
     
     @Override
-    public void delete(Emprunt entity) {
+    public void delete(Notification entity) {
         getCurrentSession().delete(entity);
     }
  
     @SuppressWarnings("unchecked")
 	@Override
-    public List<Emprunt> findAll() {
-    	List<Emprunt> products = (List<Emprunt>) getCurrentSession().createQuery("from Emprunt").list();
+    public List<Notification> findAll() {
+    	List<Notification> products = (List<Notification>) getCurrentSession().createQuery("from Notification").list();
         
         return products;
     }
     
     @Override
     public void deleteAll() {
-        List<Emprunt> entityList = findAll();
-        for (Emprunt entity : entityList) {
+        List<Notification> entityList = findAll();
+        for (Notification entity : entityList) {
             delete(entity);
         }
     }
 
 	@Override
-	public List<Emprunt> findBy(String field, String value) {
+	public List<Notification> findByUser(UserImpl user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public List<Emprunt> findBy(String[] fields, Object[] values) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Emprunt> findAllSortedBy(String field, String order) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

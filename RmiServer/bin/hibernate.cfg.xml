@@ -9,7 +9,7 @@
 
         <property name="connection.url">jdbc:postgresql://localhost:5432/rmidb</property>
         <property name="connection.username">postgres</property>
-        <property name="connection.password">toor</property>
+        <property name="connection.password"></property>
 
         <!-- SQL Dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
@@ -30,6 +30,7 @@
         <mapping class="com.server.entities.impl.Media"/>
         <mapping class="com.server.entities.impl.Rate"/>
         <mapping class="com.server.entities.impl.UserImpl"/>
+        <mapping class="com.server.entities.impl.Notification"/>
         
     </session-factory>
 </hibernate-configuration>

@@ -85,7 +85,7 @@ public class CommentDaoImpl implements ICommentDao<Comment, Long> {
     @SuppressWarnings("unchecked")
 	@Override
     public List<Comment> findAll() {
-    	List<Comment> products = (List<Comment>) getCurrentSession().createQuery("from comment").list();
+    	List<Comment> products = (List<Comment>) getCurrentSession().createQuery("from Comment").list();
         
         return products;
     }
