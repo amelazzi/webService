@@ -11,11 +11,12 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			LocateRegistry.createRegistry(1099);
+			
 			IProductRmi productRmiService = new ProductRmi();
 			Naming.rebind("productService", productRmiService);	
-			System.out.print("Server OK");
-	
 			
+			
+			System.out.print("Server OK");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
