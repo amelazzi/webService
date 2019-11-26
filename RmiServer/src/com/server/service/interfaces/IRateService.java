@@ -20,6 +20,7 @@ public interface IRateService {
     public List<Rate> findAll();
     
     public List<Rate> findAllSortedBy(String field, String order);
+
 	
 	public void deleteAll();
 	

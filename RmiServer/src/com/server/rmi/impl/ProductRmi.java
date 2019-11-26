@@ -54,7 +54,6 @@ public class ProductRmi extends UnicastRemoteObject implements IProductRmi {
 		}
 		
 		return null;
-		
 	}
 
 	@Override

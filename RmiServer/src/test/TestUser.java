@@ -18,7 +18,7 @@ public class TestUser
 		//TestSelectAll();
 		//TestUpdate();
 		//TestAdd();
-		testLoginCheck("user@mail.com","password");
+		testLoginCheck("ea_azzi@esi.dz","amel");
 		
 	}
 	
