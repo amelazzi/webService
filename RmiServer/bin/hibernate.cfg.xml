@@ -12,7 +12,7 @@
         <property name="connection.password">toor</property>
 
         <!-- SQL Dialect -->
-        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
 
         <!-- Echo All Executed SQL to stdout -->
         <property name="show_sql">true</property>

@@ -30,8 +30,8 @@ public class TestUser
 		UserImpl user=new UserImpl();
 		user.setBirthday(new Date());
 		user.setDomain("Informatique");
-		user.setEmail("user@mail.com");
-		user.setFirstName("Diallo");
+		user.setEmail("amel@mail.com");
+		user.setFirstName("Azzi");
 		user.setLastName("Mamadou");
 		user.setGraduate("Master2");
 		user.setMatricule(1234);

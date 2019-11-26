@@ -10,6 +10,10 @@ import com.server.entities.impl.Product;
 import com.server.entities.impl.UserImpl;
 import com.server.service.impl.ProductService;
 import com.server.service.impl.UserService;
+import com.server.utils.EncodeSha;
+
+import static test.TestDemande.empruntService;
+import static test.TestUser.userService;
 
 public class Test {
 
@@ -65,7 +69,7 @@ public class Test {
 		 * System.out.println("*** select one***"); Product produit =
 		 * service.findOneById((long) 1); System.out.println("-"+produit.toString());
 		 */
-
+		/*
 		UserImpl user = new UserImpl();
 		user.setBirthday(new Date());
 		user.setDomain("Informatique");
@@ -91,7 +95,7 @@ public class Test {
 		for (Emprunt e : emprunts) {
 			System.out.println("-" + e.toString());
 		}
-
+		*/
 	}
 
 }

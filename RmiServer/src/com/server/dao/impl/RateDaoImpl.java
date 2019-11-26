@@ -8,8 +8,9 @@ import org.hibernate.Transaction;
 
 import com.server.dao.interfaces.IRateDao;
 import com.server.entities.impl.Rate;
- 
- 
+import org.hibernate.cfg.Configuration;
+
+
 public class RateDaoImpl implements IRateDao<Rate, Long> {
  
     private Session currentSession;
@@ -38,11 +39,15 @@ public class RateDaoImpl implements IRateDao<Rate, Long> {
         currentTransaction.commit();
         currentSession.close();
     }
-     
+
     @SuppressWarnings("static-access")
-	private static SessionFactory getSessionFactory() {
-    	HibernateFiveUtils utils=new HibernateFiveUtils();
-    	return utils.getSessionFactory();
+    private static SessionFactory getSessionFactory() {
+    	/*HibernateFiveUtils utils=new HibernateFiveUtils();
+    	return utils.getSessionFactory();*/
+        Configuration config = new Configuration();
+        SessionFactory session=config.configure("hibernate.cfg.xml").buildSessionFactory();
+        //session.openSession();
+        return session;
     }
  
     public Session getCurrentSession() {

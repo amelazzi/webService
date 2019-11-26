@@ -8,8 +8,9 @@ import org.hibernate.Transaction;
 
 import com.server.dao.interfaces.IEmpruntDao;
 import com.server.entities.impl.Emprunt;
- 
- 
+import org.hibernate.cfg.Configuration;
+
+
 public class EmpruntDaoImpl implements IEmpruntDao<Emprunt, Long> {
  
     private Session currentSession;
@@ -38,11 +39,15 @@ public class EmpruntDaoImpl implements IEmpruntDao<Emprunt, Long> {
         currentTransaction.commit();
         currentSession.close();
     }
-     
+
     @SuppressWarnings("static-access")
-	private static SessionFactory getSessionFactory() {
-    	HibernateFiveUtils utils=new HibernateFiveUtils();
-    	return utils.getSessionFactory();
+    private static SessionFactory getSessionFactory() {
+    	/*HibernateFiveUtils utils=new HibernateFiveUtils();
+    	return utils.getSessionFactory();*/
+        Configuration config = new Configuration();
+        SessionFactory session=config.configure("hibernate.cfg.xml").buildSessionFactory();
+        //session.openSession();
+        return session;
     }
  
     public Session getCurrentSession() {

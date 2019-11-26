@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 
 import com.server.dao.interfaces.IUserDao;
@@ -28,7 +29,7 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
     }
  
     public Session openCurrentSessionwithTransaction() {
-        currentSession = getSessionFactory().openSession();
+        //currentSession = getSessionFactory().openSession();
         currentTransaction = currentSession.beginTransaction();
         return currentSession;
     }
@@ -44,13 +45,18 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
      
     @SuppressWarnings("static-access")
 	private static SessionFactory getSessionFactory() {
-    	HibernateFiveUtils utils=new HibernateFiveUtils();
-    	return utils.getSessionFactory();
+    	/*HibernateFiveUtils utils=new HibernateFiveUtils();
+    	return utils.getSessionFactory();*/
+    	Configuration config = new Configuration();
+    	SessionFactory session=config.configure("hibernate.cfg.xml").buildSessionFactory();
+    	//session.openSession();
+    	return session;
     }
  
     public Session getCurrentSession() {
         return currentSession;
     }
+    
  
     public void setCurrentSession(Session currentSession) {
         this.currentSession = currentSession;
