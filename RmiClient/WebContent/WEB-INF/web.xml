@@ -8,4 +8,12 @@
     <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
     <param-value>i18n.applicationResources</param-value>
   </context-param>
+  <context-param>
+		<param-name>
+			javax.servlet.jsp.jstl.fmt.locale
+		</param-name>
+		<param-value>
+			fr_FR
+		</param-value>
+	</context-param>
 </web-app>

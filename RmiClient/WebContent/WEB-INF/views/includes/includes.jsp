@@ -14,5 +14,5 @@
 	}
 %>
 
-<fmt:setLocale value="${locale}"/>
+<fmt:setLocale value="${locale}" scope="session"/>
 <fmt:bundle basename="i18n.ApplicationBundle"/>
