@@ -12,9 +12,9 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			LocateRegistry.createRegistry(1099);
-			
+
 			IProductRmi productRmiService = new ProductRmi();
-			Naming.rebind("productService", productRmiService);
+			Naming.rebind("rmi://localhost:1099/productService", productRmiService);
 
 			IUserRmi userRmiService = new UserRmi();
 			Naming.bind("userService", userRmiService);

@@ -10,17 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.client.rmi.ProductStub;
+import com.server.entities.impl.Product;
 /**
  * Servlet implementation class Product
  */
 @WebServlet("/product")
-public class Product extends HttpServlet {
+public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Product() {
+    public ProductServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,6 +32,14 @@ public class Product extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Product> produits=new ArrayList<Product>();
+		try {
+			produits=ProductStub.getStub().findAll();
+			System.out.println(produits.get(0).toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		request.setAttribute("products", produits);
 		request.getRequestDispatcher( "/WEB-INF/views/product/list.jsp" ).forward( request, response );
 	}
