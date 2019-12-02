@@ -7,20 +7,19 @@ import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 
 import com.server.rmi.interfaces.IProductRmi;
+import com.server.rmi.interfaces.IUserRmi;
 
-public class ProductStub {
+public class UserStub {
 	
-	private ProductStub() {
+	private UserStub() {
 		
 	}
 	
-	public static IProductRmi getStub() throws Exception {
-		
+	public static IUserRmi getStub() throws Exception {
 		try {
-			IProductRmi stubProduct=(IProductRmi) Naming.lookup("rmi://localhost:1099/productService");
-			return stubProduct;
+			IUserRmi stubUser=(IUserRmi) Naming.lookup("rmi://localhost:1099/userService");
+			return stubUser;
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

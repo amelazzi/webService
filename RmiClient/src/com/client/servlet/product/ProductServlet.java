@@ -15,7 +15,7 @@ import com.server.entities.impl.Product;
 /**
  * Servlet implementation class Product
  */
-@WebServlet("/product")
+@WebServlet("/setting/product")
 public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

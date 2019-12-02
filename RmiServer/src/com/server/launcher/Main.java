@@ -1,9 +1,9 @@
 package com.server.launcher;
 
 import java.rmi.Naming;
+import java.rmi.RMISecurityManager;
 import java.rmi.registry.LocateRegistry;
 
-import com.server.entities.interfaces.IEmprunt;
 import com.server.rmi.impl.*;
 import com.server.rmi.interfaces.*;
 
@@ -12,7 +12,10 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			LocateRegistry.createRegistry(1099);
-
+            /*stem.out.println("Mise en place du Security Manager ...");
+            if (System.getSecurityManager() == null) {
+                System.setSecurityManager(new RMISecurityManager());
+            }*/
 			IProductRmi productRmiService = new ProductRmi();
 			Naming.rebind("rmi://localhost:1099/productService", productRmiService);
 
@@ -33,8 +36,6 @@ public class Main {
 
 			INotificationRmi notificationRmiService = new NotificationRmi();
 			Naming.rebind("notificationService", notificationRmiService);
-
-
 			System.out.print("Server OK");
 		} catch (Exception e) {
 			e.printStackTrace();

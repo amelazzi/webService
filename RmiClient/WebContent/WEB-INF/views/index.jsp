@@ -25,14 +25,20 @@
   <div class="login-logo">
     <a href=""><b>WebService</b>RmiClient</a>
   </div>
+
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg"><fmt:message key="index.login"/></p>
-
-      <form action="" method="post">
+      	<c:if test="${!empty error_msg}">
+      		<div class="alert alert-danger" role="alert">${error_msg}</div>
+      	</c:if>
+      	<c:if test="${!empty success_msg}">
+      		<div class="alert alert-success" role="alert">${success_msg}</div>
+      	</c:if>
+      <form action="<c:url value="/login"/>" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="<fmt:message key="common.email"/>" name="email">
+          <input type="email" class="form-control <c:if test="${!empty error_msg}">is-invalid</c:if>" placeholder="<fmt:message key="common.email"/>" name="email" required="required">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -40,7 +46,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="<fmt:message key="common.password"/>" name="password">
+          <input type="password" class="form-control <c:if test="${!empty error_msg}">is-invalid</c:if>" placeholder="<fmt:message key="common.password"/>" name="password" required="required">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

@@ -1,4 +1,3 @@
-<%-- <%@ include file="/WEB-INF/views/includes/includes.jsp" %> --%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
 <t:template title="Blank Page">
 	<jsp:attribute name="content">

@@ -25,14 +25,16 @@
   <div class="register-logo">
     <a href=""><b>WebService</b>RmiClient</a>
   </div>
-
+	
   <div class="card">
     <div class="card-body register-card-body">
       <p class="login-box-msg"><fmt:message key="index.registretion"/></p>
-
+		<c:if test="${!empty error_msg}">
+      		<div class="alert alert-danger" role="alert">${error_msg}</div>
+      	</c:if>
       <form action="" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="<fmt:message key="common.firstname"/>" name="firstname" required="required">
+          <input type="text" class="form-control" value="${user.getFirstName()}" placeholder="<fmt:message key="common.firstname"/>" name="firstname" required="required">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -40,7 +42,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="<fmt:message key="common.lastname"/>" name="lastname" required="required">
+          <input type="text" class="form-control" value="${user.getLastName()}" placeholder="<fmt:message key="common.lastname"/>" name="lastname" required="required">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -48,7 +50,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="<fmt:message key="common.email"/>" name="email" required="required">
+          <input type="email" class="form-control" value="${user.getEmail()}" placeholder="<fmt:message key="common.email"/>" name="email" required="required">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -56,7 +58,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="<fmt:message key="common.password"/>" name="password" required="required">
+          <input type="password" class="form-control <c:if test="${!empty error_msg}">is-invalid</c:if>" placeholder="<fmt:message key="common.password"/>" name="password" required="required">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -64,7 +66,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="<fmt:message key="common.password.confirm"/>" name="confirm" required="required">
+          <input type="password" class="form-control <c:if test="${!empty error_msg}">is-invalid</c:if>" placeholder="<fmt:message key="common.password.confirm"/>" name="confirm" required="required">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
