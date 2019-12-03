@@ -17,7 +17,7 @@ public class ProductStub {
 	public static IProductRmi getStub() throws Exception {
 		
 		try {
-			IProductRmi stubProduct=(IProductRmi) Naming.lookup("rmi://localhost:1099/productService");
+			IProductRmi stubProduct=(IProductRmi) Naming.lookup("productService");
 			return stubProduct;
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block

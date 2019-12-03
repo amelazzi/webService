@@ -36,7 +36,7 @@
       	<c:if test="${!empty success_msg}">
       		<div class="alert alert-success" role="alert">${success_msg}</div>
       	</c:if>
-      <form action="<c:url value="/login"/>" method="post">
+      <form action="/login" method="post">
         <div class="input-group mb-3">
           <input type="email" class="form-control <c:if test="${!empty error_msg}">is-invalid</c:if>" placeholder="<fmt:message key="common.email"/>" name="email" required="required">
           <div class="input-group-append">

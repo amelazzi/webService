@@ -5,11 +5,13 @@ import java.util.List;
 import com.server.entities.impl.Product;
 
 public interface IProductService {
-	public Product save(Product entity);
+	public Product add(Product entity);
+
+	public long getMaxId();
 	
 	public Product update(Product entity);
 	
-	public void delete(Long id);
+	public void delete(Product product);
 	
 	public Product findOneById(Long id);
 	

@@ -7,27 +7,34 @@ import java.util.List;
 
 
 import com.server.entities.interfaces.IProduct;
+import com.server.utils.DateTool;
 
 @SuppressWarnings("serial")
 public class Product implements IProduct, Serializable {
 
+
 	private long idProduct;
-	
-	private float price;
-	private String title;
-	private String description;
 	private Boolean available;
 	private Date createdAt;
+	private String description;
+	private float price;
 	private int quantity;
-	
-	private List<Rate> rates;
+	private String title;
 
+	
+
+	private List<Rate> rates;
+	
+	
 	private List<Comment> comments;
 	
+
 	private List<Emprunt> emprunts;
 	
+
 	private List<Demande> demandes;
 	
+
 	private List<Media> medias;
 	
 	
@@ -55,6 +62,10 @@ public class Product implements IProduct, Serializable {
 		return idProduct;
 	}
 
+	@Override
+	public void setIdProduct(long id) {
+		idProduct = id;
+	}
 	
 	@Override
 	public float getPrice() {
@@ -158,10 +169,9 @@ public class Product implements IProduct, Serializable {
 
 	@Override
 	public String toString() {
-		return "Product [idProduct=" + idProduct + ", price=" + price + ", title=" + title + ", description="
-				+ description + ", available=" + available + ", createdAt=" + createdAt + ", quantity=" + quantity + "]";
+		return "" + idProduct + ", " + available + ", '" + DateTool.dateToString(createdAt) +
+				"', '" + description + "', " + price +  ", " + quantity + ", '" + title
+				+  "";
 	}
-
-	
 	
 }

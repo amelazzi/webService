@@ -21,12 +21,12 @@ public class ProductService implements IProductService{
     }
     
     @Override
-    public Product save(Product entity) {
+    public Product add(Product entity) {
     	try {
     		if(entity!=null) {
-    			productDao.openCurrentSessionwithTransaction();
-                productDao.persist(entity);
-                productDao.closeCurrentSessionwithTransaction();
+    			//productDao.openCurrentSessionwithTransaction();
+                productDao.add(entity);
+                //productDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
 		} catch (HibernateException e) {
@@ -34,8 +34,13 @@ public class ProductService implements IProductService{
 		}
     	return null;
     }
-    
-    @Override
+
+	@Override
+	public long getMaxId() {
+		return productDao.getMaxId();
+	}
+
+	@Override
     public Product update(Product entity) {
     	try {
     		if(entity!=null) {
@@ -54,13 +59,13 @@ public class ProductService implements IProductService{
     }
     
 	@Override
-	public void delete(Long id) {
+	public void delete(Product product) {
 		try {
-			if(id!=0L) {
-				productDao.openCurrentSessionwithTransaction();
-		        Product product = productDao.findOneById(id);
+			if(product.getIdProduct()!=0L) {
+				//productDao.openCurrentSessionwithTransaction();
+		        //Product product = productDao.findOneById(id);
 		        productDao.delete(product);
-		        productDao.closeCurrentSessionwithTransaction();
+		        //productDao.closeCurrentSessionwithTransaction();
 			}
 			
 		} catch (HibernateException e) {
@@ -86,11 +91,11 @@ public class ProductService implements IProductService{
     @Override
     public List<Product> findAll() {
     	try {
-    		productDao.openCurrentSession();
+    		//productDao.openCurrentSession();
             List<Product> products = productDao.findAll();
-            productDao.closeCurrentSession();
+            //productDao.closeCurrentSession();
             return products;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
         return null;

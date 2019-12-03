@@ -1,6 +1,8 @@
 package com.client.servlet;
 
 import java.io.IOException;
+import java.rmi.Naming;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.client.rmi.UserStub;
 import com.server.entities.impl.UserImpl;
+import com.server.rmi.interfaces.IUserRmi;
 
 /**
  * Servlet implementation class IndexServlet
@@ -49,6 +52,8 @@ public class IndexServlet extends HttpServlet {
 				try {
 					UserStub.getStub().login(email, password);
 					UserImpl user = (UserImpl) UserStub.getStub().findOneById((long) 1);
+					System.out.println("getStub: " + user.getIdUser());
+
 					session.setAttribute("user", user);
 					response.sendRedirect( request.getContextPath()+"/home");
 				} catch (Exception e) {

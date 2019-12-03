@@ -11,6 +11,7 @@ import com.server.entities.impl.Rate;
 
 public interface IProduct{
 	public long getIdProduct();
+	public void setIdProduct(long id);
 	public float getPrice() ;
 	public void setPrice(float price) ;
 	public String getTitle() ;

@@ -14,21 +14,24 @@ public class TestProduct
 	static ProductService productService = new ProductService();
 	
 	public static void main(String[] args) throws RemoteException {
-		//TestSelectAll();
+
+		//testDelete(14);
 		//TestUpdate();
-		//TestAdd();
+		TestAdd();
+		TestSelectAll();
 		
 	}
 	
-	public void TestAdd() {
+	public static void TestAdd() {
 		Product product1 = new Product();
+		product1.setIdProduct(productService.getMaxId()+1);
         product1.setTitle("Livre Java");
 		product1.setQuantity(5);
 		product1.setPrice(23);
 		product1.setDescription("ceci est une description du produit");
 		product1.setAvailable(true);
 		
-		Product product2 = new Product();
+		/*Product product2 = new Product();
         product2.setTitle("Livre C");
 		product2.setQuantity(5);
 		product2.setPrice(23);
@@ -40,22 +43,28 @@ public class TestProduct
 		product3.setQuantity(5);
 		product3.setPrice(23);
 		product3.setDescription("ceci est une description du produit");
-		product3.setAvailable(true);
+		product3.setAvailable(true);*/
 		
 		
         System.out.println("*** Persist - start ***");
-        productService.save(product1);
-        productService.save(product2);
-        productService.save(product3);
+        productService.add(product1);
+        //productService.add(product2);
+        //productService.add(product3);
         
         TestSelectAll();
 	}
 	
 	public static String TestSelectAll(){
-	      List<Product> listProducts=productService.findAll();
+	      List<Product> listProducts = productService.findAll();
 		  displayMany(listProducts);
 	      return "success";
 	      
+	}
+
+	public static void testDelete(long i){
+		Product product = new Product();
+		product.setIdProduct(i);
+		productService.delete(product);
 	}
 	
 	public static String TestUpdate(){
@@ -81,7 +90,7 @@ public class TestProduct
    public static void displayMany(List<Product> listProducts) {
 	   System.out.println("Product list :");
 	   for (Product d : listProducts) {
-	        System.out.println("-" + d.toString());
+	        System.out.println(d.toString());
 	      }
    }
 

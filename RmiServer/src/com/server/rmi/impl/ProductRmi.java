@@ -23,7 +23,7 @@ public class ProductRmi extends UnicastRemoteObject implements IProductRmi {
 	@Override
 	public IProduct add(Product entity) throws RemoteException {
 		if(entity!=null) {
-			service.save(entity);
+			service.add(entity);
 			return entity;
 		}
 		
@@ -42,8 +42,8 @@ public class ProductRmi extends UnicastRemoteObject implements IProductRmi {
 	}
 
 	@Override
-	public void remove(Long id) throws RemoteException {
-		service.delete(id);
+	public void remove(Product product) throws RemoteException {
+		service.delete(product);
 		
 	}
 

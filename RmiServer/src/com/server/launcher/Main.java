@@ -17,7 +17,7 @@ public class Main {
                 System.setSecurityManager(new RMISecurityManager());
             }*/
 			IProductRmi productRmiService = new ProductRmi();
-			Naming.rebind("rmi://localhost:1099/productService", productRmiService);
+			Naming.rebind("productService", productRmiService);
 
 			IUserRmi userRmiService = new UserRmi();
 			Naming.bind("userService", userRmiService);

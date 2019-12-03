@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.server.entities.interfaces.IProduct;
+import com.server.utils.DateTool;
 
 @SuppressWarnings("serial")
 @Entity
@@ -21,13 +22,13 @@ public class Product implements IProduct, Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idProduct;
-	
-	private float price;
-	private String title;
-	private String description;
 	private Boolean available;
 	private Date createdAt;
+	private String description;
+	private float price;
 	private int quantity;
+	private String title;
+
 	
 	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private List<Rate> rates;
@@ -69,6 +70,10 @@ public class Product implements IProduct, Serializable {
 		return idProduct;
 	}
 
+	@Override
+	public void setIdProduct(long id) {
+		idProduct = id;
+	}
 	
 	@Override
 	public float getPrice() {
@@ -172,10 +177,9 @@ public class Product implements IProduct, Serializable {
 
 	@Override
 	public String toString() {
-		return "Product [idProduct=" + idProduct + ", price=" + price + ", title=" + title + ", description="
-				+ description + ", available=" + available + ", createdAt=" + createdAt + ", quantity=" + quantity + "]";
+		return "" + idProduct + ", " + available + ", '" + DateTool.dateToString(createdAt) +
+				"', '" + description + "', " + price +  ", " + quantity + ", '" + title
+				+  "";
 	}
 
-	
-	
 }
