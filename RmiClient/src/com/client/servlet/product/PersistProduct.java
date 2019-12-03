@@ -31,14 +31,18 @@ public class PersistProduct extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Product product1 = new Product();
-		product1.setTitle("Livre Java");
+		product1.setIdProduct(16);
+		product1.setTitle("Livre React");
 		product1.setQuantity(5);
-		product1.setPrice(23);
+		product1.setPrice(18);
 		product1.setDescription("ceci est une description du produit");
 		product1.setAvailable(false);
 		
 		try {
-			ProductStub.getStub().add(product1);
+			if(product1.getIdProduct()==0L)
+				ProductStub.getStub().add(product1);
+			else
+				ProductStub.getStub().update(product1);
 			System.out.println("done");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
