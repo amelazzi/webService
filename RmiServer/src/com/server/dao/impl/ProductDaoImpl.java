@@ -23,7 +23,7 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
     private Transaction currentTransaction;
 
     private  Database database;
- 
+
     public ProductDaoImpl() {
         String hostname = "localhost";
         String dbName = "rmidb";
@@ -84,12 +84,14 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
     
     @Override
     public void add(Product entity) {
+        //product1.setIdProduct(productService.getMaxId()+1);
+        entity.setIdProduct(this.getMaxId()+1);
         database.insert("product", entity);
     }
     
     @Override
     public void update(Product entity) {
-        getCurrentSession().update(entity);
+        database.update("product", entity);
     }
     
     @Override

@@ -110,10 +110,10 @@ public class Database {
 	{
 		try {
 			Statement sql = db.createStatement();
-			StringBuffer query = new StringBuffer("INSERT INTO "+delimit(tableName)+" VALUES( "+row[0]+"' ");
+			StringBuffer query = new StringBuffer("INSERT INTO "+delimit(tableName)+" VALUES( "+row[0]+" ");
 			
 			for (int i = 1; i < row.length; i++) {
-				query.append(",'"+row[i]+"' ");
+				query.append(","+row[i]+" ");
 			}
 			query.append(");");
 
@@ -153,14 +153,17 @@ public class Database {
 		try {
 			Statement sql = db.createStatement();
 			String cols[] = getColumnNames(delimit(tableName));
+
+			System.out.println("hello: " + row[0]);
+			String data[] = row[0].toString().split(",");
 			
-			StringBuffer query = new StringBuffer("UPDATE "+tableName+" SET "+delimit(cols[1])+" = '"+row[1]+"'");
+			StringBuffer query = new StringBuffer("UPDATE "+tableName+" SET "+delimit(cols[1])+" = "+data[1]+"");
 			
 			for (int i = 2; i < cols.length; i++) {
-				query.append(", "+ delimit(cols[i]) + " ='"+row[i]+"' ");
+				query.append(","+ delimit(cols[i]) + " ="+data[i]+"");
 			}
 			
-			query.append(" WHERE "+delimit(cols[0])+" = '"+row[0]+ "' ");
+			query.append(" WHERE "+delimit(cols[0])+" = "+data[0]+ " ");
 			
 			return sql.executeUpdate(query.toString());
 		} catch (Exception e) {

@@ -179,7 +179,7 @@ public class Product implements IProduct, Serializable {
 	public String toString() {
 		return "" + idProduct + ", " + available + ", '" + DateTool.dateToString(createdAt) +
 				"', '" + description + "', " + price +  ", " + quantity + ", '" + title
-				+  "";
+				+  "'";
 	}
 
 }

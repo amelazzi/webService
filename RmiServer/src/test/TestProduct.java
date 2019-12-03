@@ -14,17 +14,17 @@ public class TestProduct
 	static ProductService productService = new ProductService();
 	
 	public static void main(String[] args) throws RemoteException {
-
-		//testDelete(14);
+		testUpdate();
+		//testDelete(0);
 		//TestUpdate();
 		TestAdd();
-		TestSelectAll();
+		//TestSelectAll();
 		
 	}
 	
 	public static void TestAdd() {
 		Product product1 = new Product();
-		product1.setIdProduct(productService.getMaxId()+1);
+		//product1.setIdProduct(productService.getMaxId()+1);
         product1.setTitle("Livre Java");
 		product1.setQuantity(5);
 		product1.setPrice(23);
@@ -54,10 +54,10 @@ public class TestProduct
         TestSelectAll();
 	}
 	
-	public static String TestSelectAll(){
+	public static Product TestSelectAll(){
 	      List<Product> listProducts = productService.findAll();
-		  displayMany(listProducts);
-	      return "success";
+		  //displayMany(listProducts);
+	      return listProducts.get(3);
 	      
 	}
 
@@ -67,15 +67,20 @@ public class TestProduct
 		productService.delete(product);
 	}
 	
-	public static String TestUpdate(){
-	      List<Product> listProducts=productService.findAll();
-	      for (Product d : listProducts) {
-		        d.setCreatedAt(new Date());
-		        productService.update(d);
-		  }
+	public static String testUpdate(){
+	      //List<Product> listProducts=productService.findAll();
+	      //for (Product d : listProducts) {
+		    //    d.setCreatedAt(new Date());
+		Product p = new Product();
+		p = TestSelectAll();
+		System.out.println("id: " + p.getIdProduct());
+		p.setAvailable(false);
+
+		        productService.update(p);
+		  //}
 	      
-	      listProducts=productService.findAll();
-	      displayMany(listProducts);
+	      //listProducts=productService.findAll();
+	      //displayMany(listProducts);
 	      
 	      return "success";
 	      
@@ -93,6 +98,7 @@ public class TestProduct
 	        System.out.println(d.toString());
 	      }
    }
+
 
    
    

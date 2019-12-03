@@ -45,9 +45,9 @@ public class ProductService implements IProductService{
     	try {
     		if(entity!=null) {
     			if(entity.getIdProduct()!=0L) {
-    				productDao.openCurrentSessionwithTransaction();
+    				//productDao.openCurrentSessionwithTransaction();
     	            productDao.update(entity);
-    	            productDao.closeCurrentSessionwithTransaction();
+    	            //productDao.closeCurrentSessionwithTransaction();
     	            return entity;
     			}
     		}
@@ -61,12 +61,12 @@ public class ProductService implements IProductService{
 	@Override
 	public void delete(Product product) {
 		try {
-			if(product.getIdProduct()!=0L) {
+			//if(product.getIdProduct()!=0L) {
 				//productDao.openCurrentSessionwithTransaction();
 		        //Product product = productDao.findOneById(id);
 		        productDao.delete(product);
 		        //productDao.closeCurrentSessionwithTransaction();
-			}
+			//}
 			
 		} catch (HibernateException e) {
 			e.printStackTrace();
