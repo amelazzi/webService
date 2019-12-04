@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.server.entities.interfaces.IComment;
+
 @SuppressWarnings("serial")
 public class Comment implements Serializable, IComment {
 	
@@ -14,9 +15,7 @@ public class Comment implements Serializable, IComment {
 	private long idComment;
 	private String content;
 	private Date createdAt;
-	
 	private Product product;
-	
 	private UserImpl user;
 	
 	@Override

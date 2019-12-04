@@ -8,9 +8,7 @@ import com.server.entities.interfaces.IRate;
 public class Rate implements Serializable, IRate {
 	
 	private long IdRate;
-	
 	private int value;
-	
 	private Product product;
 	
 	@Override

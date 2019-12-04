@@ -22,7 +22,6 @@ public class Media implements Serializable, IMedia {
 	private String url;
 	private Date uploadedAt;
 	private String type;
-	
 	private Product product;
 	
 	@Override

@@ -14,5 +14,8 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="flickr4java-3.0.2.jar"/>
+	<classpathentry kind="lib" path="scribejava-apis-6.8.1.jar"/>
+	<classpathentry kind="lib" path="scribejava-core-6.8.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

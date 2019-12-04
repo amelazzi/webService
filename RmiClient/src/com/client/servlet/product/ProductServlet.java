@@ -34,7 +34,6 @@ public class ProductServlet extends HttpServlet {
 		List<Product> produits=new ArrayList<Product>();
 		try {
 			produits=ProductStub.getStub().findAll();
-			System.out.println(produits.get(0).toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

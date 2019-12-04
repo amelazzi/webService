@@ -14,13 +14,9 @@ public class Notification implements Serializable, INotification {
 	}
 
 	private long IdNotification;
-	
 	private String message;
-	
 	private Date sendAt;
-	
 	private boolean isRead;
-	
 	private UserImpl user;
 	
 	@Override

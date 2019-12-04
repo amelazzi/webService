@@ -6,7 +6,6 @@ import java.util.Date;
 import com.server.entities.interfaces.IEmprunt;
 
 @SuppressWarnings("serial")
-
 public class Emprunt implements Serializable, IEmprunt{
 	
 	public Emprunt() {
@@ -14,15 +13,13 @@ public class Emprunt implements Serializable, IEmprunt{
 		this.isReturned = false;
 		this.setToGiveBackAt(this.returnIn(15));
 	}
-	
+
 	private long idEmprunt;
 	private Date createdAt;
 	private Boolean isReturned;
 	private Date returnedAt;
 	private Date toGiveBackAt;
-	
 	private Product product;
-	
 	private UserImpl user;
 	
 	@Override

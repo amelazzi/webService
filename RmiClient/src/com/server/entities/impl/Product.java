@@ -5,13 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 import com.server.entities.interfaces.IProduct;
 import com.server.utils.DateTool;
 
 @SuppressWarnings("serial")
 public class Product implements IProduct, Serializable {
-
 
 	private long idProduct;
 	private Boolean available;
@@ -20,25 +18,16 @@ public class Product implements IProduct, Serializable {
 	private float price;
 	private int quantity;
 	private String title;
-
-	
-
 	private List<Rate> rates;
-	
-	
 	private List<Comment> comments;
-	
-
 	private List<Emprunt> emprunts;
-	
-
 	private List<Demande> demandes;
-	
-
 	private List<Media> medias;
+	private String image;
 	
 	
 	public Product(){
+		this.image="assets/img/default.png";
 		this.createdAt = new Date();
 		this.rates = new ArrayList<Rate>();
 		this.comments = new ArrayList<Comment>();
@@ -167,11 +156,22 @@ public class Product implements IProduct, Serializable {
 		this.medias = medias;
 	}
 
+
+	@Override
+	public String getImage() {
+		return image;
+	}
+
+	@Override
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	@Override
 	public String toString() {
-		return "" + idProduct + ", " + available + ", '" + DateTool.dateToString(createdAt) +
+		return idProduct + ", " + available + ", '" + DateTool.dateToString(createdAt) +
 				"', '" + description + "', " + price +  ", " + quantity + ", '" + title
-				+  "";
+				+  "', '"+image+"'";
 	}
-	
+
 }

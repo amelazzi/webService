@@ -25,13 +25,7 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
     private  Database database;
 
     public ProductDaoImpl() {
-        String hostname = "localhost";
-        String dbName = "rmidb";
-        String user = "postgres";
-        String pwd = "";
-
-        PostgresDataSource postgresDataSource = new PostgresDataSource(
-                hostname, dbName, user, pwd);
+        PostgresDataSource postgresDataSource = new PostgresDataSource();
 
         database = new Database(postgresDataSource);
     }

@@ -40,13 +40,10 @@ public class UserImpl implements Serializable, IUser{
 	private String domain;
 	private String graduate;
 	private Date registeredAt;
-	
 	private List<Emprunt> emprunts;
-
-	private List<Demande> demandes;
-
-	private List<Comment> comments;
 	
+	private List<Demande> demandes;
+	private List<Comment> comments;
 	private List<Notification> notifications;
 	
 	public int getTotalEmprunt() {

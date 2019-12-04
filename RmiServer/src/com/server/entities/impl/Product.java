@@ -28,6 +28,7 @@ public class Product implements IProduct, Serializable {
 	private float price;
 	private int quantity;
 	private String title;
+	private String image;
 
 	
 	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
@@ -47,6 +48,7 @@ public class Product implements IProduct, Serializable {
 	
 	
 	public Product(){
+		this.image="assets/img/default.png";
 		this.createdAt = new Date();
 		this.rates = new ArrayList<Rate>();
 		this.comments = new ArrayList<Comment>();
@@ -176,10 +178,19 @@ public class Product implements IProduct, Serializable {
 	}
 
 	@Override
-	public String toString() {
-		return "" + idProduct + ", " + available + ", '" + DateTool.dateToString(createdAt) +
-				"', '" + description + "', " + price +  ", " + quantity + ", '" + title
-				+  "'";
+	public String getImage() {
+		return image;
 	}
 
+	@Override
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	@Override
+	public String toString() {
+		return idProduct + ", " + available + ", '" + DateTool.dateToString(createdAt) +
+				"', '" + description + "', " + price +  ", " + quantity + ", '" + title
+				+  "', '"+image+"'";
+	}
 }

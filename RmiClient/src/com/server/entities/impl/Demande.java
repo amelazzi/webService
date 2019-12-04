@@ -18,9 +18,7 @@ public class Demande implements Serializable, IDemande{
 	private Date createdAt;
 	private Date desiredAt;
 	private Boolean isDone;
-	
 	private Product product;
-
 	private UserImpl user;
 	
 	@Override

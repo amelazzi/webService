@@ -1,21 +1,18 @@
 package com.server.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
-
 public class DateTool {
-
 
     /**
      * Convertit un string au format date Date
      * Tue Feb 06 09:16:17 GMT 2018 (yyyy-MM-dd HH:mm:)
      * @param dateString
      * @return
-     * @throws java.text.ParseException 
      */
-    public static Date stringToDate(String dateString) throws java.text.ParseException{
+    public static Date stringToDate(String dateString){
         //format android
         String expectedFormat = "yyyy-MM-dd HH:mm:ss";
         return stringToDate(dateString,expectedFormat);
@@ -26,9 +23,8 @@ public class DateTool {
      * @param dateString
      * @param expectedFormat
      * @return
-     * @throws java.text.ParseException 
      */
-    public static Date stringToDate(String dateString, String expectedFormat) throws java.text.ParseException{
+    public static Date stringToDate(String dateString, String expectedFormat){
         SimpleDateFormat format = new SimpleDateFormat(expectedFormat);
         try {
             Date date = format.parse(dateString);

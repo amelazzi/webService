@@ -1,10 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<nav class="col-md-2 d-none d-md-block sidebar">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="req" value="${pageContext.request}" />
+<c:set var="baseURL" value="${req.scheme}://${req.serverName}:${req.serverPort}${req.contextPath}" />
+<nav class="col-md-2 d-md-block sidebar bg-light">
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-            	<c:url value="/home" var="home"/>
-                <a class="nav-link" href="home">
+                <a class="nav-link" href="${baseURL}/home">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span data-feather="home">
                     	<fmt:message key="common.dashboard"/>
@@ -12,7 +14,6 @@
                 </a>
             </li>
             <li class="nav-item">
-            	<c:url value="/emprunt" var="emprunt"/>
                 <a class="nav-link" href="#">
                 	<i class="fas fa-book-reader"></i>
                     <span data-feather="file"></span>
@@ -20,7 +21,6 @@
                 </a>
             </li>
             <li class="nav-item">
-            	<c:url value="/demande" var="demand"/>
                 <a class="nav-link" href="#">
                 	<i class="fab fa-buffer"></i>
                     <span data-feather="shopping-cart"></span>
@@ -29,7 +29,6 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                	<c:url value="/achat" var="achat"/>
                 	<i class="fa fa-shopping-cart"></i>
                     <span data-feather="shopping-cart"></span>
                     <fmt:message key="user.buy"/>
@@ -42,17 +41,13 @@
 			    <fmt:message key="common.setting"/>
 			  </a>
 			  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-			  	<c:url value="/setting/product" var="settingProduct"/>
-			    <a class="dropdown-item" href="product"><fmt:message key="common.product"/></a>
-			    <c:url value="/setting/user" var="settingUser"/>
+			    <a class="dropdown-item" href="${baseURL}/setting/product"><fmt:message key="common.product"/></a>
 			    <a class="dropdown-item" href=""><fmt:message key="user"/></a>
-			    <c:url value="/setting/emprunt" var="settingEmprunt"/>
-			    <a class="dropdown-item" href="settingEmprunt"><fmt:message key="common.lend"/></a>
-			    <c:url value="/setting/demand" var="settingDemand"/>
+			    <a class="dropdown-item" href=""><fmt:message key="common.lend"/></a>
 			    <a class="dropdown-item" href=""><fmt:message key="common.lend.request"/></a>
 			  </div>
 			</li>
-            
         </ul>
+        <img alt="" src="${baseURL}/assets/img/logo.png" class="fixed-bottom p-3" style="height:150px; width:250px;">
     </div>
 </nav>
