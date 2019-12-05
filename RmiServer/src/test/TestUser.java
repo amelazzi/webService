@@ -18,10 +18,11 @@ public class TestUser
 		//TestSelectAll();
 		//TestUpdate();
 		//TestAdd();
-		userService.deleteAll();
+		//userService.deleteAll();
 		//testLoginCheck("ea_azzi@esi.dz","amel");
 		//userService.findAll();
-		displayMany(userService.findAll());
+		//displayMany(userService.findAll());
+		displayMany(userService.findBy("status", "student"));
 		
 	}
 	
@@ -33,17 +34,45 @@ public class TestUser
 		UserImpl user = new UserImpl();
 
 		user.setBirthday(new Date());
-		user.setDomain("Design");
+		user.setDomain("Sport");
 		user.setEmail("Bob@mail.com");
 		user.setFirstName("bob");
 		user.setLastName("mastigas");
 		user.setGraduate("M2");
-		user.setMatricule(1806);
+		user.setMatricule(1901);
 		user.setPassword(EncodeSha.getHash("pwd"));
-		user.setPhone("0669573582");
+		user.setPhone("0646702698");
 		user.setStatus("teacher");
+
+		UserImpl user2 = new UserImpl();
+
+		user2.setBirthday(new Date());
+		user2.setDomain("SSIO");
+		user2.setEmail("amel@mail.com");
+		user2.setFirstName("amel");
+		user2.setLastName("azzi");
+		user2.setGraduate("M2");
+		user2.setMatricule(1806);
+		user2.setPassword(EncodeSha.getHash("pwd"));
+		user2.setPhone("0669573582");
+		user2.setStatus("student");
+
+		UserImpl user3 = new UserImpl();
+
+		user3.setBirthday(new Date());
+		user3.setDomain("SSIO");
+		user3.setEmail("mamadou@mail.com");
+		user3.setFirstName("mamadou");
+		user3.setLastName("hassimiou");
+		user3.setGraduate("M2");
+		user3.setMatricule(1806);
+		user3.setPassword(EncodeSha.getHash("pwd"));
+		user3.setPhone("0669573582");
+		user3.setStatus("student");
 		
 		userService.add(user);
+		userService.add(user2);
+		userService.add(user3);
         
         //TestSelectAll();
 	}

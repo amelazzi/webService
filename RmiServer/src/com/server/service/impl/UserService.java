@@ -87,15 +87,10 @@ public class UserService implements IUserService{
 
     @Override
     public List<UserImpl> findAll() {
-    	try {
     		//userDao.openCurrentSession();
             List<UserImpl> users = userDao.findAll();
             //userDao.closeCurrentSession();
             return users;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-        return null;
     }
     
     @Override
@@ -117,7 +112,9 @@ public class UserService implements IUserService{
 	@Override
 	public List<UserImpl> findBy(String field, String value) {
 		// TODO Auto-generated method stub
-		return null;
+		List<UserImpl> users = userDao.findBy(field, value);
+		//userDao.closeCurrentSession();
+		return users;
 	}
 
 	@Override

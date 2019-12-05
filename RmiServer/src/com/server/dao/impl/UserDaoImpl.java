@@ -131,8 +131,12 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
 
     @Override
     public long getMaxId() {
+        long id;
         String[][] data = database.executeQuery("select max(idUser) as max from userimpl");
-        long id = Long.parseLong(data[1][0]);
+        if(data[1][0]!=null)
+            id = Long.parseLong(data[1][0]);
+        else
+            id = 0L;
         return id;
     }
 
@@ -151,13 +155,13 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
 	@Override
     public List<UserImpl> findAll() {
         String[][] users = database.select("userimpl");
-        List<UserImpl> productsList = new ArrayList<>();
+        List<UserImpl> usersList = new ArrayList<>();
 
         for(int i=1; i<users.length; i++){
-            productsList.add(parseUser(users,i));
+            usersList.add(parseUser(users,i));
         }
 
-        return productsList;
+        return usersList;
     }
     
     @Override
@@ -171,7 +175,13 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
 	@Override
 	public List<UserImpl> findBy(String field, String value) {
 		// TODO Auto-generated method stub
-		return null;
+        String[][] users = database.select("userimpl", field, value);
+        List<UserImpl> usersList = new ArrayList<>();
+
+        for(int i=1; i<users.length; i++){
+            usersList.add(parseUser(users,i));
+        }
+		return usersList;
 	}
 
 	@Override
