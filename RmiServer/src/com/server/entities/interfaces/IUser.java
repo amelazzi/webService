@@ -33,6 +33,7 @@ public interface IUser {
 	public List<Comment> getComments();
 	public void setComments(List<Comment> comments);
 	public long getIdUser();
+	public void setIdUser(long id);
 	public String getEmail();
 	public void setEmail(String email);
 	public String getPassword();

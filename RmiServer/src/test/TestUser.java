@@ -17,8 +17,8 @@ public class TestUser
 	public static void main(String[] args) throws RemoteException {
 		//TestSelectAll();
 		//TestUpdate();
-		//TestAdd();
-		testLoginCheck("ea_azzi@esi.dz","amel");
+		TestAdd();
+		//testLoginCheck("ea_azzi@esi.dz","amel");
 		
 	}
 	
@@ -26,21 +26,21 @@ public class TestUser
 		return userService.checkLogin(email, password);
 	}
 	
-	public void TestAdd() {
-		UserImpl user=new UserImpl();
+	public static void TestAdd() {
+		UserImpl user = new UserImpl();
 		user.setBirthday(new Date());
 		user.setDomain("Informatique");
 		user.setEmail("amel@mail.com");
 		user.setFirstName("Azzi");
-		user.setLastName("Mamadou");
+		user.setLastName("amel");
 		user.setGraduate("Master2");
 		user.setMatricule(1234);
 		user.setPassword(EncodeSha.getHash("password"));
-		user.setPhone("0612345678");
+		user.setPhone("0669573582");
 		
-		userService.save(user);
+		userService.add(user);
         
-        TestSelectAll();
+        //TestSelectAll();
 	}
 	
 	public static String TestSelectAll(){

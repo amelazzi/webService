@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.server.entities.interfaces.IUser;
+import com.server.utils.DateTool;
 
 @SuppressWarnings("serial")
 @Entity
@@ -196,7 +197,12 @@ public class UserImpl implements Serializable, IUser{
 	public long getIdUser() {
 		return idUser;
 	}
-	
+
+	@Override
+	public void setIdUser(long id) {
+		idUser = id;
+	}
+
 	@Override
 	public String getEmail() {
 		return email;
@@ -237,10 +243,9 @@ public class UserImpl implements Serializable, IUser{
 	
 	@Override
 	public String toString() {
-		return "User [idUser=" + idUser + ", matricule=" + matricule + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", email=" + email + ", password=" + password + ", phone=" + phone + ", role=" + role
-				+ ", status=" + status + ", birthday=" + birthday + ", domain=" + domain + ", graduate=" + graduate
-				+ ", registeredAt=" + registeredAt  + "]";
+		return "" + idUser + ",'" + DateTool.dateToString(birthday) + "','" + domain + "','" +email + "','"
+				+ firstName + "','" + graduate + "','" + lastName + "'," + matricule + ",'" + password + "','"
+				+ phone + "','" + DateTool.dateToString(registeredAt) + "','" + role + "','" + status + "'";
 	}
 
 }

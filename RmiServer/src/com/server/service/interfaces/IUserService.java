@@ -5,7 +5,7 @@ import java.util.List;
 import com.server.entities.impl.UserImpl;
 
 public interface IUserService {
-	public UserImpl save(UserImpl entity);
+	public UserImpl add(UserImpl entity);
 	
 	public UserImpl update(UserImpl entity);
 	

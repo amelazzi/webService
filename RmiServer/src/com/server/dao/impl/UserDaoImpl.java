@@ -2,6 +2,8 @@ package com.server.dao.impl;
 
 import java.util.List;
 
+import com.server.utils.Database;
+import com.server.utils.PostgresDataSource;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,10 +19,20 @@ import com.server.utils.EncodeSha;
 public class UserDaoImpl implements IUserDao<UserImpl, Long> {
  
     private Session currentSession;
-     
     private Transaction currentTransaction;
+
+    private Database database;
  
     public UserDaoImpl() {
+        String hostname = "localhost";
+        String dbName = "rmidb";
+        String user = "postgres";
+        String pwd = "";
+
+        PostgresDataSource postgresDataSource = new PostgresDataSource(
+                hostname, dbName, user, pwd);
+
+        database = new Database(postgresDataSource);
     }
     
     public Session openCurrentSession() {
@@ -71,15 +83,23 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
     }
     
     @Override
-    public void persist(UserImpl entity) {
-        getCurrentSession().save(entity);
+    public void add(UserImpl entity) {
+        entity.setIdUser(this.getMaxId()+1);
+        database.insert("userimpl", entity);
     }
     
     @Override
     public void update(UserImpl entity) {
         getCurrentSession().update(entity);
     }
-    
+
+    @Override
+    public long getMaxId() {
+        String[][] data = database.executeQuery("select max(idUser) as max from userimpl");
+        long id = Long.parseLong(data[1][0]);
+        return id;
+    }
+
     @Override
     public UserImpl findOneById(Long id) {
     	UserImpl produit = (UserImpl) getCurrentSession().get(UserImpl.class, id);

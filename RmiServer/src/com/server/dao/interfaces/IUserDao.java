@@ -5,9 +5,11 @@ import java.util.List;
  
 public interface IUserDao<T, Id extends Serializable> {
  
-    public void persist(T entity);
+    public void add(T entity);
      
     public void update(T entity);
+
+    public long getMaxId();
      
     public T findOneById(Id id);
     

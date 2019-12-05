@@ -23,4 +23,5 @@ public interface IUserRmi extends Remote {
     public void removeAll() throws RemoteException;
 
     public boolean login(String email, String password) throws RemoteException;
+
 }

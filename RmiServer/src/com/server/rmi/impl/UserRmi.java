@@ -24,7 +24,7 @@ public class UserRmi extends UnicastRemoteObject implements IUserRmi {
     @Override
     public IUser add(UserImpl entity) throws RemoteException {
         if(entity!=null) {
-            service.save(entity);
+            service.add(entity);
             return entity;
         }
 

@@ -22,13 +22,13 @@ public class UserService implements IUserService{
     }
     
     @Override
-    public UserImpl save(UserImpl entity) {
+    public UserImpl add(UserImpl entity) {
     	try {
     		if(entity!=null) {
     			entity.setPassword(EncodeSha.getHash(entity.getPassword()));
-    			userDao.openCurrentSessionwithTransaction();
-                userDao.persist(entity);
-                userDao.closeCurrentSessionwithTransaction();
+    			//userDao.openCurrentSessionwithTransaction();
+                userDao.add(entity);
+                //userDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
 		} catch (HibernateException e) {

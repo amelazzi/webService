@@ -29,7 +29,7 @@ public class Test {
 		user.setPassword("amel");
 
 		System.out.println("*** Persist - start ***");
-		service.save(user);
+		service.add(user);
 		System.out.println("*** User Saved ***");
 		/*
 		 * ProductService service = new ProductService();
