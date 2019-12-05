@@ -29,7 +29,7 @@ public class ProductService implements IProductService{
                 //productDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();	
 		}
     	return null;
@@ -52,7 +52,7 @@ public class ProductService implements IProductService{
     			}
     		}
     		
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	return null;
@@ -68,7 +68,7 @@ public class ProductService implements IProductService{
 		        //productDao.closeCurrentSessionwithTransaction();
 			//}
 			
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -142,7 +142,7 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
 
     @Override
     public UserImpl findOneById(Long id) {
-    	UserImpl user = findBy("idUser", id.toString()).get(0);
+    	UserImpl user = findBy("idUser", id).get(0);
         return user;
     }
     

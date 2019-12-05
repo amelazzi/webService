@@ -96,8 +96,8 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
     
     @Override
     public Product findOneById(Long id) {
-    	Product produit = (Product) getCurrentSession().get(Product.class, id);
-        return produit; 
+        Product product = findBy("idUser", id).get(0);
+        return product;
     }
     
     @Override

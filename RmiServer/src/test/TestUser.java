@@ -22,7 +22,7 @@ public class TestUser
 		//testLoginCheck("ea_azzi@esi.dz","amel");
 		//userService.findAll();
 		//displayMany(userService.findAll());
-		displayMany(userService.findBy("idUser", 2L));
+		displayOne(userService.findOneById(2L));
 		
 	}
 	
