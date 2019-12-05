@@ -6,18 +6,29 @@ import java.util.List;
 import com.server.entities.impl.Emprunt;
 import com.server.entities.impl.UserImpl;
 import com.server.service.impl.EmpruntService;
+import com.server.service.impl.ProductService;
+import com.server.service.impl.UserService;
 
 
 public class TestEmprunt
 {	
 	static EmpruntService empruntService = new EmpruntService();
+	static UserService userService = new UserService();
+	static ProductService productService  = new ProductService();
 	
 	public static void main(String[] args) throws RemoteException {
 		//TestSelectAll();
 		//TestUpdate();
-		testRestituter();
+		//testRestituter();
 		//testCheckPriority();
-		
+		Emprunt emprunt = new Emprunt();
+		emprunt.setProduct(productService.findOneById(6L));
+		emprunt.setUser(userService.findOneById(3L));
+		emprunt.setIsReturned(true);
+		//empruntService.add(emprunt);
+		empruntService.emprunter(productService.findOneById(6L), userService.findOneById(3L));
+
+
 	}
 	
 	public void testEmprunter() {

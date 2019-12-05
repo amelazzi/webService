@@ -7,7 +7,7 @@ import com.server.entities.impl.Product;
 import com.server.entities.impl.UserImpl;
 
 public interface IEmpruntService {
-	public Emprunt save(Emprunt entity);
+	public Emprunt add(Emprunt entity);
 	
 	public Emprunt update(Emprunt entity);
 	
@@ -24,6 +24,8 @@ public interface IEmpruntService {
     public List<Emprunt> findAllSortedBy(String field, String order);
 	
 	public void deleteAll();
+
+	public boolean checkEmprunt(Product product, UserImpl user);
 	
 	public int emprunter(Product product, UserImpl user);
 	

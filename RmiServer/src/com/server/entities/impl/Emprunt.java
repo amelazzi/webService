@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.server.entities.interfaces.IEmprunt;
+import com.server.utils.DateTool;
 
 @SuppressWarnings("serial")
 @Entity
@@ -23,6 +24,7 @@ public class Emprunt implements Serializable, IEmprunt{
 	
 	public Emprunt() {
 		this.createdAt = new Date();
+		this.returnedAt = new Date();
 		this.isReturned = false;
 		this.setToGiveBackAt(this.returnIn(15));
 	}
@@ -87,6 +89,9 @@ public class Emprunt implements Serializable, IEmprunt{
 	public long getIdEmprunt() {
 		return idEmprunt;
 	}
+
+	@Override
+	public void setIdEmprunt(long idEmprunt) {this.idEmprunt = idEmprunt;}
 	
 	public Date returnIn(int days) {
 		int d = days*24;
@@ -112,7 +117,8 @@ public class Emprunt implements Serializable, IEmprunt{
 
 	@Override
 	public String toString() {
-		return "Emprunt [idEmprunt=" + idEmprunt + ", createdAt=" + createdAt + ", isReturned=" + isReturned
-				+ ", product=" + product + ", user=" + user + "]";
+		return idEmprunt + ",'" + DateTool.dateToString(createdAt) + "'," + isReturned +  ",'"
+				+ DateTool.dateToString(returnedAt) + "','" + DateTool.dateToString(toGiveBackAt)
+				+ "'," + product.getIdProduct() + "," + user.getIdUser();
 	}
 }

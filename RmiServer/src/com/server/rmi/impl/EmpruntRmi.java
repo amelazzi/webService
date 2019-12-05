@@ -24,7 +24,7 @@ public class EmpruntRmi extends UnicastRemoteObject implements IEmpruntRmi {
     @Override
     public IEmprunt add(Emprunt entity) throws RemoteException {
         if(entity!=null) {
-            service.save(entity);
+            service.add(entity);
             return entity;
         }
 

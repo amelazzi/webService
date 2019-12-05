@@ -35,15 +35,15 @@ public class EmpruntService implements IEmpruntService{
     }
     
     @Override
-    public Emprunt save(Emprunt entity) {
+    public Emprunt add(Emprunt entity) {
     	try {
     		if(entity!=null) {
-    			empruntDao.openCurrentSessionwithTransaction();
-                empruntDao.persist(entity);
-                empruntDao.closeCurrentSessionwithTransaction();
+    			//empruntDao.openCurrentSessionwithTransaction();
+                empruntDao.add(entity);
+                //empruntDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();	
 		}
     	return null;
@@ -100,11 +100,11 @@ public class EmpruntService implements IEmpruntService{
     @Override
     public List<Emprunt> findAll() {
     	try {
-    		empruntDao.openCurrentSession();
+    		//empruntDao.openCurrentSession();
             List<Emprunt> emprunts = empruntDao.findAll();
-            empruntDao.closeCurrentSession();
+            //empruntDao.closeCurrentSession();
             return emprunts;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
         return null;
@@ -122,8 +122,26 @@ public class EmpruntService implements IEmpruntService{
     }
 
 	@Override
+	public boolean checkEmprunt(Product product, UserImpl user) {
+		List<Emprunt> emprunts = empruntDao.findBy("iduser", Long.toString(user.getIdUser()));
+		for(Emprunt e:emprunts){
+			if((product.getIdProduct()==e.getProduct().getIdProduct()) && (e.getIsReturned()))
+				return true;
+		}
+		return false;
+	}
+
+	@Override
 	public List<Emprunt> findBy(String field, String value) {
 		// TODO Auto-generated method stub
+		try {
+			//empruntDao.openCurrentSession();
+			List<Emprunt> emprunts = empruntDao.findBy(field, value);
+			//empruntDao.closeCurrentSession();
+			return emprunts;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -141,14 +159,45 @@ public class EmpruntService implements IEmpruntService{
 	
 	@Override
 	public int emprunter(Product p, UserImpl u) {
-    	if(p.getQuantity()>=1) {
+    	if(checkEmprunt(p, u)){
+			if(p.getQuantity()>=1){
+				Emprunt emprunt = new Emprunt();
+				emprunt.setProduct(p);
+				emprunt.setUser(u);
+				try{
+					add(emprunt);
+					p.setQuantity(p.getQuantity()-1);
+					productService.update(p);
+					System.out.println("Emprunter accorder");
+				}catch (Exception e){
+					System.out.println("Impossible d'emprunter");
+					return 0;
+				}
+				return 1;
+			}else{
+				try{
+					//add(demande);
+				}catch (Exception e){
+					System.out.println("Impossible de faire une demande");
+					return 0;
+				}
+				System.out.println("demande en attente...");
+				return -1;
+			}
+		}else{
+			System.out.println("vous avez deja empruntere ce livre");
+			return 0;
+		}
+
+
+    	/*if(p.getQuantity()>=1) {
     		//procedure d'emprunt
     		Emprunt emprunt = new Emprunt();
     		emprunt.setProduct(p);
     		emprunt.setUser(u);
     		
     		try {
-        		this.save(emprunt);
+        		this.add(emprunt);
         		p.setQuantity(p.getQuantity()-1);
         		productService.update(p);
         		return 1;
@@ -169,12 +218,12 @@ public class EmpruntService implements IEmpruntService{
 				return 0;
 			}
     		return -1;
-    	}
+    	}*/
     }
     
 	@Override
     public boolean restituer(Emprunt emprunt) {
-    	if(!emprunt.getIsReturned()) {
+    	/*if(!emprunt.getIsReturned()) {
     		emprunt.setReturnedAt(new Date());
     		emprunt.setIsReturned(true);
     		try {
@@ -190,7 +239,7 @@ public class EmpruntService implements IEmpruntService{
 					if(user!=null) {
 						System.out.println("here");	
 						Notification notification = new Notification();
-						notification.setMessage("Notification demande: Le produit que vous avez souhaité "
+						notification.setMessage("Notification demande: Le produit que vous avez souhaitï¿½ "
 								+ "emprunter est maintenant disponible. Veuillez valider l'emprunt");
 						notificationService.save(notification);
 					}
@@ -207,7 +256,7 @@ public class EmpruntService implements IEmpruntService{
 				//e.printStackTrace();
 				return false;
 			}
-    	}
+    	}*/
     	
     	return false;
     }
