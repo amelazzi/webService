@@ -1,8 +1,12 @@
 package com.server.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.server.service.impl.ProductService;
+import com.server.service.impl.UserService;
 import com.server.utils.Database;
+import com.server.utils.DateTool;
 import com.server.utils.PostgresDataSource;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,6 +23,8 @@ public class CommentDaoImpl implements ICommentDao<Comment, Long> {
     private Transaction currentTransaction;
 
     private Database database;
+    private UserService userService = new UserService();
+    private ProductService productService = new ProductService();
  
     public CommentDaoImpl() {
         PostgresDataSource postgresDataSource = new PostgresDataSource();
@@ -88,7 +94,20 @@ public class CommentDaoImpl implements ICommentDao<Comment, Long> {
         entity.setIdComment(this.getMaxId()+1);
         database.insert("comment", entity);
     }
-    
+
+    @Override
+    public Comment parseComment(String[][] data, int i) {
+        Comment comment = new Comment();
+
+        comment.setIdComment(Long.parseLong(data[i][0]));
+        comment.setContent(data[i][1]);
+        comment.setCreateAt(DateTool.stringToDate(data[i][2]));
+        comment.setProduct(productService.findOneById(Long.parseLong(data[i][3])));
+        comment.setUser(userService.findOneById(Long.parseLong(data[i][4])));
+
+        return comment;
+    }
+
     @Override
     public void update(Comment entity) {
         getCurrentSession().update(entity);
@@ -108,9 +127,14 @@ public class CommentDaoImpl implements ICommentDao<Comment, Long> {
     @SuppressWarnings("unchecked")
 	@Override
     public List<Comment> findAll() {
-    	List<Comment> products = (List<Comment>) getCurrentSession().createQuery("from Comment").list();
-        
-        return products;
+        String[][] comments = database.select("comment");
+        List<Comment> commentList = new ArrayList<>();
+
+        for(int i=1; i<comments.length; i++){
+            commentList.add(parseComment(comments,i));
+        }
+
+        return commentList;
     }
     
     @Override

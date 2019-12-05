@@ -1,5 +1,7 @@
 package com.server.dao.interfaces;
 
+import com.server.entities.impl.Comment;
+
 import java.io.Serializable;
 import java.util.List;
  
@@ -8,6 +10,8 @@ public interface ICommentDao<T, Id extends Serializable> {
     public long getMaxId();
 
     public void add(T entity);
+
+    public Comment parseComment(String[][] data, int i);
      
     public void update(T entity);
      

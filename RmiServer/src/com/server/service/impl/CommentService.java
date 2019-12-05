@@ -86,11 +86,11 @@ public class CommentService implements ICommentService{
     @Override
     public List<Comment> findAll() {
     	try {
-    		commentDao.openCurrentSession();
+    		//commentDao.openCurrentSession();
             List<Comment> comment = commentDao.findAll();
-            commentDao.closeCurrentSession();
+            //commentDao.closeCurrentSession();
             return comment;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
         return null;

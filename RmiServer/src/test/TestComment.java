@@ -15,8 +15,8 @@ public class TestComment {
     static ProductService productService = new ProductService();
 
     public static void main(String[] args) throws RemoteException {
-        testAdd();
-        //displayMany();
+        //testAdd();
+        displayMany(commentService.findAll());
     }
 
     public static void testAdd(){
@@ -39,6 +39,8 @@ public class TestComment {
         commentService.add(c1);
         commentService.add(c2);
     }
+
+
 
     public static void displayOne(Comment comment) {
         System.out.println("Comment :");
