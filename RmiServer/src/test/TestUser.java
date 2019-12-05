@@ -16,7 +16,7 @@ public class TestUser
 	
 	public static void main(String[] args) throws RemoteException {
 		//TestSelectAll();
-		//TestUpdate();
+		TestUpdate();
 		//TestAdd();
 		//testLoginCheck("ea_azzi@esi.dz","amel");
 		//userService.findAll();
@@ -45,20 +45,20 @@ public class TestUser
         //TestSelectAll();
 	}
 
-	public static String TestSelectAll(){
+	public static UserImpl TestSelectAll(){
 	      List<UserImpl> listUserImpls=userService.findAll();
-		  displayMany(listUserImpls);
-	      return "success";
+		  //displayMany(listUserImpls);
+	      return listUserImpls.get(0);
 	      
 	}
 	
 	public static String TestUpdate(){
-		UserImpl p = new UserImpl();
-		//p = TestSelectAll();
-		System.out.println("id: " + p.getIdUser());
-		//p.setAvailable(false);
+		UserImpl user = new UserImpl();
+		user = TestSelectAll();
+		System.out.println("id: " + user.getIdUser());
+		user.setPhone("0642702698");
 
-		userService.update(p);
+		userService.update(user);
 		//}
 
 		//listProducts=productService.findAll();

@@ -42,9 +42,9 @@ public class UserService implements IUserService{
     	try {
     		if(entity!=null) {
     			if(entity.getIdUser()!=0L) {
-    				userDao.openCurrentSessionwithTransaction();
+    				//userDao.openCurrentSessionwithTransaction();
     	            userDao.update(entity);
-    	            userDao.closeCurrentSessionwithTransaction();
+    	            //userDao.closeCurrentSessionwithTransaction();
     	            return entity;
     			}
     		}
