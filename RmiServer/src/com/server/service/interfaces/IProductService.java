@@ -15,7 +15,7 @@ public interface IProductService {
 	
 	public Product findOneById(Long id);
 	
-	public List<Product> findBy(String field, String value);
+	public List<Product> findBy(String field, Object value);
     
     public List<Product> findBy(String[] fields, Object[] values);
      

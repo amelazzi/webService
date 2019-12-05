@@ -77,12 +77,12 @@ public class ProductService implements IProductService{
 	public Product findOneById(Long id) {
 		try {
 			if(id!=0L) {
-				productDao.openCurrentSession();
+				//productDao.openCurrentSession();
 		        Product product = productDao.findOneById(id);
-		        productDao.closeCurrentSession();
+		        //productDao.closeCurrentSession();
 		        return product;
 			}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -104,18 +104,19 @@ public class ProductService implements IProductService{
     @Override
     public void deleteAll() {
     	try {
-    		productDao.openCurrentSessionwithTransaction();
+    		//productDao.openCurrentSessionwithTransaction();
             productDao.deleteAll();
-            productDao.closeCurrentSessionwithTransaction();
-		} catch (HibernateException e) {
+            //productDao.closeCurrentSessionwithTransaction();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }
 
 	@Override
-	public List<Product> findBy(String field, String value) {
+	public List<Product> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Product> products = productDao.findBy(field, value);
+		return products;
 	}
 
 	@Override

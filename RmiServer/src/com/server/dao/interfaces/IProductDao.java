@@ -15,7 +15,7 @@ public interface IProductDao<T, Id extends Serializable> {
      
     public T findOneById(Id id);
     
-    public List<T> findBy(String field, String value);
+    public List<T> findBy(String field, Object value);
     
     public List<T> findBy(String[] fields, Object[] values);
      

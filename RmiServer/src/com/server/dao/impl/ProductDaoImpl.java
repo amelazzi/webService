@@ -154,9 +154,16 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
     }
 
     @Override
-	public List<Product> findBy(String field, String value) {
+	public List<Product> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
-		return null;
+        String[][] products = database.select("product", field, value);
+        List<Product> productsList = new ArrayList<>();
+
+        for(int i=1; i<products.length; i++){
+            productsList.add(parseProduct(products,i));
+        }
+
+        return productsList;
 	}
 
 	@Override
