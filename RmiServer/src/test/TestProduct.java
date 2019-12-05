@@ -14,11 +14,12 @@ public class TestProduct
 	static ProductService productService = new ProductService();
 	
 	public static void main(String[] args) throws RemoteException {
-		testUpdate();
+		//testUpdate();
 		//testDelete(0);
 		//TestUpdate();
-		TestAdd();
+		//TestAdd();
 		//TestSelectAll();
+		displayMany(productService.saleProduct(6));
 		
 	}
 	

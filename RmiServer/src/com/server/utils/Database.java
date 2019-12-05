@@ -99,6 +99,7 @@ public class Database {
 		return executeQuery(query);
 	}
 
+
 	public String[][] selectLike(String tableName, String key, String value){
 	
 		String query = "SELECT * FROM "+delimit(tableName)+" WHERE "+delimit(key)+" =  '"+value+"'";

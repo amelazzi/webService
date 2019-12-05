@@ -1,6 +1,7 @@
 package com.server.dao.impl;
 
 import java.text.SimpleDateFormat;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,8 @@ import org.hibernate.Transaction;
 import com.server.dao.interfaces.IProductDao;
 import com.server.entities.impl.Product;
 import org.hibernate.cfg.Configuration;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 
 public class ProductDaoImpl implements IProductDao<Product, Long> {
@@ -155,6 +158,20 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
         product.setTitle(data[i][6]);
 
         return product;
+    }
+
+    @Override
+    public List<Product> saleProduct(int dayNbr) {
+        Date date = new Date();
+        List<Product> productsList = findAll();
+        List<Product> saleProducts = new ArrayList<>();
+        int days;
+        for(Product product: productsList){
+            days = (int)( (date.getTime() - product.getCreatedAt().getTime()) / (1000 * 60 * 60 * 24));
+            if(days>dayNbr)
+                saleProducts.add(product);
+        }
+        return saleProducts;
     }
 
     @Override

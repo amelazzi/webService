@@ -113,6 +113,12 @@ public class ProductService implements IProductService{
     }
 
 	@Override
+	public List<Product> saleProduct(int dayNbr) {
+		List<Product> products = productDao.saleProduct(dayNbr);
+		return products;
+	}
+
+	@Override
 	public List<Product> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
 		List<Product> products = productDao.findBy(field, value);

@@ -28,5 +28,7 @@ public interface IProductDao<T, Id extends Serializable> {
     public void deleteAll();
 
     public Product parseProduct(String[][] data, int i);
+
+    public List<T> saleProduct (int dayNbr);
      
 }

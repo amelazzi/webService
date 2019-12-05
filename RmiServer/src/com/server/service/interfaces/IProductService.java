@@ -24,5 +24,7 @@ public interface IProductService {
     public List<Product> findAllSortedBy(String field, String order);
 	
 	public void deleteAll();
+
+	public List<Product> saleProduct (int dayNbr);
 	
 }
