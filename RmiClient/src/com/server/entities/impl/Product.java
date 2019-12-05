@@ -7,7 +7,7 @@ import java.util.List;
 
 
 import com.server.entities.interfaces.IProduct;
-import com.server.utils.DateTool;
+import com.server.utils._DateTool;
 
 @SuppressWarnings("serial")
 public class Product implements IProduct, Serializable {
@@ -169,7 +169,7 @@ public class Product implements IProduct, Serializable {
 
 	@Override
 	public String toString() {
-		return "" + idProduct + ", " + available + ", '" + DateTool.dateToString(createdAt) +
+		return "" + idProduct + ", " + available + ", '" + _DateTool.dateToString(createdAt) +
 				"', '" + description + "', " + price +  ", " + quantity + ", '" + title
 				+  "";
 	}

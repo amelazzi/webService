@@ -14,13 +14,13 @@ import com.server.entities.impl.Product;
  * Servlet implementation class PersistProduct
  */
 @WebServlet("/product/persist")
-public class PersistProduct extends HttpServlet {
+public class _PersistProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PersistProduct() {
+    public _PersistProduct() {
         super();
         // TODO Auto-generated constructor stub
     }
