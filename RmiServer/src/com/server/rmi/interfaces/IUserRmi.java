@@ -14,7 +14,7 @@ public interface IUserRmi extends Remote {
 
     public IUser update(UserImpl entity) throws RemoteException;
 
-    public void remove(Long id) throws RemoteException;
+    public void remove(UserImpl user) throws RemoteException;
 
     public IUser findOneById(Long id) throws RemoteException;
 

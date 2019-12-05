@@ -56,16 +56,16 @@ public class UserService implements IUserService{
     }
     
 	@Override
-	public void delete(Long id) {
+	public void delete(UserImpl user) {
 		try {
-			if(id!=0L) {
-				userDao.openCurrentSessionwithTransaction();
-		        UserImpl user = userDao.findOneById(id);
-		        userDao.delete(user);
-		        userDao.closeCurrentSessionwithTransaction();
-			}
+			//if(id!=0L) {
+				//userDao.openCurrentSessionwithTransaction();
+				userDao.delete(user);
+		        //userDao.delete(user);
+		        //userDao.closeCurrentSessionwithTransaction();
+			//}
 			
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -101,9 +101,9 @@ public class UserService implements IUserService{
     @Override
     public void deleteAll() {
     	try {
-    		userDao.openCurrentSessionwithTransaction();
+    		//userDao.openCurrentSessionwithTransaction();
             userDao.deleteAll();
-            userDao.closeCurrentSessionwithTransaction();
+            //userDao.closeCurrentSessionwithTransaction();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}

@@ -9,7 +9,7 @@ public interface IUserService {
 	
 	public UserImpl update(UserImpl entity);
 	
-	public void delete(Long id);
+	public void delete(UserImpl user);
 	
 	public UserImpl findOneById(Long id);
 	

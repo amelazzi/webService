@@ -43,8 +43,8 @@ public class UserRmi extends UnicastRemoteObject implements IUserRmi {
     }
 
     @Override
-    public void remove(Long id) throws RemoteException {
-        service.delete(id);
+    public void remove(UserImpl user) throws RemoteException {
+        service.delete(user);
     }
 
     @Override

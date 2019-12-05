@@ -144,7 +144,7 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
     
     @Override
     public void delete(UserImpl entity) {
-        getCurrentSession().delete(entity);
+        database.delete("userimpl", "idUser",entity.getIdUser());
     }
  
     @SuppressWarnings("unchecked")
