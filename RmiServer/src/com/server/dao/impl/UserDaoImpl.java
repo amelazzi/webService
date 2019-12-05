@@ -142,8 +142,8 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
 
     @Override
     public UserImpl findOneById(Long id) {
-    	UserImpl produit = (UserImpl) getCurrentSession().get(UserImpl.class, id);
-        return produit; 
+    	UserImpl user = findBy("idUser", id.toString()).get(0);
+        return user;
     }
     
     @Override

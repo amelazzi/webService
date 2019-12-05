@@ -74,12 +74,12 @@ public class UserService implements IUserService{
 	public UserImpl findOneById(Long id) {
 		try {
 			if(id!=0L) {
-				userDao.openCurrentSession();
+				//userDao.openCurrentSession();
 		        UserImpl user = userDao.findOneById(id);
-		        userDao.closeCurrentSession();
+		        //userDao.closeCurrentSession();
 		        return user;
 			}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
