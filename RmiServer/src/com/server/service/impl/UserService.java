@@ -110,7 +110,7 @@ public class UserService implements IUserService{
     }
 
 	@Override
-	public List<UserImpl> findBy(String field, String value) {
+	public List<UserImpl> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
 		List<UserImpl> users = userDao.findBy(field, value);
 		//userDao.closeCurrentSession();
@@ -120,6 +120,7 @@ public class UserService implements IUserService{
 	@Override
 	public List<UserImpl> findBy(String[] fields, Object[] values) {
 		// TODO Auto-generated method stub
+		List<UserImpl> users = userDao.findBy(fields, values);
 		return null;
 	}
 

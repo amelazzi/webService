@@ -173,7 +173,7 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
     }
 
 	@Override
-	public List<UserImpl> findBy(String field, String value) {
+	public List<UserImpl> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
         String[][] users = database.select("userimpl", field, value);
         List<UserImpl> usersList = new ArrayList<>();

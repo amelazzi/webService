@@ -13,7 +13,7 @@ public interface IUserService {
 	
 	public UserImpl findOneById(Long id);
 	
-	public List<UserImpl> findBy(String field, String value);
+	public List<UserImpl> findBy(String field, Object value);
     
     public List<UserImpl> findBy(String[] fields, Object[] values);
      

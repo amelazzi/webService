@@ -18,7 +18,7 @@ public interface IUserDao<T, Id extends Serializable> {
     
     public Boolean checkLogin(String email, String password);
      
-    public List<T> findBy(String field, String value);
+    public List<T> findBy(String field, Object value);
     
     public List<T> findBy(String[] fields, Object[] values);
      
