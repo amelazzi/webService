@@ -1,6 +1,9 @@
 <%@ tag language="java" pageEncoding="ISO-8859-1" isELIgnored="false" %>
 <%@ attribute name="title" required="true" rtexprvalue="true" %>
 <%@ attribute name="content" fragment="true"%>
+<%@ attribute name="css" fragment="true"%>
+<%@ attribute name="js" fragment="true"%>
+
 <!doctype html>
 <html lang="en">
 
@@ -22,29 +25,12 @@
   
    <!-- Google Font: Source Sans Pro -->
    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-   <meta name="theme-color" content="#30435C">
    
-
-
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
-    </style>
+   <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+   
+   <jsp:invoke fragment="css"></jsp:invoke>
     <!-- Custom styles for this template -->
-    <link href="assets/css/dashboard.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/4.0/examples/dashboard/dashboard.css" rel="stylesheet">
 </head>
 
 <body class="bg-gradient-light">
@@ -55,7 +41,7 @@
         <div class="row">
             <!-- menu-->
 			<%@ include file="/WEB-INF/views/includes/sidebar/left.jsp" %>
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 pt-5">
                 <!--content-->
                 <jsp:invoke fragment="content"></jsp:invoke>
             </main>
@@ -84,6 +70,16 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<!-- AdminLTE App -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.18/js/adminlte.min.js"></script>
+	
+	<!-- Data Table -->
+	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+	<jsp:invoke fragment="js"></jsp:invoke>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $('#dataTable').DataTable();
+		} );
+	</script>
 	    
 </body>
 

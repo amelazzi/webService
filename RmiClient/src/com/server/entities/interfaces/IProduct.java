@@ -24,6 +24,8 @@ public interface IProduct{
 	public void setCreatedAt(Date createdAt) ;
 	public int getQuantity() ;
 	public void setQuantity(int quantity) ;
+	public String getImage();
+	public void setImage(String image);
 	public List<Rate> getRates();
 	public void setRates(List<Rate> rates);
 	public List<Comment> getComments();

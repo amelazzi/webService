@@ -4,8 +4,7 @@
 <%@ page session="true" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%
-	String locale =(session.getAttribute("local")==null)? "fr_FR": session.getAttribute("local").toString();;
-	
+	String locale =(session.getAttribute("local")==null)? "fr_FR": session.getAttribute("local").toString();
 	
 	if(session.getAttribute("login")==null){
 		//response.sendRedirect("index.jsp");
@@ -13,6 +12,7 @@
 		//request.getRequestDispatcher( "index.jsp" ).forward( request, response );
 	}
 %>
-
+<c:set var="req" value="${pageContext.request}" />
+<c:set var="baseURL" value="${req.scheme}://${req.serverName}:${req.serverPort}${req.contextPath}" />
 <fmt:setLocale value="${locale}" scope="session"/>
 <fmt:bundle basename="i18n.ApplicationBundle"/>

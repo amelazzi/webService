@@ -1,13 +1,16 @@
 package com.server.utils;
 
 public class PostgresDataSource extends DataSource{
-
+	private static final String HOSTNAME = "localhost";
+	private static final String DB_NAME = "rmidb";
+	private static final String USER = "postgres";
+	private static final String PWD = "toor";
 
 	public static final String POSTGRES_DRIVER = "org.postgresql.Driver";
 	public static final String POSTGRESL_BRIDGE = "jdbc:postgresql:";
 	
 	public PostgresDataSource() {
-			
+		super(POSTGRES_DRIVER, POSTGRESL_BRIDGE, HOSTNAME, DB_NAME, USER, PWD);
 	}
 
 	public PostgresDataSource(String host, String source, String user, String password) {

@@ -13,7 +13,7 @@ public interface IProductRmi extends Remote {
 
 	public IProduct update(Product entity) throws RemoteException;
 
-	public void remove(Long id) throws RemoteException;
+	public void remove(Product product) throws RemoteException;
 
 	public IProduct findOneById(Long id) throws RemoteException;
 	

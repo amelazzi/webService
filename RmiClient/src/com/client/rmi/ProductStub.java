@@ -3,7 +3,6 @@ package com.client.rmi;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
-import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 
 import com.server.rmi.interfaces.IProductRmi;

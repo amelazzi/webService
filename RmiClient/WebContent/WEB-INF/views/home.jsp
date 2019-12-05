@@ -1,33 +1,44 @@
 <%-- <%@ include file="/WEB-INF/views/includes/includes.jsp" %> --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
-<t:template title="Blank Page">
+<t:template title="Home">
 	<jsp:attribute name="content">
-		<nav aria-label="breadcrumb" class="">
-		  <ol class="breadcrumb">
-		    <li class="breadcrumb-item"><a href="#">Home</a></li>
-		    <li class="breadcrumb-item active" aria-current="page">Library</li>
-		  </ol>
-		</nav>
-
 	    <!-- Main content -->
-	    <section class="content">
+	    <section class="content pt-3">
+	    	<nav aria-label="breadcrumb" class="">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a href="#">Home</a></li>
+			  </ol>
+			</nav>
 			<div class="row">
-				<div class="col-md-4">
-		          <div class="card mb-4 shadow-sm">
-		            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-		            <title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-		            <div class="card-body">
-		              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-		              <div class="d-flex justify-content-between align-items-center">
-		                <div class="btn-group">
-		                  <button type="button" class="btn btn-sm btn-outline-secondary">Emprunter</button>
-		                  <button type="button" class="btn btn-sm btn-outline-secondary">Acheter</button>
-		                </div>
-		                <small class="text-muted">9 mins</small>
-		              </div>
-		            </div>
-		          </div>
-			     </div>
+				<c:forEach var="product" items="${products}" >
+					<div class="col-md-4">
+			          <div class="card mb-4 shadow-sm">
+			            <img class="bd-placeholder-img card-img-top" src="assets/img/default.png" width="100%" height="225" focusable="false" role="img" aria-label="Placeholder: ${product.getTitle()}">
+			            <div class="card-body">
+			              <h5 class="card-title">${product.getTitle()}</h5>
+			              <p class="card-text"><c:out value="${product.getDescription()}" /></p>
+			              <div class="d-flex justify-content-between align-items-center">
+			                <div class="btn-group">
+			                  <c:choose>
+			                  	<c:when test="${!product.getAvailable()}">
+			                  		<a href="" class="btn btn-sm btn-primary">Emprunter</a>
+			                  		<a href="" class="btn btn-sm btn-outline-secondary">Acheter</a>
+			                  	</c:when>
+				              	<c:otherwise>
+			                  		<a href="" class="btn btn-sm btn-outline-primary">Reserver</a>
+			                  	</c:otherwise>
+				              </c:choose>
+			                </div>
+			                <div class="btn-group">
+			                	<small class="btn btn-sm btn-dark">+Détails</small>
+			                </div>
+			                
+			              </div>
+			            </div>
+			          </div>
+				     </div>
+			     </c:forEach>
 			</div>
 	    </section>
 	</jsp:attribute>
