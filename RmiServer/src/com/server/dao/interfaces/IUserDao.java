@@ -1,10 +1,13 @@
 package com.server.dao.interfaces;
 
+import com.server.entities.impl.UserImpl;
+
 import java.io.Serializable;
 import java.util.List;
  
 public interface IUserDao<T, Id extends Serializable> {
- 
+
+    public UserImpl parseUser(String[][] data, int i);
     public void add(T entity);
      
     public void update(T entity);

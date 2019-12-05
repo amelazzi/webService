@@ -17,8 +17,10 @@ public class TestUser
 	public static void main(String[] args) throws RemoteException {
 		//TestSelectAll();
 		//TestUpdate();
-		TestAdd();
+		//TestAdd();
 		//testLoginCheck("ea_azzi@esi.dz","amel");
+		//userService.findAll();
+		displayMany(userService.findAll());
 		
 	}
 	
@@ -29,20 +31,20 @@ public class TestUser
 	public static void TestAdd() {
 		UserImpl user = new UserImpl();
 		user.setBirthday(new Date());
-		user.setDomain("Informatique");
-		user.setEmail("amel@mail.com");
-		user.setFirstName("Azzi");
-		user.setLastName("amel");
-		user.setGraduate("Master2");
-		user.setMatricule(1234);
-		user.setPassword(EncodeSha.getHash("password"));
+		user.setDomain("Design");
+		user.setEmail("misa@mail.com");
+		user.setFirstName("misa");
+		user.setLastName("chan");
+		user.setGraduate("M2");
+		user.setMatricule(1806);
+		user.setPassword(EncodeSha.getHash("pwd"));
 		user.setPhone("0669573582");
 		
 		userService.add(user);
         
         //TestSelectAll();
 	}
-	
+
 	public static String TestSelectAll(){
 	      List<UserImpl> listUserImpls=userService.findAll();
 		  displayMany(listUserImpls);
@@ -51,16 +53,18 @@ public class TestUser
 	}
 	
 	public static String TestUpdate(){
-	      List<UserImpl> listUserImpls=userService.findAll();
-	      for (UserImpl u : listUserImpls) {
-		        u.setBirthday(new Date());
-		        userService.update(u);
-		  }
-	      
-	      listUserImpls=userService.findAll();
-	      displayMany(listUserImpls);
-	      
-	      return "success";
+		UserImpl p = new UserImpl();
+		//p = TestSelectAll();
+		System.out.println("id: " + p.getIdUser());
+		//p.setAvailable(false);
+
+		userService.update(p);
+		//}
+
+		//listProducts=productService.findAll();
+		//displayMany(listProducts);
+
+		return "success";
 	      
 	   }
 	

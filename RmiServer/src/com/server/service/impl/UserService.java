@@ -88,11 +88,11 @@ public class UserService implements IUserService{
     @Override
     public List<UserImpl> findAll() {
     	try {
-    		userDao.openCurrentSession();
+    		//userDao.openCurrentSession();
             List<UserImpl> users = userDao.findAll();
-            userDao.closeCurrentSession();
+            //userDao.closeCurrentSession();
             return users;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
         return null;

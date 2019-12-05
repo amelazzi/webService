@@ -1,8 +1,11 @@
 package com.server.dao.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.server.utils.Database;
+import com.server.utils.DateTool;
 import com.server.utils.PostgresDataSource;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -81,7 +84,40 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
     public void setCurrentTransaction(Transaction currentTransaction) {
         this.currentTransaction = currentTransaction;
     }
-    
+
+    @Override
+    public UserImpl parseUser(String[][] data, int i) {
+        UserImpl user = new UserImpl();
+
+        user.setIdUser(Long.parseLong(data[i][0]));
+        System.out.println("date");
+        user.setBirthday(DateTool.stringToDate(data[i][1]));
+        System.out.println("domaine");
+        user.setDomain(data[i][2]);
+        System.out.println("email");
+        user.setEmail(data[i][3]);
+        System.out.println("first name");
+        user.setFirstName(data[i][4]);
+        System.out.println("graduate");
+        user.setGraduate(data[i][5]);
+        System.out.println("last name");
+        user.setLastName(data[i][6]);
+        System.out.println("matricule");
+        user.setMatricule(Integer.valueOf(data[i][7]));
+        System.out.println("pwd");
+        user.setPassword(data[i][8]);
+        System.out.println("phone");
+        user.setPhone(data[i][9]);
+        System.out.println("registred at");
+        user.setRegisteredAt(DateTool.stringToDate(data[i][10]));
+        System.out.println("role");
+        user.setRole(data[i][11]);
+        System.out.println("status");
+        user.setStatus(data[i][12]);
+
+        return user;
+    }
+
     @Override
     public void add(UserImpl entity) {
         entity.setIdUser(this.getMaxId()+1);
@@ -90,7 +126,7 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
     
     @Override
     public void update(UserImpl entity) {
-        getCurrentSession().update(entity);
+        database.update("userimpl", entity);
     }
 
     @Override
@@ -114,9 +150,14 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
     @SuppressWarnings("unchecked")
 	@Override
     public List<UserImpl> findAll() {
-    	List<UserImpl> products = (List<UserImpl>) getCurrentSession().createQuery("from UserImpl").list();
-        
-        return products;
+        String[][] users = database.select("userimpl");
+        List<UserImpl> productsList = new ArrayList<>();
+
+        for(int i=1; i<users.length; i++){
+            productsList.add(parseUser(users,i));
+        }
+
+        return productsList;
     }
     
     @Override
