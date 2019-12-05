@@ -21,12 +21,12 @@ public class TestEmprunt
 		//TestUpdate();
 		//testRestituter();
 		//testCheckPriority();
-		Emprunt emprunt = new Emprunt();
+		/*Emprunt emprunt = new Emprunt();
 		emprunt.setProduct(productService.findOneById(6L));
 		emprunt.setUser(userService.findOneById(3L));
 		emprunt.setIsReturned(true);
-		//empruntService.add(emprunt);
-		empruntService.emprunter(productService.findOneById(6L), userService.findOneById(3L));
+		//empruntService.add(emprunt);*/
+		empruntService.restituer(empruntService.findOneById(2L));
 
 
 	}

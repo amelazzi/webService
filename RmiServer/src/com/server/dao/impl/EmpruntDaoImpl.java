@@ -97,7 +97,7 @@ public class EmpruntDaoImpl implements IEmpruntDao<Emprunt, Long> {
     
     @Override
     public void update(Emprunt entity) {
-        getCurrentSession().update(entity);
+        database.update("emprunt", entity);
     }
 
     @Override
@@ -120,8 +120,8 @@ public class EmpruntDaoImpl implements IEmpruntDao<Emprunt, Long> {
 
     @Override
     public Emprunt findOneById(Long id) {
-    	Emprunt emprunt = (Emprunt) getCurrentSession().get(Emprunt.class, id);
-        return emprunt; 
+        Emprunt emprunt = findBy("idemprunt", id).get(0);
+        return emprunt;
     }
     
     @Override
@@ -152,7 +152,7 @@ public class EmpruntDaoImpl implements IEmpruntDao<Emprunt, Long> {
 
 	@Override
 
-	public List<Emprunt> findBy(String field, String value) {
+	public List<Emprunt> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
         String[][] emprunts = database.select("emprunt", field, value);
         List<Emprunt> empruntsList = new ArrayList<>();

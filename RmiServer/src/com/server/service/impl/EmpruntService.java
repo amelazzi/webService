@@ -54,9 +54,9 @@ public class EmpruntService implements IEmpruntService{
     	try {
     		if(entity!=null) {
     			if(entity.getIdEmprunt()!=0L) {
-    				empruntDao.openCurrentSessionwithTransaction();
+    				//empruntDao.openCurrentSessionwithTransaction();
     	            empruntDao.update(entity);
-    	            empruntDao.closeCurrentSessionwithTransaction();
+    	            //empruntDao.closeCurrentSessionwithTransaction();
     	            return entity;
     			}
     		}
@@ -86,12 +86,12 @@ public class EmpruntService implements IEmpruntService{
 	public Emprunt findOneById(Long id) {
 		try {
 			if(id!=0L) {
-				empruntDao.openCurrentSession();
+				//empruntDao.openCurrentSession();
 		        Emprunt emprunt = empruntDao.findOneById(id);
-		        empruntDao.closeCurrentSession();
+		        //empruntDao.closeCurrentSession();
 		        return emprunt;
 			}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -223,6 +223,15 @@ public class EmpruntService implements IEmpruntService{
     
 	@Override
     public boolean restituer(Emprunt emprunt) {
+    	if(!emprunt.getIsReturned()){
+    		emprunt.setIsReturned(true);
+    		emprunt.setReturnedAt(new Date());
+    		update(emprunt);
+    		emprunt.getProduct().setQuantity(emprunt.getProduct().getQuantity()+1);
+    		productService.update(emprunt.getProduct());
+    		return true;
+		}else
+			return false;
     	/*if(!emprunt.getIsReturned()) {
     		emprunt.setReturnedAt(new Date());
     		emprunt.setIsReturned(true);
@@ -257,8 +266,6 @@ public class EmpruntService implements IEmpruntService{
 				return false;
 			}
     	}*/
-    	
-    	return false;
     }
     
     public List<UserImpl> getWaitingUsers(Emprunt emprunt) {
