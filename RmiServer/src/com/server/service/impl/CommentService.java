@@ -21,15 +21,15 @@ public class CommentService implements ICommentService{
     }
     
     @Override
-    public Comment save(Comment entity) {
+    public Comment add(Comment entity) {
     	try {
     		if(entity!=null) {
-    			commentDao.openCurrentSessionwithTransaction();
-                commentDao.persist(entity);
-                commentDao.closeCurrentSessionwithTransaction();
+    			//commentDao.openCurrentSessionwithTransaction();
+                commentDao.add(entity);
+                //commentDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();	
 		}
     	return null;

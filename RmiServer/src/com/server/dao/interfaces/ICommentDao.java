@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.List;
  
 public interface ICommentDao<T, Id extends Serializable> {
- 
-    public void persist(T entity);
+
+    public long getMaxId();
+
+    public void add(T entity);
      
     public void update(T entity);
      

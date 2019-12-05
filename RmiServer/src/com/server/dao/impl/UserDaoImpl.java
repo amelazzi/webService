@@ -90,29 +90,17 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
         UserImpl user = new UserImpl();
 
         user.setIdUser(Long.parseLong(data[i][0]));
-        System.out.println("date");
         user.setBirthday(DateTool.stringToDate(data[i][1]));
-        System.out.println("domaine");
         user.setDomain(data[i][2]);
-        System.out.println("email");
         user.setEmail(data[i][3]);
-        System.out.println("first name");
         user.setFirstName(data[i][4]);
-        System.out.println("graduate");
         user.setGraduate(data[i][5]);
-        System.out.println("last name");
         user.setLastName(data[i][6]);
-        System.out.println("matricule");
         user.setMatricule(Integer.valueOf(data[i][7]));
-        System.out.println("pwd");
         user.setPassword(data[i][8]);
-        System.out.println("phone");
         user.setPhone(data[i][9]);
-        System.out.println("registred at");
         user.setRegisteredAt(DateTool.stringToDate(data[i][10]));
-        System.out.println("role");
         user.setRole(data[i][11]);
-        System.out.println("status");
         user.setStatus(data[i][12]);
 
         return user;

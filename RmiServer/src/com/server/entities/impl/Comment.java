@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.server.entities.interfaces.IComment;
+import com.server.utils.DateTool;
 
 @SuppressWarnings("serial")
 @Entity
@@ -78,11 +79,16 @@ public class Comment implements Serializable, IComment {
 	public long getIdComment() {
 		return idComment;
 	}
+
+	@Override
+	public void setIdComment(long idComment) {
+		this.idComment = idComment;
+	}
 	
 	@Override
 	public String toString() {
-		return "Comment [idComment=" + idComment + ", content=" + content + ", createdAt=" + createdAt + ", product="
-				+ product + ", user=" + user + "]";
+		return idComment + ",'" + content + "','" + DateTool.dateToString(createdAt) + "',"
+				+ product.getIdProduct() + "," + user.getIdUser();
 	}
 	
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import com.server.entities.impl.Comment;
 
 public interface ICommentService {
-	public Comment save(Comment entity);
+	public Comment add(Comment entity);
 	
 	public Comment update(Comment entity);
 	

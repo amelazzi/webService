@@ -23,4 +23,6 @@ public interface IComment {
 	public void setUser(UserImpl user);
 	
 	public long getIdComment();
+
+	public void setIdComment(long idComment);
 }

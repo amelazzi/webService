@@ -93,7 +93,7 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
     
     @Override
     public Product findOneById(Long id) {
-        Product product = findBy("idUser", id).get(0);
+        Product product = findBy("idproduct", id).get(0);
         return product;
     }
     

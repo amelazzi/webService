@@ -169,11 +169,8 @@ public class Product implements IProduct, Serializable {
 
 	@Override
 	public String toString() {
-<<<<<<< HEAD
-		return "" + idProduct + ", " + available + ", '" + _DateTool.dateToString(createdAt) +
-=======
+
 		return idProduct + ", " + available + ", '" + DateTool.dateToString(createdAt) +
->>>>>>> 8bc73530bbcd5d72ba63061d77363c05d0974350
 				"', '" + description + "', " + price +  ", " + quantity + ", '" + title
 				+  "', '"+image+"'";
 	}

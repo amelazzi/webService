@@ -21,7 +21,7 @@ public class CommentRmi extends UnicastRemoteObject implements ICommentRmi {
     @Override
     public IComment add(Comment entity) throws RemoteException {
         if(entity!=null) {
-            service.save(entity);
+            service.add(entity);
             return entity;
         }
         return null;
