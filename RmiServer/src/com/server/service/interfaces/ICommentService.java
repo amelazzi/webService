@@ -13,7 +13,7 @@ public interface ICommentService {
 	
 	public Comment findOneById(Long id);
 	
-	public List<Comment> findBy(String field, String value);
+	public List<Comment> findBy(String field, Object value);
     
     public List<Comment> findBy(String[] fields, Object[] values);
      

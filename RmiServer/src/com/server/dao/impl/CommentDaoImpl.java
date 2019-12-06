@@ -116,7 +116,7 @@ public class CommentDaoImpl implements ICommentDao<Comment, Long> {
     @Override
     public Comment findOneById(Long id) {
     	Comment produit = (Comment) getCurrentSession().get(Comment.class, id);
-        return produit; 
+        return produit;
     }
     
     @Override
@@ -146,9 +146,16 @@ public class CommentDaoImpl implements ICommentDao<Comment, Long> {
     }
 
 	@Override
-	public List<Comment> findBy(String field, String value) {
+	public List<Comment> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
-		return null;
+        String[][] comments = database.select("comment", field, value);
+        List<Comment> commentsList = new ArrayList<>();
+
+        for(int i=1; i<comments.length; i++){
+            commentsList.add(parseComment(comments,i));
+        }
+
+        return commentsList;
 	}
 
 	@Override

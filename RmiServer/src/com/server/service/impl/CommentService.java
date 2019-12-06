@@ -108,9 +108,10 @@ public class CommentService implements ICommentService{
     }
 
 	@Override
-	public List<Comment> findBy(String field, String value) {
+	public List<Comment> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Comment> comments = commentDao.findBy(field, value);
+		return comments;
 	}
 
 	@Override
