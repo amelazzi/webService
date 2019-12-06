@@ -18,11 +18,11 @@ public class TestUser
 		//TestSelectAll();
 		//TestUpdate();
 		//TestAdd();
-		//userService.deleteAll();
+		userService.delete(userService.findOneById(2L));
 		//testLoginCheck("ea_azzi@esi.dz","amel");
 		//userService.findAll();
 		//displayMany(userService.findAll());
-		displayOne(userService.findOneById(2L));
+		//displayOne(userService.findOneById(2L));
 		
 	}
 	

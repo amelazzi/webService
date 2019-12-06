@@ -15,7 +15,7 @@ public interface IEmpruntService {
 	
 	public Emprunt findOneById(Long id);
 	
-	public List<Emprunt> findBy(String field, String value);
+	public List<Emprunt> findBy(String field, Object value);
     
     public List<Emprunt> findBy(String[] fields, Object[] values);
      

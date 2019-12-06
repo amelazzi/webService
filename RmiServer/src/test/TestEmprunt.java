@@ -21,15 +21,26 @@ public class TestEmprunt
 		//TestUpdate();
 		//testRestituter();
 		//testCheckPriority();
-		//Emprunt emprunt = new Emprunt();
-		//emprunt.setIdEmprunt(4L);
-		//emprunt.setUser(userService.findOneById(3L));
-		//emprunt.setIsReturned(true);
-		//empruntService.add(emprunt);*/
-		empruntService.deleteAll();
-		displayMany(empruntService.findAll());
-		//empruntService.restituer(empruntService.findOneById(2L));
+		Emprunt emprunt = new Emprunt();
+		emprunt.setUser(userService.findOneById(3L));
+		emprunt.setProduct(productService.findOneById(12L));
 
+		Emprunt emprunt2 = new Emprunt();
+		emprunt2.setUser(userService.findOneById(2L));
+		emprunt2.setProduct(productService.findOneById(11L));
+		emprunt2.setIsReturned(false);
+
+		Emprunt emprunt3 = new Emprunt();
+		emprunt3.setUser(userService.findOneById(1L));
+		emprunt3.setProduct(productService.findOneById(11L));
+		emprunt3.setIsReturned(false);
+
+		empruntService.add(emprunt);
+		empruntService.add(emprunt2);
+		empruntService.add(emprunt3);
+		//empruntService.deleteAll();
+		//displayMany(empruntService.findAll());
+		//empruntService.restituer(empruntService.findOneById(2L));
 
 	}
 	
