@@ -113,10 +113,10 @@ public class EmpruntService implements IEmpruntService{
     @Override
     public void deleteAll() {
     	try {
-    		empruntDao.openCurrentSessionwithTransaction();
+    		//empruntDao.openCurrentSessionwithTransaction();
             empruntDao.deleteAll();
-            empruntDao.closeCurrentSessionwithTransaction();
-		} catch (HibernateException e) {
+            //empruntDao.closeCurrentSessionwithTransaction();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }
