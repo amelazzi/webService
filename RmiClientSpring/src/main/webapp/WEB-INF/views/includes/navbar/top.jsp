@@ -10,8 +10,8 @@
 	          <i class="fas fa-globe-africa fa-2x" style="color:#383530"></i>
 	        </a>
 	        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-	        	<c:url value="/langue?l=fr_FR" var="fr"/>
-	        	<c:url value="/langue?l=en_US" var="en"/>
+	        	<c:url value="/langue/fr_FR" var="fr"/>
+	        	<c:url value="/langue/en_US" var="en"/>
 	          <a class="dropdown-item" href="${fr}">Fr: Français</a>
 	          <a class="dropdown-item" href="${en}">En: English</a>
 	        </div>

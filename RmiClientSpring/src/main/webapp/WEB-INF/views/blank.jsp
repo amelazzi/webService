@@ -7,7 +7,7 @@
 	    <section class="content">
 	    	<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
-			    <li class="breadcrumb-item"><a href="<c:url value="/home"/>">Home</a></li>
+			    <li class="breadcrumb-item"><a href="<c:url value="/home"/>"><fmt:message key="common.dashboard"/></a></li>
 			    <li class="breadcrumb-item active" aria-current="page">Library</li>
 			  </ol>
 			</nav>

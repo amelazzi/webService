@@ -31,7 +31,7 @@ public class ProductController {
 		}
 		
 		model.addAttribute("products", produits );
-		return "product/list";
+		return "admin/product/list";
 	}
 	
 	@RequestMapping(value = {"/admin/product/add"}, method = RequestMethod.GET)
@@ -39,7 +39,22 @@ public class ProductController {
 		Product product = new Product();
 		
 		model.addAttribute("product", product);
-		return "product/save";
+		return "admin/product/save";
+	}
+	
+	@RequestMapping(value = {"/admin/product/{id}" }, method = RequestMethod.GET)
+	public String detail(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
+		Product product = new Product();
+		if(null!=id){
+			long idProduct = Long.parseLong(id);
+			product = (Product) ProductStub.getStub().findOneById(idProduct);
+		}else {
+			System.out.println("Element introuvable");
+			return "redirect:/admin/product/";
+		}
+		
+		model.addAttribute("product", product);
+		return "admin/product/details";
 	}
 	
 	@RequestMapping(value = {"/admin/product/{id}/edit" }, method = RequestMethod.GET)
@@ -51,7 +66,7 @@ public class ProductController {
 		}
 		
 		model.addAttribute("product", product);
-		return "product/save";
+		return "admin/product/save";
 	}
 	
 	@RequestMapping(value = {"/admin/product/{id}/delete" }, method = RequestMethod.POST)
