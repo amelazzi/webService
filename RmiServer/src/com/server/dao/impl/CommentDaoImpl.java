@@ -111,7 +111,7 @@ public class CommentDaoImpl implements ICommentDao<Comment, Long> {
 
     @Override
     public void update(Comment entity) {
-        getCurrentSession().update(entity);
+        database.update("comment", entity);
     }
     
     @Override

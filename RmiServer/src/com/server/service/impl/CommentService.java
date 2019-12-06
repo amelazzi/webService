@@ -40,14 +40,14 @@ public class CommentService implements ICommentService{
     	try {
     		if(entity!=null) {
     			if(entity.getIdComment()!=0L) {
-    				commentDao.openCurrentSessionwithTransaction();
+    				//commentDao.openCurrentSessionwithTransaction();
     	            commentDao.update(entity);
-    	            commentDao.closeCurrentSessionwithTransaction();
+    	            //commentDao.closeCurrentSessionwithTransaction();
     	            return entity;
     			}
     		}
     		
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	return null;

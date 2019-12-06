@@ -1,6 +1,7 @@
 package test;
 
 import com.server.entities.impl.Comment;
+import com.server.entities.impl.Emprunt;
 import com.server.service.impl.CommentService;
 import com.server.service.impl.ProductService;
 import com.server.service.impl.UserService;
@@ -16,7 +17,10 @@ public class TestComment {
 
     public static void main(String[] args) throws RemoteException {
         //testAdd();
-        displayOne(commentService.findOneById(3L));
+        Comment comment = commentService.findOneById(3L);
+        comment.setContent("third comment updated");
+        commentService.update(comment);
+        displayMany(commentService.findAll());
     }
 
     public static void testAdd(){
