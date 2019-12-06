@@ -68,16 +68,16 @@ public class EmpruntService implements IEmpruntService{
     }
     
 	@Override
-	public void delete(Long id) {
+	public void delete(Emprunt emprunt) {
 		try {
-			if(id!=0L) {
-				empruntDao.openCurrentSessionwithTransaction();
-		        Emprunt emprunt = empruntDao.findOneById(id);
+			//if(id!=0L) {
+				//empruntDao.openCurrentSessionwithTransaction();
+		        //Emprunt emprunt = empruntDao.findOneById(id);
 		        empruntDao.delete(emprunt);
-		        empruntDao.closeCurrentSessionwithTransaction();
-			}
-			
-		} catch (HibernateException e) {
+		        //empruntDao.closeCurrentSessionwithTransaction();
+			//}
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -14,7 +14,7 @@ public interface IEmpruntRmi extends Remote {
 
     public IEmprunt update(Emprunt entity) throws RemoteException;
 
-    public void remove(Long id) throws RemoteException;
+    public void remove(Emprunt emprunt) throws RemoteException;
 
     public IEmprunt findOneById(Long id) throws RemoteException;
 

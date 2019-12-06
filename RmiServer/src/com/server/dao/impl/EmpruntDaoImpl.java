@@ -126,7 +126,7 @@ public class EmpruntDaoImpl implements IEmpruntDao<Emprunt, Long> {
     
     @Override
     public void delete(Emprunt entity) {
-        getCurrentSession().delete(entity);
+        database.delete("emprunt", "idEmprunt", entity.getIdEmprunt());
     }
  
     @SuppressWarnings("unchecked")
