@@ -19,7 +19,7 @@ public class RateService implements IRateService{
     public RateDaoImpl rateDao() {
         return rateDao;
     }
-    
+
     @Override
     public Rate save(Rate entity) {
     	try {
@@ -72,12 +72,12 @@ public class RateService implements IRateService{
 	public Rate findOneById(Long id) {
 		try {
 			if(id!=0L) {
-				rateDao.openCurrentSession();
+				//rateDao.openCurrentSession();
 		        Rate rate = rateDao.findOneById(id);
-		        rateDao.closeCurrentSession();
+		        //rateDao.closeCurrentSession();
 		        return rate;
 			}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -86,11 +86,11 @@ public class RateService implements IRateService{
     @Override
     public List<Rate> findAll() {
     	try {
-    		rateDao.openCurrentSession();
+    		//rateDao.openCurrentSession();
             List<Rate> rates = rateDao.findAll();
-            rateDao.closeCurrentSession();
+            //rateDao.closeCurrentSession();
             return rates;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
         return null;
@@ -108,9 +108,10 @@ public class RateService implements IRateService{
     }
 
 	@Override
-	public List<Rate> findBy(String field, String value) {
+	public List<Rate> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Rate> rates = rateDao.findBy(field, value);
+		return rates;
 	}
 
 	@Override

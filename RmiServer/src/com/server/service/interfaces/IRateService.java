@@ -5,6 +5,8 @@ import java.util.List;
 import com.server.entities.impl.Rate;
 
 public interface IRateService {
+
+
 	public Rate save(Rate entity);
 	
 	public Rate update(Rate entity);
@@ -13,7 +15,7 @@ public interface IRateService {
 	
 	public Rate findOneById(Long id);
 	
-	public List<Rate> findBy(String field, String value);
+	public List<Rate> findBy(String field, Object value);
     
     public List<Rate> findBy(String[] fields, Object[] values);
      

@@ -17,7 +17,7 @@ public class Rate implements Serializable, IRate {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long IdRate;
+	private long idRate;
 	
 	private int value;
 	
@@ -27,8 +27,11 @@ public class Rate implements Serializable, IRate {
 	
 	@Override
 	public long getIdRate() {
-		return IdRate;
+		return idRate;
 	}
+
+	@Override
+	public void setIdRate(long idRate){this.idRate = idRate;}
 	
 	@Override
 	public int getValue() {
@@ -52,7 +55,7 @@ public class Rate implements Serializable, IRate {
 
 	@Override
 	public String toString() {
-		return "Rate [IdRate=" + IdRate + ", value=" + value + ", product=" + product + "]";
+		return "Rate [IdRate=" + idRate + ", value=" + value + ", product=" + product + "]";
 	}
 
 }

@@ -6,6 +6,8 @@ public interface IRate {
 	
 	public long getIdRate();
 
+	public void setIdRate(long idRate);
+
 	public int getValue();
 
 	public void setValue(int value);
