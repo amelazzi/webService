@@ -154,9 +154,16 @@ public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
     }
 
 	@Override
-	public List<Demande> findBy(String field, String value) {
+	public List<Demande> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
-		return null;
+        String[][] demandes = database.select("demande", field, value);
+        List<Demande> demandesList = new ArrayList<>();
+
+        for(int i=1; i<demandes.length; i++){
+            demandesList.add(parseDemande(demandes,i));
+        }
+
+        return demandesList;
 	}
 
 	@Override

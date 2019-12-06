@@ -23,6 +23,7 @@ public class TestDemande
 		TestSelectAll();
 		//TestFindByProduct();
 		//TestUpdate();
+		displayMany(demandeService.findBy("iduser", 3L));
 
 	}
 

@@ -19,7 +19,7 @@ public interface IDemandeDao<T, Id extends Serializable> {
 
     public Demande parseDemande(String[][] data, int i);
 
-    public List<T> findBy(String field, String value);
+    public List<T> findBy(String field, Object value);
     
     public List<T> findBy(String[] fields, Object[] values);
      

@@ -15,7 +15,7 @@ public interface IDemandeService {
 	
 	public Demande findOneById(Long id);
 	
-	public List<Demande> findBy(String field, String value);
+	public List<Demande> findBy(String field, Object value);
     
     public List<Demande> findBy(String[] fields, Object[] values);
      

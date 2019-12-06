@@ -110,9 +110,10 @@ public class DemandeService implements IDemandeService{
     }
 
 	@Override
-	public List<Demande> findBy(String field, String value) {
+	public List<Demande> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Demande> demandes = demandeDao.findBy(field, value);
+		return demandes;
 	}
 
 	@Override
