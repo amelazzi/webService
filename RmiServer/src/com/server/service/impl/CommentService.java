@@ -72,12 +72,12 @@ public class CommentService implements ICommentService{
 	public Comment findOneById(Long id) {
 		try {
 			if(id!=0L) {
-				commentDao.openCurrentSession();
+				//commentDao.openCurrentSession();
 		        Comment comment = commentDao.findOneById(id);
-		        commentDao.closeCurrentSession();
+		        //commentDao.closeCurrentSession();
 		        return comment;
 			}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;

@@ -3,6 +3,7 @@ package com.server.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.server.entities.impl.Product;
 import com.server.service.impl.ProductService;
 import com.server.service.impl.UserService;
 import com.server.utils.Database;
@@ -115,8 +116,8 @@ public class CommentDaoImpl implements ICommentDao<Comment, Long> {
     
     @Override
     public Comment findOneById(Long id) {
-    	Comment produit = (Comment) getCurrentSession().get(Comment.class, id);
-        return produit;
+        Comment comment = findBy("idComment", id).get(0);
+        return comment;
     }
     
     @Override

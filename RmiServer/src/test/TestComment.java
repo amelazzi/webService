@@ -16,7 +16,7 @@ public class TestComment {
 
     public static void main(String[] args) throws RemoteException {
         //testAdd();
-        displayMany(commentService.findBy("idproduct", 6L));
+        displayOne(commentService.findOneById(3L));
     }
 
     public static void testAdd(){
