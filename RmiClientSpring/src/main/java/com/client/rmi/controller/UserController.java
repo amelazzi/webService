@@ -6,26 +6,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.client.rmi.stub.ProductStub;
 import com.client.rmi.stub.UserStub;
-import com.server.entities.impl.Product;
 import com.server.entities.impl.UserImpl;
-import com.server.utils.DateTool;
 
 @Controller
 public class UserController {
@@ -52,40 +47,40 @@ public class UserController {
 		return "admin/user/save";
 	}
 	
-	@RequestMapping(value = {"/admin/user/{id}" }, method = RequestMethod.GET)
+	@RequestMapping(value = {"/user/{id}" }, method = RequestMethod.GET)
 	public String detail(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
-		Product product = new Product();
+		UserImpl user= new UserImpl();
 		if(null!=id){
-			long idProduct = Long.parseLong(id);
-			product = (Product) ProductStub.getStub().findOneById(idProduct);
+			long idUser = Long.parseLong(id);
+			user= (UserImpl) ProductStub.getStub().findOneById(idUser);
 		}else {
 			System.out.println("Element introuvable");
-			return "redirect:/admin/user/";
+			return "redirect:/home";
 		}
 		
-		model.addAttribute("product", product);
+		model.addAttribute("user", user);
 		return "admin/user/details";
 	}
 	
 	@RequestMapping(value = {"/admin/user/{id}/edit" }, method = RequestMethod.GET)
 	public String edit(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
-		Product product = new Product();
+		UserImpl user= new UserImpl();
 		if(null!=id){
-			long idProduct = Long.parseLong(id);
-			product = (Product) ProductStub.getStub().findOneById(idProduct);
+			long idUser= Long.parseLong(id);
+			user = (UserImpl) UserStub.getStub().findOneById(idUser);
 		}
 		
-		model.addAttribute("product", product);
+		model.addAttribute("user", user);
 		return "admin/user/save";
 	}
 	
 	@RequestMapping(value = {"/admin/user/{id}/delete" }, method = RequestMethod.POST)
 	public String delete(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
-		Product product = new Product();
+		UserImpl user= new UserImpl();
 		if(null!=id){
-			long idProduct = Long.parseLong(id);
-			product = (Product) ProductStub.getStub().findOneById(idProduct);
-			ProductStub.getStub().remove(product);
+			long idUser = Long.parseLong(id);
+			user = (UserImpl) UserStub.getStub().findOneById(idUser);
+			UserStub.getStub().remove(user.getIdUser());
 		}
 		
 		return "redirect:/admin/user/";

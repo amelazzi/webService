@@ -4,15 +4,12 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.client.rmi.stub.ProductStub;
 import com.server.entities.impl.Product;
@@ -42,7 +39,7 @@ public class ProductController {
 		return "admin/product/save";
 	}
 	
-	@RequestMapping(value = {"/admin/product/{id}" }, method = RequestMethod.GET)
+	@RequestMapping(value = {"/product/{id}" }, method = RequestMethod.GET)
 	public String detail(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
 		Product product = new Product();
 		if(null!=id){
@@ -50,7 +47,7 @@ public class ProductController {
 			product = (Product) ProductStub.getStub().findOneById(idProduct);
 		}else {
 			System.out.println("Element introuvable");
-			return "redirect:/admin/product/";
+			return "redirect:/home";
 		}
 		
 		model.addAttribute("product", product);
