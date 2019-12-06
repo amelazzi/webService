@@ -88,11 +88,11 @@ public class DemandeService implements IDemandeService{
     @Override
     public List<Demande> findAll() {
     	try {
-    		demandeDao.openCurrentSession();
+    		//demandeDao.openCurrentSession();
             List<Demande> demandes = demandeDao.findAll();
-            demandeDao.closeCurrentSession();
+            //demandeDao.closeCurrentSession();
             return demandes;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
         return null;

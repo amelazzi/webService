@@ -20,10 +20,13 @@ public class TestDemande
 	static UserService userService = new UserService();
 	
 	public static void main(String[] args) throws RemoteException {
-		//TestSelectAll();
+		TestSelectAll();
 		//TestFindByProduct();
 		//TestUpdate();
 
+	}
+
+	public static void testAdd(){
 		Demande demande = new Demande();
 		demande.setProduct(productService.findOneById(12L));
 		demande.setUser(userService.findOneById(3L));
@@ -39,7 +42,6 @@ public class TestDemande
 		demandeService.add(demande);
 		demandeService.add(demande2);
 		demandeService.add(demande3);
-		
 	}
 	
 	public static String TestSelectAll(){

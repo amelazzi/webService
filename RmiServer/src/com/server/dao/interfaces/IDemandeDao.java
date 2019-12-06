@@ -16,7 +16,9 @@ public interface IDemandeDao<T, Id extends Serializable> {
     public void update(T entity);
      
     public T findOneById(Id id);
-     
+
+    public Demande parseDemande(String[][] data, int i);
+
     public List<T> findBy(String field, String value);
     
     public List<T> findBy(String[] fields, Object[] values);

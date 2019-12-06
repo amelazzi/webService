@@ -3,7 +3,10 @@ package com.server.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.server.service.impl.ProductService;
+import com.server.service.impl.UserService;
 import com.server.utils.Database;
+import com.server.utils.DateTool;
 import com.server.utils.PostgresDataSource;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -24,6 +27,8 @@ public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
     private Transaction currentTransaction;
 
     private  Database database;
+    private UserService userService = new UserService();
+    private ProductService productService = new ProductService();
  
     public DemandeDaoImpl() {
         PostgresDataSource postgresDataSource = new PostgresDataSource();
@@ -104,7 +109,24 @@ public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
     	Demande demande = (Demande) getCurrentSession().get(Demande.class, id);
         return demande; 
     }
-    
+
+    @Override
+    public Demande parseDemande(String[][] data, int i) {
+        Demande demande = new Demande();
+
+        demande.setIdDemande(Long.parseLong(data[i][0]));
+        demande.setCreatedAt(DateTool.stringToDate(data[i][1]));
+        demande.setDesiredAt(DateTool.stringToDate(data[i][2]));
+
+        boolean isDone = data[i][3]=="t"? true:false;
+        demande.setIsDone(isDone);
+
+        demande.setProduct(productService.findOneById(Long.parseLong(data[i][4])));
+        demande.setUser(userService.findOneById(Long.parseLong(data[i][5])));
+
+        return demande;
+    }
+
     @Override
     public void delete(Demande entity) {
         getCurrentSession().delete(entity);
@@ -113,9 +135,14 @@ public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
     @SuppressWarnings("unchecked")
 	@Override
     public List<Demande> findAll() {
-    	List<Demande> demandes = getCurrentSession().createQuery("select d from Demande d").list();
-        
-        return demandes;
+        String[][] demandes = database.select("demande");
+        List<Demande> demandesList = new ArrayList<>();
+
+        for(int i=1; i<demandes.length; i++){
+            demandesList.add(parseDemande(demandes,i));
+        }
+
+        return demandesList;
     }
     
     @Override
