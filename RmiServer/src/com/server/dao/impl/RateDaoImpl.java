@@ -118,7 +118,7 @@ public class RateDaoImpl implements IRateDao<Rate, Long> {
     
     @Override
     public void delete(Rate entity) {
-        getCurrentSession().delete(entity);
+        database.delete("rate", "idRate", entity.getIdRate());
     }
  
     @SuppressWarnings("unchecked")

@@ -38,8 +38,8 @@ public class RateRmi extends UnicastRemoteObject implements IRateRmi {
     }
 
     @Override
-    public void remove(Long id) throws RemoteException {
-        service.delete(id);
+    public void remove(Rate rate) throws RemoteException {
+        service.delete(rate);
     }
 
     @Override

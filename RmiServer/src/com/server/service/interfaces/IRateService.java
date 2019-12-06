@@ -12,7 +12,7 @@ public interface IRateService {
 	
 	public Rate update(Rate entity);
 	
-	public void delete(Long id);
+	public void delete(Rate rate);
 	
 	public Rate findOneById(Long id);
 	

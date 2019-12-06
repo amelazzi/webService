@@ -59,16 +59,16 @@ public class RateService implements IRateService{
     }
     
 	@Override
-	public void delete(Long id) {
+	public void delete(Rate rate) {
 		try {
-			if(id!=0L) {
-				rateDao.openCurrentSessionwithTransaction();
-		        Rate rate = rateDao.findOneById(id);
+			//if(id!=0L) {
+				//rateDao.openCurrentSessionwithTransaction();
+		        //Rate rate = rateDao.findOneById(id);
 		        rateDao.delete(rate);
-		        rateDao.closeCurrentSessionwithTransaction();
-			}
+		        //rateDao.closeCurrentSessionwithTransaction();
+			//}
 			
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -104,10 +104,10 @@ public class RateService implements IRateService{
     @Override
     public void deleteAll() {
     	try {
-    		rateDao.openCurrentSessionwithTransaction();
+    		//rateDao.openCurrentSessionwithTransaction();
             rateDao.deleteAll();
-            rateDao.closeCurrentSessionwithTransaction();
-		} catch (HibernateException e) {
+            //rateDao.closeCurrentSessionwithTransaction();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }

@@ -15,8 +15,9 @@ public class TestRate {
     public static void main(String[] args) throws RemoteException {
         /*displayMany(rateService.findAll());
         displayMany(rateService.findBy("idproduct", 6L));
-        displayOne(rateService.findOneById(3L));*/
-        testAdd();
+        displayOne(rateService.findOneById(3L));
+        testAdd();*/
+        rateService.deleteAll();
         displayMany(rateService.findAll());
     }
 
