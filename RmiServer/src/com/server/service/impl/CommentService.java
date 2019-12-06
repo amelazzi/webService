@@ -63,7 +63,7 @@ public class CommentService implements ICommentService{
 		        //commentDao.closeCurrentSessionwithTransaction();
 			//}
 			
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -99,10 +99,10 @@ public class CommentService implements ICommentService{
     @Override
     public void deleteAll() {
     	try {
-    		commentDao.openCurrentSessionwithTransaction();
+    		//commentDao.openCurrentSessionwithTransaction();
             commentDao.deleteAll();
-            commentDao.closeCurrentSessionwithTransaction();
-		} catch (HibernateException e) {
+            //commentDao.closeCurrentSessionwithTransaction();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }

@@ -17,9 +17,9 @@ public class TestComment {
 
     public static void main(String[] args) throws RemoteException {
         //testAdd();
-        Comment comment = commentService.findOneById(3L);
+        //Comment comment = commentService.findOneById(3L);
         //comment.setContent("third comment updated");
-        commentService.delete(comment);
+        commentService.deleteAll();
         displayMany(commentService.findAll());
     }
 
