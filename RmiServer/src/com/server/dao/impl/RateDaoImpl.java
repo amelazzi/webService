@@ -79,13 +79,20 @@ public class RateDaoImpl implements IRateDao<Rate, Long> {
     }
 
     @Override
-    public long getIdMax() {
-        return 0;
+    public long getMaxId() {
+        long id;
+        String[][] data = database.executeQuery("select max(idRate) as max from rate");
+        if(data[1][0]!=null)
+            id = Long.parseLong(data[1][0]);
+        else
+            id = 0L;
+        return id;
     }
 
     @Override
-    public void persist(Rate entity) {
-        getCurrentSession().save(entity);
+    public void add(Rate entity) {
+        entity.setIdRate(this.getMaxId()+1);
+        database.insert("rate", entity);
     }
     
     @Override

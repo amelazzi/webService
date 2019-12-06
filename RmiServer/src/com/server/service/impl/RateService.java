@@ -20,16 +20,21 @@ public class RateService implements IRateService{
         return rateDao;
     }
 
-    @Override
-    public Rate save(Rate entity) {
+	@Override
+	public long getMaxId() {
+		return rateDao.getMaxId();
+	}
+
+	@Override
+    public Rate add(Rate entity) {
     	try {
     		if(entity!=null) {
-    			rateDao.openCurrentSessionwithTransaction();
-                rateDao.persist(entity);
-                rateDao.closeCurrentSessionwithTransaction();
+    			//rateDao.openCurrentSessionwithTransaction();
+                rateDao.add(entity);
+                //rateDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();	
 		}
     	return null;

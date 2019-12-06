@@ -6,9 +6,9 @@ import java.io.Serializable;
 import java.util.List;
  
 public interface IRateDao<T, Id extends Serializable> {
-    public long getIdMax();
+    public long getMaxId();
  
-    public void persist(T entity);
+    public void add(T entity);
      
     public void update(T entity);
 

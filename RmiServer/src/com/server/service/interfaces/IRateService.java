@@ -6,8 +6,9 @@ import com.server.entities.impl.Rate;
 
 public interface IRateService {
 
+	public long getMaxId();
 
-	public Rate save(Rate entity);
+	public Rate add(Rate entity);
 	
 	public Rate update(Rate entity);
 	

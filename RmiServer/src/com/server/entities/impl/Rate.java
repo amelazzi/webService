@@ -55,7 +55,7 @@ public class Rate implements Serializable, IRate {
 
 	@Override
 	public String toString() {
-		return "Rate [IdRate=" + idRate + ", value=" + value + ", product=" + product + "]";
+		return idRate + "," + value + "," + product.getIdProduct();
 	}
 
 }

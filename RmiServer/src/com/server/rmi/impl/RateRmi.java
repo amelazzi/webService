@@ -19,7 +19,7 @@ public class RateRmi extends UnicastRemoteObject implements IRateRmi {
     @Override
     public IRate add(Rate entity) throws RemoteException {
         if(entity!=null) {
-            service.save(entity);
+            service.add(entity);
             return entity;
         }
 
