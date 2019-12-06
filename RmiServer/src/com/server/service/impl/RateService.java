@@ -45,14 +45,14 @@ public class RateService implements IRateService{
     	try {
     		if(entity!=null) {
     			if(entity.getIdRate()!=0L) {
-    				rateDao.openCurrentSessionwithTransaction();
+    				//rateDao.openCurrentSessionwithTransaction();
     	            rateDao.update(entity);
-    	            rateDao.closeCurrentSessionwithTransaction();
+    	            //rateDao.closeCurrentSessionwithTransaction();
     	            return entity;
     			}
     		}
     		
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	return null;

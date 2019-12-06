@@ -97,7 +97,7 @@ public class RateDaoImpl implements IRateDao<Rate, Long> {
     
     @Override
     public void update(Rate entity) {
-        getCurrentSession().update(entity);
+        database.update("rate", entity);
     }
 
     @Override

@@ -17,7 +17,9 @@ public class TestRate {
         displayMany(rateService.findBy("idproduct", 6L));
         displayOne(rateService.findOneById(3L));
         testAdd();*/
-        rateService.deleteAll();
+        Rate rate = rateService.findOneById(2L);
+        rate.setValue(6);
+        rateService.update(rate);
         displayMany(rateService.findAll());
     }
 
