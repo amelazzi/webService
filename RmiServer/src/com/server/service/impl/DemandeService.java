@@ -42,9 +42,9 @@ public class DemandeService implements IDemandeService{
     	try {
     		if(entity!=null) {
     			if(entity.getIdDemande()!=0L) {
-    				demandeDao.openCurrentSessionwithTransaction();
+    				//demandeDao.openCurrentSessionwithTransaction();
     	            demandeDao.update(entity);
-    	            demandeDao.closeCurrentSessionwithTransaction();
+    	            //demandeDao.closeCurrentSessionwithTransaction();
     	            return entity;
     			}
     		}

@@ -142,7 +142,7 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
 
         product.setIdProduct(Long.parseLong(data[i][0]));
 
-        boolean available = data[i][1]=="t"? true:false;
+        boolean available = data[i][1].equals("t")? true:false;;
         product.setAvailable(available);
 
         product.setCreatedAt(DateTool.stringToDate(data[i][2]));

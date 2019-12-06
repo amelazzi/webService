@@ -24,7 +24,10 @@ public class TestDemande
 		//TestFindByProduct();
 		//TestUpdate();
 		//displayMany(demandeService.findBy("iduser", 3L));
-		displayOne(demandeService.findOneById(6L));
+		Demande demande = demandeService.findOneById(4L);
+		demande.setIsDone(true);
+		demandeService.update(demande);
+		TestSelectAll();
 
 	}
 

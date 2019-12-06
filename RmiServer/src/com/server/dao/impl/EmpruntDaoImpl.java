@@ -107,7 +107,7 @@ public class EmpruntDaoImpl implements IEmpruntDao<Emprunt, Long> {
         emprunt.setIdEmprunt(Long.parseLong(data[i][0]));
         emprunt.setCreatedAt(DateTool.stringToDate(data[i][1]));
 
-        boolean isReturned = data[i][2]=="t"? true:false;
+        boolean isReturned = data[i][2].equals("t")? true:false;
         emprunt.setIsReturned(isReturned);
 
         emprunt.setReturnedAt(DateTool.stringToDate(data[i][3]));

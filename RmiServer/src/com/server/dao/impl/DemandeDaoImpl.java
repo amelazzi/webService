@@ -101,7 +101,7 @@ public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
     
     @Override
     public void update(Demande entity) {
-        getCurrentSession().update(entity);
+        database.update("demande", entity);
     }
     
     @Override
@@ -118,7 +118,7 @@ public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
         demande.setCreatedAt(DateTool.stringToDate(data[i][1]));
         demande.setDesiredAt(DateTool.stringToDate(data[i][2]));
 
-        boolean isDone = data[i][3]=="t"? true:false;
+        boolean isDone = data[i][3].equals("t")? true:false;
         demande.setIsDone(isDone);
 
         demande.setProduct(productService.findOneById(Long.parseLong(data[i][4])));
