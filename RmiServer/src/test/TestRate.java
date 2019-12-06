@@ -18,7 +18,7 @@ public class TestRate {
         displayOne(rateService.findOneById(3L));
         testAdd();*/
         Rate rate = rateService.findOneById(2L);
-        rate.setValue(6);
+        rate.setValue(4);
         rateService.update(rate);
         displayMany(rateService.findAll());
     }

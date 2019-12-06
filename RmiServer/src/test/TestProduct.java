@@ -15,7 +15,7 @@ public class TestProduct
 	
 	public static void main(String[] args) throws RemoteException {
 		//testUpdate();
-		//testDelete(0);
+		testDelete(12);
 		//TestUpdate();
 		//TestAdd();
 		//TestSelectAll();

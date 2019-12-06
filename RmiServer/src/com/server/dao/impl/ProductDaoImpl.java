@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.server.entities.impl.Demande;
+import com.server.entities.impl.Emprunt;
+import com.server.entities.impl.Rate;
+import com.server.service.impl.DemandeService;
+import com.server.service.impl.EmpruntService;
+import com.server.service.impl.RateService;
 import com.server.utils.Database;
 import com.server.utils.DateTool;
 import com.server.utils.PostgresDataSource;
@@ -24,6 +30,10 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
  
     private Session currentSession;
     private Transaction currentTransaction;
+
+    //private DemandeService demandeService = new DemandeService();
+    //private EmpruntService empruntService = new EmpruntService();
+    //private RateService rateService = new RateService();
 
     private  Database database;
 
@@ -116,7 +126,6 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
     @SuppressWarnings("unchecked")
 	@Override
     public List<Product> findAll() {
-    	//List<Product> products = (List<Product>) getCurrentSession().createQuery("from Product").list();
 
         String[][] products = database.select("product");
         List<Product> productsList = new ArrayList<>();

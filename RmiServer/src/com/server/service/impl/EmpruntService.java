@@ -132,7 +132,7 @@ public class EmpruntService implements IEmpruntService{
 	}
 
 	@Override
-	public List<Emprunt> findBy(String field, String value) {
+	public List<Emprunt> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
 		try {
 			//empruntDao.openCurrentSession();
