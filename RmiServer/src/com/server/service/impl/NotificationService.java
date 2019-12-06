@@ -46,14 +46,14 @@ public class NotificationService implements INotificationService{
     	try {
     		if(entity!=null) {
     			if(entity.getIdNotification()!=0L) {
-    				notificationDao.openCurrentSessionwithTransaction();
+    				//notificationDao.openCurrentSessionwithTransaction();
     	            notificationDao.update(entity);
-    	            notificationDao.closeCurrentSessionwithTransaction();
+    	            //notificationDao.closeCurrentSessionwithTransaction();
     	            return entity;
     			}
     		}
     		
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	return null;

@@ -95,7 +95,7 @@ public class NotificationDaoImpl implements INotificationDao<Notification, Long>
     
     @Override
     public void update(Notification entity) {
-        getCurrentSession().update(entity);
+        database.update("notification", entity);
     }
 
     @Override
