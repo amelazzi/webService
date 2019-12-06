@@ -1,17 +1,26 @@
 package com.server.dao.interfaces;
 
+import com.server.entities.impl.Emprunt;
+import com.server.entities.impl.Product;
+import com.server.entities.impl.UserImpl;
+import com.server.rmi.impl.UserRmi;
+
 import java.io.Serializable;
 import java.util.List;
  
 public interface IEmpruntDao<T, Id extends Serializable> {
- 
-    public void persist(T entity);
+
+    public long getMaxId();
+
+    public void add(T entity);
      
     public void update(T entity);
+
+    public Emprunt parseEmprunt(String[][] data, int i);
      
     public T findOneById(Id id);
      
-    public List<T> findBy(String field, String value);
+    public List<T> findBy(String field, Object value);
     
     public List<T> findBy(String[] fields, Object[] values);
      

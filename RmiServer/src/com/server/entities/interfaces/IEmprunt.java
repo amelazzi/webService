@@ -15,4 +15,5 @@ public interface IEmprunt {
 	public UserImpl getUser();
 	public void setUser(UserImpl user);
 	public long getIdEmprunt();
+	public void setIdEmprunt(long idEmprunt);
 }
