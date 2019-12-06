@@ -9,6 +9,7 @@ import com.server.entities.impl.Product;
 import com.server.service.impl.DemandeService;
 import com.server.service.impl.EmpruntService;
 import com.server.service.impl.ProductService;
+import com.server.service.impl.UserService;
 
 
 public class TestDemande
@@ -16,11 +17,28 @@ public class TestDemande
 	static DemandeService demandeService = new DemandeService();
 	static EmpruntService empruntService = new EmpruntService();
 	static ProductService productService = new ProductService();
+	static UserService userService = new UserService();
 	
 	public static void main(String[] args) throws RemoteException {
 		//TestSelectAll();
-		TestFindByProduct();
+		//TestFindByProduct();
 		//TestUpdate();
+
+		Demande demande = new Demande();
+		demande.setProduct(productService.findOneById(12L));
+		demande.setUser(userService.findOneById(3L));
+
+		Demande demande2 = new Demande();
+		demande2.setProduct(productService.findOneById(11L));
+		demande2.setUser(userService.findOneById(3L));
+
+		Demande demande3 = new Demande();
+		demande3.setProduct(productService.findOneById(15L));
+		demande3.setUser(userService.findOneById(2L));
+
+		demandeService.add(demande);
+		demandeService.add(demande2);
+		demandeService.add(demande3);
 		
 	}
 	

@@ -24,7 +24,7 @@ public class DemandeRmi extends UnicastRemoteObject implements IDemandeRmi {
     @Override
     public IDemande add(Demande entity) throws RemoteException {
         if(entity!=null) {
-            service.save(entity);
+            service.add(entity);
             return entity;
         }
 

@@ -7,7 +7,7 @@ import com.server.entities.impl.Product;
 import com.server.entities.impl.UserImpl;
 
 public interface IDemandeService {
-	public Demande save(Demande entity);
+	public Demande add(Demande entity);
 	
 	public Demande update(Demande entity);
 	

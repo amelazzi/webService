@@ -23,12 +23,12 @@ public class DemandeService implements IDemandeService{
     }
     
     @Override
-    public Demande save(Demande entity) {
+    public Demande add(Demande entity) {
     	try {
     		if(entity!=null) {
-    			demandeDao.openCurrentSessionwithTransaction();
-                demandeDao.persist(entity);
-                demandeDao.closeCurrentSessionwithTransaction();
+    			//demandeDao.openCurrentSessionwithTransaction();
+                demandeDao.add(entity);
+                //demandeDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
 		} catch (HibernateException e) {

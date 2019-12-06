@@ -105,7 +105,7 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
     @Override
     public long getMaxId(){
         long id;
-        String[][] data = database.executeQuery("select max(idUser) as max from userimpl");
+        String[][] data = database.executeQuery("select max(idProduct) as max from product");
         if(data[1][0]!=null)
             id = Long.parseLong(data[1][0]);
         else

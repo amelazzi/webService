@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.server.entities.interfaces.IDemande;
+import com.server.utils.DateTool;
 
 @SuppressWarnings("serial")
 @Entity
@@ -97,11 +98,16 @@ public class Demande implements Serializable, IDemande{
 	public long getIdDemande() {
 		return idDemande;
 	}
-	
+
+	@Override
+	public void setIdDemande(long id) {
+		idDemande = id;
+	}
+
 	@Override
 	public String toString() {
-		return "Demande [idDemande=" + idDemande + ", createdAt=" + createdAt + ", desiredAt=" + desiredAt + ", isDone="
-				+ isDone + ", product=" + product + ", user=" + user + "]";
+		return idDemande + ",'" + DateTool.dateToString(createdAt) + "','" + DateTool.dateToString(desiredAt)
+				+ "'," + isDone + "," + product.getIdProduct() + "," + user.getIdUser();
 	}
 	
 }

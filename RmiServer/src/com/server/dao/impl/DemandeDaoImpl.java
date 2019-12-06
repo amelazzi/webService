@@ -3,6 +3,8 @@ package com.server.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.server.utils.Database;
+import com.server.utils.PostgresDataSource;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,10 +21,14 @@ import com.server.entities.impl.UserImpl;
 public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
  
     private Session currentSession;
-     
     private Transaction currentTransaction;
+
+    private  Database database;
  
     public DemandeDaoImpl() {
+        PostgresDataSource postgresDataSource = new PostgresDataSource();
+
+        database = new Database(postgresDataSource);
     }
     
     public Session openCurrentSession() {
@@ -70,10 +76,22 @@ public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
     public void setCurrentTransaction(Transaction currentTransaction) {
         this.currentTransaction = currentTransaction;
     }
-    
+
     @Override
-    public void persist(Demande entity) {
-        getCurrentSession().save(entity);
+    public long getMaxId() {
+        long id;
+        String[][] data = database.executeQuery("select max(idDemande) as max from demande");
+        if(data[1][0]!=null)
+            id = Long.parseLong(data[1][0]);
+        else
+            id = 0L;
+        return id;
+    }
+
+    @Override
+    public void add(Demande entity) {
+        entity.setIdDemande(this.getMaxId()+1);
+        database.insert("demande", entity);
     }
     
     @Override
