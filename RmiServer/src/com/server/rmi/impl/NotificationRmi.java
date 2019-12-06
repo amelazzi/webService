@@ -42,8 +42,8 @@ public class NotificationRmi extends UnicastRemoteObject implements INotificatio
     }
 
     @Override
-    public void remove(Long id) throws RemoteException {
-        service.delete(id);
+    public void remove(Notification notification) throws RemoteException {
+        service.delete(notification);
     }
 
     @Override

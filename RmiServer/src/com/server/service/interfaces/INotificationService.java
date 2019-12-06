@@ -13,7 +13,7 @@ public interface INotificationService {
 	
 	public Notification update(Notification entity);
 	
-	public void delete(Long id);
+	public void delete(Notification notification);
 	
 	public Notification findOneById(Long id);
 	

@@ -15,10 +15,11 @@ public class TestNotif {
     static DemandeService demandeService = new DemandeService();
 
     public static void main(String[] args) throws RemoteException {
-        Notification notification = notificationService.findOneById(6L);
-        notification.setMessage("Im update");
-        notification.setRead(true);
-        notificationService.update(notification);
+        //Notification notification = notificationService.findOneById(10L);
+        //notification.setMessage("Im update");
+        //notification.setRead(true);
+        notificationService.deleteAll();
+        displayMany(notificationService.findAll());
     }
 
     public static void testAdd(){

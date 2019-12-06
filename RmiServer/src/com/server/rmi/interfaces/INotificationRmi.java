@@ -12,7 +12,7 @@ public interface INotificationRmi extends Remote {
 
     public INotification update(Notification entity) throws RemoteException;
 
-    public void remove(Long id) throws RemoteException;
+    public void remove(Notification notification) throws RemoteException;
 
     public INotification findOneById(Long id) throws RemoteException;
 

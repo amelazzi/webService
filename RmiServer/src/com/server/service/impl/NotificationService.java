@@ -1,6 +1,7 @@
 package com.server.service.impl;
 import java.util.List;
 
+import com.server.entities.impl.Demande;
 import org.hibernate.HibernateException;
 
 import com.server.dao.impl.NotificationDaoImpl;
@@ -60,16 +61,16 @@ public class NotificationService implements INotificationService{
     }
     
 	@Override
-	public void delete(Long id) {
+	public void delete(Notification notification) {
 		try {
-			if(id!=0L) {
-				notificationDao.openCurrentSessionwithTransaction();
-		        Notification notification = notificationDao.findOneById(id);
+			//if(id!=0L) {
+				//notificationDao.openCurrentSessionwithTransaction();
+		        //Notification notification = notificationDao.findOneById(id);
 		        notificationDao.delete(notification);
-		        notificationDao.closeCurrentSessionwithTransaction();
-			}
+		        //notificationDao.closeCurrentSessionwithTransaction();
+			//}
 			
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -111,10 +112,10 @@ public class NotificationService implements INotificationService{
     @Override
     public void deleteAll() {
     	try {
-    		notificationDao.openCurrentSessionwithTransaction();
+    		//notificationDao.openCurrentSessionwithTransaction();
             notificationDao.deleteAll();
-            notificationDao.closeCurrentSessionwithTransaction();
-		} catch (HibernateException e) {
+            //notificationDao.closeCurrentSessionwithTransaction();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }

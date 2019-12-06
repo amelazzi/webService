@@ -135,7 +135,7 @@ public class NotificationDaoImpl implements INotificationDao<Notification, Long>
 
     @Override
     public void delete(Notification entity) {
-        getCurrentSession().delete(entity);
+        database.delete("notification", "idnotification", entity.getIdNotification());
     }
  
     @SuppressWarnings("unchecked")
