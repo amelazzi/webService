@@ -18,8 +18,8 @@ public class TestComment {
     public static void main(String[] args) throws RemoteException {
         //testAdd();
         Comment comment = commentService.findOneById(3L);
-        comment.setContent("third comment updated");
-        commentService.update(comment);
+        //comment.setContent("third comment updated");
+        commentService.delete(comment);
         displayMany(commentService.findAll());
     }
 

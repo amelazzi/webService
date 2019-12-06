@@ -9,7 +9,7 @@ public interface ICommentService {
 	
 	public Comment update(Comment entity);
 	
-	public void delete(Long id);
+	public void delete(Comment comment);
 	
 	public Comment findOneById(Long id);
 	

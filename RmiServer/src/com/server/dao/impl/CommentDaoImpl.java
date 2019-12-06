@@ -122,7 +122,7 @@ public class CommentDaoImpl implements ICommentDao<Comment, Long> {
     
     @Override
     public void delete(Comment entity) {
-        getCurrentSession().delete(entity);
+        database.delete("comment", "idComment", entity.getIdComment());
     }
  
     @SuppressWarnings("unchecked")

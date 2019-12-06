@@ -12,7 +12,7 @@ public interface ICommentRmi extends Remote {
 
     public IComment update(Comment entity) throws RemoteException;
 
-    public void remove(Long id) throws RemoteException;
+    public void remove(Comment comment) throws RemoteException;
 
     public IComment findOneById(Long id) throws RemoteException;
 

@@ -54,14 +54,14 @@ public class CommentService implements ICommentService{
     }
     
 	@Override
-	public void delete(Long id) {
+	public void delete(Comment comment) {
 		try {
-			if(id!=0L) {
-				commentDao.openCurrentSessionwithTransaction();
-		        Comment comment = commentDao.findOneById(id);
+			//if(id!=0L) {
+				//commentDao.openCurrentSessionwithTransaction();
+		        //Comment comment = commentDao.findOneById(id);
 		        commentDao.delete(comment);
-		        commentDao.closeCurrentSessionwithTransaction();
-			}
+		        //commentDao.closeCurrentSessionwithTransaction();
+			//}
 			
 		} catch (HibernateException e) {
 			e.printStackTrace();

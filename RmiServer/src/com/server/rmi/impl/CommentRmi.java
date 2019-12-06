@@ -39,8 +39,8 @@ public class CommentRmi extends UnicastRemoteObject implements ICommentRmi {
     }
 
     @Override
-    public void remove(Long id) throws RemoteException {
-        service.delete(id);
+    public void remove(Comment comment) throws RemoteException {
+        service.delete(comment);
     }
 
     @Override
