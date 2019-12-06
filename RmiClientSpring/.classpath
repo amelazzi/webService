@@ -25,7 +25,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Coding/Projets/WebService/RmiClient/scribejava-apis-6.8.1.jar"/>
-	<classpathentry kind="lib" path="D:/Coding/Projets/WebService/RmiClient/scribejava-core-6.8.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Coding/Projets/WebService/RmiClient/scribejava-apis-6.8.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Coding/Projets/WebService/RmiClient/scribejava-core-6.8.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

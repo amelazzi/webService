@@ -42,7 +42,7 @@
 			  </a>
 			  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 			    <a class="dropdown-item" href="<c:url value="/admin/product"/>"><fmt:message key="common.product"/></a>
-			    <a class="dropdown-item" href=""><fmt:message key="user"/></a>
+			    <a class="dropdown-item" href="<c:url value="/admin/user"/>"><fmt:message key="user"/></a>
 			    <a class="dropdown-item" href=""><fmt:message key="common.lend"/></a>
 			    <a class="dropdown-item" href=""><fmt:message key="common.lend.request"/></a>
 			  </div>

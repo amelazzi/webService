@@ -7,7 +7,7 @@
 	    <section class="content pt-3">
 	    	<nav aria-label="breadcrumb" class="">
 			  <ol class="breadcrumb">
-			    <li class="breadcrumb-item"><a href="#">Home</a></li>
+			    <li class="breadcrumb-item"><a href="#"><fmt:message key="common.dashboard"/></a></li>
 			  </ol>
 			</nav>
 			<div class="row">
@@ -21,12 +21,16 @@
 			              <div class="d-flex justify-content-between align-items-center">
 			                <div class="btn-group">
 			                  <c:choose>
-			                  	<c:when test="${!product.getAvailable()}">
-			                  		<a href="" class="btn btn-sm btn-primary">Emprunter</a>
-			                  		<a href="" class="btn btn-sm btn-outline-secondary">Acheter</a>
+			                  	<c:when test="${product.getQuantity()>0}">
+			                  		<a href="" class="btn btn-sm btn-primary">
+			                  			<i class="fas fa-book-reader"></i> 
+			                  		<fmt:message key="common.lending"/></a>
+			                  		<a href="" class="btn btn-sm btn-outline-secondary">
+			                  			<i class="fa fa-shopping-cart"></i> <fmt:message key="common.buying"/>
+			                  		</a>
 			                  	</c:when>
 				              	<c:otherwise>
-			                  		<a href="" class="btn btn-sm btn-outline-primary">Reserver</a>
+			                  		<a href="" class="btn btn-sm btn-outline-primary"><i class="fab fa-buffer"></i> <fmt:message key="common.reserve"/></a>
 			                  	</c:otherwise>
 				              </c:choose>
 			                </div>

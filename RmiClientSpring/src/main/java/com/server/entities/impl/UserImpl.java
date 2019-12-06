@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.server.entities.interfaces.IUser;
+import com.server.utils.DateTool;
 
 @SuppressWarnings("serial")
 public class UserImpl implements Serializable, IUser{
@@ -26,7 +27,7 @@ public class UserImpl implements Serializable, IUser{
 	public enum Status{
 	      student, teacher
 	}
-	
+
 	private long idUser;
 	private int matricule;
 	private String firstName;
@@ -40,8 +41,8 @@ public class UserImpl implements Serializable, IUser{
 	private String domain;
 	private String graduate;
 	private Date registeredAt;
-	private List<Emprunt> emprunts;
 	
+	private List<Emprunt> emprunts;
 	private List<Demande> demandes;
 	private List<Comment> comments;
 	private List<Notification> notifications;
@@ -174,7 +175,12 @@ public class UserImpl implements Serializable, IUser{
 	public long getIdUser() {
 		return idUser;
 	}
-	
+
+	@Override
+	public void setIdUser(long id) {
+		idUser = id;
+	}
+
 	@Override
 	public String getEmail() {
 		return email;
@@ -215,10 +221,9 @@ public class UserImpl implements Serializable, IUser{
 	
 	@Override
 	public String toString() {
-		return "User [idUser=" + idUser + ", matricule=" + matricule + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", email=" + email + ", password=" + password + ", phone=" + phone + ", role=" + role
-				+ ", status=" + status + ", birthday=" + birthday + ", domain=" + domain + ", graduate=" + graduate
-				+ ", registeredAt=" + registeredAt  + "]";
+		return "" + idUser + ",'" + DateTool.dateToString(birthday) + "','" + domain + "','" +email + "','"
+				+ firstName + "','" + graduate + "','" + lastName + "'," + matricule + ",'" + password + "','"
+				+ phone + "','" + DateTool.dateToString(registeredAt) + "','" + role + "','" + status + "'";
 	}
 
 }
