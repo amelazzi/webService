@@ -43,8 +43,8 @@ public class EmpruntRmi extends UnicastRemoteObject implements IEmpruntRmi {
     }
 
     @Override
-    public void remove(Long id) throws RemoteException {
-        service.delete(id);
+    public void remove(Emprunt emprunt) throws RemoteException {
+        service.delete(emprunt);
     }
 
     @Override

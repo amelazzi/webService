@@ -7,15 +7,15 @@ import com.server.entities.impl.Product;
 import com.server.entities.impl.UserImpl;
 
 public interface IDemandeService {
-	public Demande save(Demande entity);
+	public Demande add(Demande entity);
 	
 	public Demande update(Demande entity);
 	
-	public void delete(Long id);
+	public void delete(Demande demande);
 	
 	public Demande findOneById(Long id);
 	
-	public List<Demande> findBy(String field, String value);
+	public List<Demande> findBy(String field, Object value);
     
     public List<Demande> findBy(String[] fields, Object[] values);
      

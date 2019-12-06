@@ -23,7 +23,7 @@ public class NotificationRmi extends UnicastRemoteObject implements INotificatio
     @Override
     public INotification add(Notification entity) throws RemoteException {
         if(entity!=null) {
-            service.save(entity);
+            service.add(entity);
             return entity;
         }
 
@@ -42,8 +42,8 @@ public class NotificationRmi extends UnicastRemoteObject implements INotificatio
     }
 
     @Override
-    public void remove(Long id) throws RemoteException {
-        service.delete(id);
+    public void remove(Notification notification) throws RemoteException {
+        service.delete(notification);
     }
 
     @Override
@@ -53,6 +53,11 @@ public class NotificationRmi extends UnicastRemoteObject implements INotificatio
         }
 
         return null;
+    }
+
+    @Override
+    public List<Notification> findBy(String field, Object value) {
+        return service.findBy(field, value);
     }
 
     @Override

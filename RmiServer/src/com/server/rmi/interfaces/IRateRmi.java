@@ -12,7 +12,7 @@ public interface IRateRmi extends Remote {
 
     public IRate update(Rate entity) throws RemoteException;
 
-    public void remove(Long id) throws RemoteException;
+    public void remove(Rate rate) throws RemoteException;
 
     public IRate findOneById(Long id) throws RemoteException;
 

@@ -8,14 +8,18 @@ import com.server.entities.impl.Product;
 import com.server.entities.impl.UserImpl;
  
 public interface IDemandeDao<T, Id extends Serializable> {
- 
-    public void persist(T entity);
+
+    public long getMaxId();
+
+    public void add(T entity);
      
     public void update(T entity);
      
     public T findOneById(Id id);
-     
-    public List<T> findBy(String field, String value);
+
+    public Demande parseDemande(String[][] data, int i);
+
+    public List<T> findBy(String field, Object value);
     
     public List<T> findBy(String[] fields, Object[] values);
      

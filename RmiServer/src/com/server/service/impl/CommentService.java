@@ -40,30 +40,30 @@ public class CommentService implements ICommentService{
     	try {
     		if(entity!=null) {
     			if(entity.getIdComment()!=0L) {
-    				commentDao.openCurrentSessionwithTransaction();
+    				//commentDao.openCurrentSessionwithTransaction();
     	            commentDao.update(entity);
-    	            commentDao.closeCurrentSessionwithTransaction();
+    	            //commentDao.closeCurrentSessionwithTransaction();
     	            return entity;
     			}
     		}
     		
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	return null;
     }
     
 	@Override
-	public void delete(Long id) {
+	public void delete(Comment comment) {
 		try {
-			if(id!=0L) {
-				commentDao.openCurrentSessionwithTransaction();
-		        Comment comment = commentDao.findOneById(id);
+			//if(id!=0L) {
+				//commentDao.openCurrentSessionwithTransaction();
+		        //Comment comment = commentDao.findOneById(id);
 		        commentDao.delete(comment);
-		        commentDao.closeCurrentSessionwithTransaction();
-			}
+		        //commentDao.closeCurrentSessionwithTransaction();
+			//}
 			
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -72,12 +72,12 @@ public class CommentService implements ICommentService{
 	public Comment findOneById(Long id) {
 		try {
 			if(id!=0L) {
-				commentDao.openCurrentSession();
+				//commentDao.openCurrentSession();
 		        Comment comment = commentDao.findOneById(id);
-		        commentDao.closeCurrentSession();
+		        //commentDao.closeCurrentSession();
 		        return comment;
 			}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -99,18 +99,19 @@ public class CommentService implements ICommentService{
     @Override
     public void deleteAll() {
     	try {
-    		commentDao.openCurrentSessionwithTransaction();
+    		//commentDao.openCurrentSessionwithTransaction();
             commentDao.deleteAll();
-            commentDao.closeCurrentSessionwithTransaction();
-		} catch (HibernateException e) {
+            //commentDao.closeCurrentSessionwithTransaction();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }
 
 	@Override
-	public List<Comment> findBy(String field, String value) {
+	public List<Comment> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Comment> comments = commentDao.findBy(field, value);
+		return comments;
 	}
 
 	@Override

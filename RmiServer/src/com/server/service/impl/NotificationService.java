@@ -1,6 +1,7 @@
 package com.server.service.impl;
 import java.util.List;
 
+import com.server.entities.impl.Demande;
 import org.hibernate.HibernateException;
 
 import com.server.dao.impl.NotificationDaoImpl;
@@ -20,17 +21,22 @@ public class NotificationService implements INotificationService{
     public NotificationDaoImpl notificationDao() {
         return notificationDao;
     }
-    
-    @Override
-    public Notification save(Notification entity) {
+
+	@Override
+	public long getMaxId() {
+		return notificationDao.getMaxId();
+	}
+
+	@Override
+    public Notification add(Notification entity) {
     	try {
     		if(entity!=null) {
-    			notificationDao.openCurrentSessionwithTransaction();
-                notificationDao.persist(entity);
-                notificationDao.closeCurrentSessionwithTransaction();
+    			//notificationDao.openCurrentSessionwithTransaction();
+                notificationDao.add(entity);
+                //notificationDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();	
 		}
     	return null;
@@ -41,30 +47,30 @@ public class NotificationService implements INotificationService{
     	try {
     		if(entity!=null) {
     			if(entity.getIdNotification()!=0L) {
-    				notificationDao.openCurrentSessionwithTransaction();
+    				//notificationDao.openCurrentSessionwithTransaction();
     	            notificationDao.update(entity);
-    	            notificationDao.closeCurrentSessionwithTransaction();
+    	            //notificationDao.closeCurrentSessionwithTransaction();
     	            return entity;
     			}
     		}
     		
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	return null;
     }
     
 	@Override
-	public void delete(Long id) {
+	public void delete(Notification notification) {
 		try {
-			if(id!=0L) {
-				notificationDao.openCurrentSessionwithTransaction();
-		        Notification notification = notificationDao.findOneById(id);
+			//if(id!=0L) {
+				//notificationDao.openCurrentSessionwithTransaction();
+		        //Notification notification = notificationDao.findOneById(id);
 		        notificationDao.delete(notification);
-		        notificationDao.closeCurrentSessionwithTransaction();
-			}
+		        //notificationDao.closeCurrentSessionwithTransaction();
+			//}
 			
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -73,25 +79,31 @@ public class NotificationService implements INotificationService{
 	public Notification findOneById(Long id) {
 		try {
 			if(id!=0L) {
-				notificationDao.openCurrentSession();
+				//notificationDao.openCurrentSession();
 		        Notification notification = notificationDao.findOneById(id);
-		        notificationDao.closeCurrentSession();
+		        //notificationDao.closeCurrentSession();
 		        return notification;
 			}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-    @Override
+	@Override
+	public List<Notification> findBy(String field, Object value) {
+		List<Notification> notifs = notificationDao.findBy(field, value);
+		return notifs;
+	}
+
+	@Override
     public List<Notification> findAll() {
     	try {
-    		notificationDao.openCurrentSession();
+    		//notificationDao.openCurrentSession();
             List<Notification> notifications = notificationDao.findAll();
-            notificationDao.closeCurrentSession();
+            //notificationDao.closeCurrentSession();
             return notifications;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
         return null;
@@ -100,21 +112,14 @@ public class NotificationService implements INotificationService{
     @Override
     public void deleteAll() {
     	try {
-    		notificationDao.openCurrentSessionwithTransaction();
+    		//notificationDao.openCurrentSessionwithTransaction();
             notificationDao.deleteAll();
-            notificationDao.closeCurrentSessionwithTransaction();
-		} catch (HibernateException e) {
+            //notificationDao.closeCurrentSessionwithTransaction();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }
 
-	@Override
-	public List<Notification> findByUser(UserImpl user) {
-		// TODO Auto-genenotificationd method stub
-		return null;
-	}
-    
-    
 	
 }
 

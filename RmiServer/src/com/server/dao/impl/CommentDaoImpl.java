@@ -3,6 +3,7 @@ package com.server.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.server.entities.impl.Product;
 import com.server.service.impl.ProductService;
 import com.server.service.impl.UserService;
 import com.server.utils.Database;
@@ -110,18 +111,18 @@ public class CommentDaoImpl implements ICommentDao<Comment, Long> {
 
     @Override
     public void update(Comment entity) {
-        getCurrentSession().update(entity);
+        database.update("comment", entity);
     }
     
     @Override
     public Comment findOneById(Long id) {
-    	Comment produit = (Comment) getCurrentSession().get(Comment.class, id);
-        return produit; 
+        Comment comment = findBy("idComment", id).get(0);
+        return comment;
     }
     
     @Override
     public void delete(Comment entity) {
-        getCurrentSession().delete(entity);
+        database.delete("comment", "idComment", entity.getIdComment());
     }
  
     @SuppressWarnings("unchecked")
@@ -146,9 +147,16 @@ public class CommentDaoImpl implements ICommentDao<Comment, Long> {
     }
 
 	@Override
-	public List<Comment> findBy(String field, String value) {
+	public List<Comment> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
-		return null;
+        String[][] comments = database.select("comment", field, value);
+        List<Comment> commentsList = new ArrayList<>();
+
+        for(int i=1; i<comments.length; i++){
+            commentsList.add(parseComment(comments,i));
+        }
+
+        return commentsList;
 	}
 
 	@Override

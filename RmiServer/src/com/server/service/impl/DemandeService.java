@@ -9,7 +9,7 @@ import com.server.entities.impl.Product;
 import com.server.entities.impl.UserImpl;
 import com.server.service.interfaces.IDemandeService;
 
- 
+
 public class DemandeService implements IDemandeService{
  
     private static DemandeDaoImpl demandeDao;
@@ -23,15 +23,15 @@ public class DemandeService implements IDemandeService{
     }
     
     @Override
-    public Demande save(Demande entity) {
+    public Demande add(Demande entity) {
     	try {
     		if(entity!=null) {
-    			demandeDao.openCurrentSessionwithTransaction();
-                demandeDao.persist(entity);
-                demandeDao.closeCurrentSessionwithTransaction();
+    			//demandeDao.openCurrentSessionwithTransaction();
+                demandeDao.add(entity);
+                //demandeDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();	
 		}
     	return null;
@@ -42,30 +42,30 @@ public class DemandeService implements IDemandeService{
     	try {
     		if(entity!=null) {
     			if(entity.getIdDemande()!=0L) {
-    				demandeDao.openCurrentSessionwithTransaction();
+    				//demandeDao.openCurrentSessionwithTransaction();
     	            demandeDao.update(entity);
-    	            demandeDao.closeCurrentSessionwithTransaction();
+    	            //demandeDao.closeCurrentSessionwithTransaction();
     	            return entity;
     			}
     		}
     		
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	return null;
     }
     
 	@Override
-	public void delete(Long id) {
+	public void delete(Demande demande) {
 		try {
-			if(id!=0L) {
-				demandeDao.openCurrentSessionwithTransaction();
-		        Demande demande = demandeDao.findOneById(id);
+			//if(id!=0L) {
+				//demandeDao.openCurrentSessionwithTransaction();
+		        //Demande demande = demandeDao.findOneById(id);
 		        demandeDao.delete(demande);
-		        demandeDao.closeCurrentSessionwithTransaction();
-			}
+		        //demandeDao.closeCurrentSessionwithTransaction();
+			//}
 			
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -73,13 +73,13 @@ public class DemandeService implements IDemandeService{
 	@Override
 	public Demande findOneById(Long id) {
 		try {
-			if(id!=0L) {
-				demandeDao.openCurrentSession();
+			//if(id!=0L) {
+				//demandeDao.openCurrentSession();
 		        Demande demande = demandeDao.findOneById(id);
-		        demandeDao.closeCurrentSession();
+		        //demandeDao.closeCurrentSession();
 		        return demande;
-			}
-		} catch (HibernateException e) {
+			//}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -88,11 +88,11 @@ public class DemandeService implements IDemandeService{
     @Override
     public List<Demande> findAll() {
     	try {
-    		demandeDao.openCurrentSession();
+    		//demandeDao.openCurrentSession();
             List<Demande> demandes = demandeDao.findAll();
-            demandeDao.closeCurrentSession();
+            //demandeDao.closeCurrentSession();
             return demandes;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
         return null;
@@ -101,18 +101,19 @@ public class DemandeService implements IDemandeService{
     @Override
     public void deleteAll() {
     	try {
-    		demandeDao.openCurrentSessionwithTransaction();
+    		//demandeDao.openCurrentSessionwithTransaction();
             demandeDao.deleteAll();
-            demandeDao.closeCurrentSessionwithTransaction();
-		} catch (HibernateException e) {
+            //demandeDao.closeCurrentSessionwithTransaction();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }
 
 	@Override
-	public List<Demande> findBy(String field, String value) {
+	public List<Demande> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Demande> demandes = demandeDao.findBy(field, value);
+		return demandes;
 	}
 
 	@Override

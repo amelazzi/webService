@@ -17,4 +17,5 @@ public interface IDemande {
 	public UserImpl getUser();
 	public void setUser(UserImpl user);
 	public long getIdDemande();
+	public void setIdDemande(long id);
 }

@@ -10,8 +10,8 @@ public interface IEmpruntService {
 	public Emprunt add(Emprunt entity);
 	
 	public Emprunt update(Emprunt entity);
-	
-	public void delete(Long id);
+
+	public void delete(Emprunt emprunt);
 	
 	public Emprunt findOneById(Long id);
 	

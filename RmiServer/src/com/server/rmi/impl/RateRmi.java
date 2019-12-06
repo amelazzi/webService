@@ -19,7 +19,7 @@ public class RateRmi extends UnicastRemoteObject implements IRateRmi {
     @Override
     public IRate add(Rate entity) throws RemoteException {
         if(entity!=null) {
-            service.save(entity);
+            service.add(entity);
             return entity;
         }
 
@@ -38,8 +38,8 @@ public class RateRmi extends UnicastRemoteObject implements IRateRmi {
     }
 
     @Override
-    public void remove(Long id) throws RemoteException {
-        service.delete(id);
+    public void remove(Rate rate) throws RemoteException {
+        service.delete(rate);
     }
 
     @Override

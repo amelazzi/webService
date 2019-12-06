@@ -15,7 +15,7 @@ public interface IDemandeRmi extends Remote {
 
     public IDemande update(Demande entity) throws RemoteException;
 
-    public void remove(Long id) throws RemoteException;
+    public void remove(Demande demande) throws RemoteException;
 
     public IDemande findOneById(Long id) throws RemoteException;
 

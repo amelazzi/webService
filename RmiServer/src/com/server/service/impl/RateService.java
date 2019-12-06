@@ -19,17 +19,22 @@ public class RateService implements IRateService{
     public RateDaoImpl rateDao() {
         return rateDao;
     }
-    
-    @Override
-    public Rate save(Rate entity) {
+
+	@Override
+	public long getMaxId() {
+		return rateDao.getMaxId();
+	}
+
+	@Override
+    public Rate add(Rate entity) {
     	try {
     		if(entity!=null) {
-    			rateDao.openCurrentSessionwithTransaction();
-                rateDao.persist(entity);
-                rateDao.closeCurrentSessionwithTransaction();
+    			//rateDao.openCurrentSessionwithTransaction();
+                rateDao.add(entity);
+                //rateDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();	
 		}
     	return null;
@@ -40,30 +45,30 @@ public class RateService implements IRateService{
     	try {
     		if(entity!=null) {
     			if(entity.getIdRate()!=0L) {
-    				rateDao.openCurrentSessionwithTransaction();
+    				//rateDao.openCurrentSessionwithTransaction();
     	            rateDao.update(entity);
-    	            rateDao.closeCurrentSessionwithTransaction();
+    	            //rateDao.closeCurrentSessionwithTransaction();
     	            return entity;
     			}
     		}
     		
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	return null;
     }
     
 	@Override
-	public void delete(Long id) {
+	public void delete(Rate rate) {
 		try {
-			if(id!=0L) {
-				rateDao.openCurrentSessionwithTransaction();
-		        Rate rate = rateDao.findOneById(id);
+			//if(id!=0L) {
+				//rateDao.openCurrentSessionwithTransaction();
+		        //Rate rate = rateDao.findOneById(id);
 		        rateDao.delete(rate);
-		        rateDao.closeCurrentSessionwithTransaction();
-			}
+		        //rateDao.closeCurrentSessionwithTransaction();
+			//}
 			
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -72,12 +77,12 @@ public class RateService implements IRateService{
 	public Rate findOneById(Long id) {
 		try {
 			if(id!=0L) {
-				rateDao.openCurrentSession();
+				//rateDao.openCurrentSession();
 		        Rate rate = rateDao.findOneById(id);
-		        rateDao.closeCurrentSession();
+		        //rateDao.closeCurrentSession();
 		        return rate;
 			}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -86,11 +91,11 @@ public class RateService implements IRateService{
     @Override
     public List<Rate> findAll() {
     	try {
-    		rateDao.openCurrentSession();
+    		//rateDao.openCurrentSession();
             List<Rate> rates = rateDao.findAll();
-            rateDao.closeCurrentSession();
+            //rateDao.closeCurrentSession();
             return rates;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
         return null;
@@ -99,18 +104,19 @@ public class RateService implements IRateService{
     @Override
     public void deleteAll() {
     	try {
-    		rateDao.openCurrentSessionwithTransaction();
+    		//rateDao.openCurrentSessionwithTransaction();
             rateDao.deleteAll();
-            rateDao.closeCurrentSessionwithTransaction();
-		} catch (HibernateException e) {
+            //rateDao.closeCurrentSessionwithTransaction();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }
 
 	@Override
-	public List<Rate> findBy(String field, String value) {
+	public List<Rate> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Rate> rates = rateDao.findBy(field, value);
+		return rates;
 	}
 
 	@Override

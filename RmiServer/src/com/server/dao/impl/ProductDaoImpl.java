@@ -105,7 +105,7 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
     @Override
     public long getMaxId(){
         long id;
-        String[][] data = database.executeQuery("select max(idUser) as max from userimpl");
+        String[][] data = database.executeQuery("select max(idProduct) as max from product");
         if(data[1][0]!=null)
             id = Long.parseLong(data[1][0]);
         else
@@ -142,7 +142,7 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
 
         product.setIdProduct(Long.parseLong(data[i][0]));
 
-        boolean available = data[i][1]=="t"? true:false;
+        boolean available = data[i][1].equals("t")? true:false;;
         product.setAvailable(available);
 
         product.setCreatedAt(DateTool.stringToDate(data[i][2]));

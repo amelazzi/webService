@@ -9,11 +9,11 @@ public interface ICommentService {
 	
 	public Comment update(Comment entity);
 	
-	public void delete(Long id);
+	public void delete(Comment comment);
 	
 	public Comment findOneById(Long id);
 	
-	public List<Comment> findBy(String field, String value);
+	public List<Comment> findBy(String field, Object value);
     
     public List<Comment> findBy(String[] fields, Object[] values);
      

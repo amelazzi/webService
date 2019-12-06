@@ -24,7 +24,7 @@ public class DemandeRmi extends UnicastRemoteObject implements IDemandeRmi {
     @Override
     public IDemande add(Demande entity) throws RemoteException {
         if(entity!=null) {
-            service.save(entity);
+            service.add(entity);
             return entity;
         }
 
@@ -43,8 +43,8 @@ public class DemandeRmi extends UnicastRemoteObject implements IDemandeRmi {
     }
 
     @Override
-    public void remove(Long id) throws RemoteException {
-        service.delete(id);
+    public void remove(Demande demande) throws RemoteException {
+        service.delete(demande);
     }
 
     @Override

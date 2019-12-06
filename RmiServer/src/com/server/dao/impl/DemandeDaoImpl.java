@@ -3,6 +3,11 @@ package com.server.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.server.service.impl.ProductService;
+import com.server.service.impl.UserService;
+import com.server.utils.Database;
+import com.server.utils.DateTool;
+import com.server.utils.PostgresDataSource;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,10 +24,16 @@ import com.server.entities.impl.UserImpl;
 public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
  
     private Session currentSession;
-     
     private Transaction currentTransaction;
+
+    private  Database database;
+    private UserService userService = new UserService();
+    private ProductService productService = new ProductService();
  
     public DemandeDaoImpl() {
+        PostgresDataSource postgresDataSource = new PostgresDataSource();
+
+        database = new Database(postgresDataSource);
     }
     
     public Session openCurrentSession() {
@@ -70,34 +81,68 @@ public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
     public void setCurrentTransaction(Transaction currentTransaction) {
         this.currentTransaction = currentTransaction;
     }
-    
+
     @Override
-    public void persist(Demande entity) {
-        getCurrentSession().save(entity);
+    public long getMaxId() {
+        long id;
+        String[][] data = database.executeQuery("select max(idDemande) as max from demande");
+        if(data[1][0]!=null)
+            id = Long.parseLong(data[1][0]);
+        else
+            id = 0L;
+        return id;
+    }
+
+    @Override
+    public void add(Demande entity) {
+        entity.setIdDemande(this.getMaxId()+1);
+        database.insert("demande", entity);
     }
     
     @Override
     public void update(Demande entity) {
-        getCurrentSession().update(entity);
+        database.update("demande", entity);
     }
     
     @Override
     public Demande findOneById(Long id) {
-    	Demande demande = (Demande) getCurrentSession().get(Demande.class, id);
-        return demande; 
+        Demande demande = findBy("idDemande", id).get(0);
+        return demande;
     }
-    
+
+    @Override
+    public Demande parseDemande(String[][] data, int i) {
+        Demande demande = new Demande();
+
+        demande.setIdDemande(Long.parseLong(data[i][0]));
+        demande.setCreatedAt(DateTool.stringToDate(data[i][1]));
+        demande.setDesiredAt(DateTool.stringToDate(data[i][2]));
+
+        boolean isDone = data[i][3].equals("t")? true:false;
+        demande.setIsDone(isDone);
+
+        demande.setProduct(productService.findOneById(Long.parseLong(data[i][4])));
+        demande.setUser(userService.findOneById(Long.parseLong(data[i][5])));
+
+        return demande;
+    }
+
     @Override
     public void delete(Demande entity) {
-        getCurrentSession().delete(entity);
+        database.delete("demande", "idDemande", entity.getIdDemande());
     }
  
     @SuppressWarnings("unchecked")
 	@Override
     public List<Demande> findAll() {
-    	List<Demande> demandes = getCurrentSession().createQuery("select d from Demande d").list();
-        
-        return demandes;
+        String[][] demandes = database.select("demande");
+        List<Demande> demandesList = new ArrayList<>();
+
+        for(int i=1; i<demandes.length; i++){
+            demandesList.add(parseDemande(demandes,i));
+        }
+
+        return demandesList;
     }
     
     @Override
@@ -109,9 +154,16 @@ public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
     }
 
 	@Override
-	public List<Demande> findBy(String field, String value) {
+	public List<Demande> findBy(String field, Object value) {
 		// TODO Auto-generated method stub
-		return null;
+        String[][] demandes = database.select("demande", field, value);
+        List<Demande> demandesList = new ArrayList<>();
+
+        for(int i=1; i<demandes.length; i++){
+            demandesList.add(parseDemande(demandes,i));
+        }
+
+        return demandesList;
 	}
 
 	@Override
