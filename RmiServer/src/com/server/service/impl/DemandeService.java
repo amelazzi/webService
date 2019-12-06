@@ -9,7 +9,7 @@ import com.server.entities.impl.Product;
 import com.server.entities.impl.UserImpl;
 import com.server.service.interfaces.IDemandeService;
 
- 
+
 public class DemandeService implements IDemandeService{
  
     private static DemandeDaoImpl demandeDao;
@@ -31,7 +31,7 @@ public class DemandeService implements IDemandeService{
                 //demandeDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();	
 		}
     	return null;
@@ -49,23 +49,23 @@ public class DemandeService implements IDemandeService{
     			}
     		}
     		
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	return null;
     }
     
 	@Override
-	public void delete(Long id) {
+	public void delete(Demande demande) {
 		try {
-			if(id!=0L) {
-				demandeDao.openCurrentSessionwithTransaction();
-		        Demande demande = demandeDao.findOneById(id);
+			//if(id!=0L) {
+				//demandeDao.openCurrentSessionwithTransaction();
+		        //Demande demande = demandeDao.findOneById(id);
 		        demandeDao.delete(demande);
-		        demandeDao.closeCurrentSessionwithTransaction();
-			}
+		        //demandeDao.closeCurrentSessionwithTransaction();
+			//}
 			
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -101,10 +101,10 @@ public class DemandeService implements IDemandeService{
     @Override
     public void deleteAll() {
     	try {
-    		demandeDao.openCurrentSessionwithTransaction();
+    		//demandeDao.openCurrentSessionwithTransaction();
             demandeDao.deleteAll();
-            demandeDao.closeCurrentSessionwithTransaction();
-		} catch (HibernateException e) {
+            //demandeDao.closeCurrentSessionwithTransaction();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }

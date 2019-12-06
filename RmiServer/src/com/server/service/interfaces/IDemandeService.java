@@ -11,7 +11,7 @@ public interface IDemandeService {
 	
 	public Demande update(Demande entity);
 	
-	public void delete(Long id);
+	public void delete(Demande demande);
 	
 	public Demande findOneById(Long id);
 	

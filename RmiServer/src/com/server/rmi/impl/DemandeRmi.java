@@ -43,8 +43,8 @@ public class DemandeRmi extends UnicastRemoteObject implements IDemandeRmi {
     }
 
     @Override
-    public void remove(Long id) throws RemoteException {
-        service.delete(id);
+    public void remove(Demande demande) throws RemoteException {
+        service.delete(demande);
     }
 
     @Override

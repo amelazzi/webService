@@ -129,7 +129,7 @@ public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
 
     @Override
     public void delete(Demande entity) {
-        getCurrentSession().delete(entity);
+        database.delete("demande", "idDemande", entity.getIdDemande());
     }
  
     @SuppressWarnings("unchecked")
