@@ -106,8 +106,8 @@ public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
     
     @Override
     public Demande findOneById(Long id) {
-    	Demande demande = (Demande) getCurrentSession().get(Demande.class, id);
-        return demande; 
+        Demande demande = findBy("idDemande", id).get(0);
+        return demande;
     }
 
     @Override

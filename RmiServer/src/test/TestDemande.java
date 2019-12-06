@@ -20,10 +20,11 @@ public class TestDemande
 	static UserService userService = new UserService();
 	
 	public static void main(String[] args) throws RemoteException {
-		TestSelectAll();
+		//TestSelectAll();
 		//TestFindByProduct();
 		//TestUpdate();
-		displayMany(demandeService.findBy("iduser", 3L));
+		//displayMany(demandeService.findBy("iduser", 3L));
+		displayOne(demandeService.findOneById(6L));
 
 	}
 

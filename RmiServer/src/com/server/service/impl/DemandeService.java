@@ -73,13 +73,13 @@ public class DemandeService implements IDemandeService{
 	@Override
 	public Demande findOneById(Long id) {
 		try {
-			if(id!=0L) {
-				demandeDao.openCurrentSession();
+			//if(id!=0L) {
+				//demandeDao.openCurrentSession();
 		        Demande demande = demandeDao.findOneById(id);
-		        demandeDao.closeCurrentSession();
+		        //demandeDao.closeCurrentSession();
 		        return demande;
-			}
-		} catch (HibernateException e) {
+			//}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
