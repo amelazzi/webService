@@ -2,6 +2,7 @@ package com.server.entities.interfaces;
 
 import java.util.Date;
 
+import com.server.entities.impl.Demande;
 import com.server.entities.impl.UserImpl;
 
 public interface INotification {
@@ -18,9 +19,11 @@ public interface INotification {
 
 	public void setRead(boolean isRead);
 
-	public UserImpl getUser();
+	public Demande getDemande();
 
-	public void setUser(UserImpl user);
+	public void setDemande(Demande demande);
 
 	public long getIdNotification();
+
+	public void setIdNotification(long idNotification);
 }

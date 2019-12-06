@@ -73,25 +73,31 @@ public class NotificationService implements INotificationService{
 	public Notification findOneById(Long id) {
 		try {
 			if(id!=0L) {
-				notificationDao.openCurrentSession();
+				//notificationDao.openCurrentSession();
 		        Notification notification = notificationDao.findOneById(id);
-		        notificationDao.closeCurrentSession();
+		        //notificationDao.closeCurrentSession();
 		        return notification;
 			}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-    @Override
+	@Override
+	public List<Notification> findBy(String field, Object value) {
+		List<Notification> notifs = notificationDao.findBy(field, value);
+		return notifs;
+	}
+
+	@Override
     public List<Notification> findAll() {
     	try {
-    		notificationDao.openCurrentSession();
+    		//notificationDao.openCurrentSession();
             List<Notification> notifications = notificationDao.findAll();
-            notificationDao.closeCurrentSession();
+            //notificationDao.closeCurrentSession();
             return notifications;
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
         return null;
@@ -108,13 +114,6 @@ public class NotificationService implements INotificationService{
 		}
     }
 
-	@Override
-	public List<Notification> findByUser(UserImpl user) {
-		// TODO Auto-genenotificationd method stub
-		return null;
-	}
-    
-    
 	
 }
 

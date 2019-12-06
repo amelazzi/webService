@@ -16,6 +16,8 @@ public interface INotificationRmi extends Remote {
 
     public INotification findOneById(Long id) throws RemoteException;
 
+    public List<Notification> findBy(String field, Object value);
+
     public List<Notification> findAll() throws RemoteException;
 
     public void removeAll() throws RemoteException;

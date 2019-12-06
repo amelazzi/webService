@@ -14,7 +14,7 @@ public interface INotificationService {
 	
 	public Notification findOneById(Long id);
 	
-	public List<Notification> findByUser(UserImpl user);
+	public List<Notification> findBy(String field, Object value);
      
     public List<Notification> findAll();
 	

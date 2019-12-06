@@ -23,7 +23,7 @@ public class Notification implements Serializable, INotification {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long IdNotification;
+	private long idNotification;
 	
 	private String message;
 	
@@ -32,8 +32,8 @@ public class Notification implements Serializable, INotification {
 	private boolean isRead;
 	
 	@ManyToOne
-	@JoinColumn(name="idUser")
-	private UserImpl user;
+	@JoinColumn(name="idDemande")
+	private Demande demande;
 	
 	@Override
 	public String getMessage() {
@@ -64,25 +64,30 @@ public class Notification implements Serializable, INotification {
 	public void setRead(boolean isRead) {
 		this.isRead = isRead;
 	}
-	
+
 	@Override
-	public UserImpl getUser() {
-		return user;
+	public Demande getDemande() {
+		return null;
 	}
-	
+
 	@Override
-	public void setUser(UserImpl user) {
-		this.user = user;
+	public void setDemande(Demande demande) {
+
 	}
 	
 	@Override
 	public long getIdNotification() {
-		return IdNotification;
+		return idNotification;
+	}
+
+	@Override
+	public void setIdNotification(long idNotification) {
+		this.idNotification = idNotification;
 	}
 
 	@Override
 	public String toString() {
-		return "Notification [IdNotification=" + IdNotification + ", message=" + message + ", sendAt=" + sendAt
+		return "Notification [IdNotification=" + idNotification + ", message=" + message + ", sendAt=" + sendAt
 				+ ", isRead=" + isRead  + "]";
 	}
 	

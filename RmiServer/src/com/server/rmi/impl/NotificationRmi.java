@@ -56,6 +56,11 @@ public class NotificationRmi extends UnicastRemoteObject implements INotificatio
     }
 
     @Override
+    public List<Notification> findBy(String field, Object value) {
+        return service.findBy(field, value);
+    }
+
+    @Override
     public List<Notification> findAll() throws RemoteException {
         return service.findAll();
     }

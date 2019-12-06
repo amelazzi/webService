@@ -1,7 +1,12 @@
 package com.server.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.server.service.impl.DemandeService;
+import com.server.utils.Database;
+import com.server.utils.DateTool;
+import com.server.utils.PostgresDataSource;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,10 +20,15 @@ import org.hibernate.cfg.Configuration;
 public class NotificationDaoImpl implements INotificationDao<Notification, Long> {
  
     private Session currentSession;
-     
     private Transaction currentTransaction;
+
+    private Database database;
+    private DemandeService demandeService = new DemandeService();
  
     public NotificationDaoImpl() {
+        PostgresDataSource postgresDataSource = new PostgresDataSource();
+
+        database = new Database(postgresDataSource);
     }
     
     public Session openCurrentSession() {
@@ -76,13 +86,42 @@ public class NotificationDaoImpl implements INotificationDao<Notification, Long>
     public void update(Notification entity) {
         getCurrentSession().update(entity);
     }
-    
+
+    @Override
+    public Notification parseNotif(String[][] data, int i) {
+        Notification notif = new Notification();
+
+        notif.setIdNotification(Long.parseLong(data[i][0]));
+
+        boolean isread = data[i][1].equals("t")? true:false;;
+        notif.setRead(isread);
+
+        notif.setMessage(data[i][2]);
+        notif.setSendAt(DateTool.stringToDate(data[i][3]));
+
+        notif.setDemande(demandeService.findOneById(Long.parseLong(data[i][4])));
+
+        return notif;
+    }
+
     @Override
     public Notification findOneById(Long id) {
-    	Notification produit = (Notification) getCurrentSession().get(Notification.class, id);
-        return produit; 
+        Notification notif = findBy("idNotification", id).get(0);
+        return notif;
     }
-    
+
+    @Override
+    public List<Notification> findBy(String field, Object value) {
+        String[][] notifs = database.select("notification", field, value);
+        List<Notification> notifsList = new ArrayList<>();
+
+        for(int i=1; i<notifs.length; i++){
+            notifsList.add(parseNotif(notifs,i));
+        }
+
+        return notifsList;
+    }
+
     @Override
     public void delete(Notification entity) {
         getCurrentSession().delete(entity);
@@ -91,9 +130,14 @@ public class NotificationDaoImpl implements INotificationDao<Notification, Long>
     @SuppressWarnings("unchecked")
 	@Override
     public List<Notification> findAll() {
-    	List<Notification> products = (List<Notification>) getCurrentSession().createQuery("from Notification").list();
-        
-        return products;
+        String[][] notifs = database.select("notification");
+        List<Notification> notifsList = new ArrayList<>();
+
+        for(int i=1; i<notifs.length; i++){
+            notifsList.add(parseNotif(notifs,i));
+        }
+
+        return notifsList;
     }
     
     @Override
@@ -104,10 +148,5 @@ public class NotificationDaoImpl implements INotificationDao<Notification, Long>
         }
     }
 
-	@Override
-	public List<Notification> findByUser(UserImpl user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
