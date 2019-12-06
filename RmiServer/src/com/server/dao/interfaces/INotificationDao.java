@@ -1,7 +1,6 @@
 package com.server.dao.interfaces;
 
 import java.io.Serializable;
-import java.lang.invoke.StringConcatFactory;
 import java.util.List;
 
 import com.server.entities.impl.Notification;
@@ -9,7 +8,9 @@ import com.server.entities.impl.UserImpl;
  
 public interface INotificationDao<T, Id extends Serializable> {
  
-	public void persist(T entity);
+	public long getMaxId();
+
+    public void add(T entity);
     
     public void update(T entity);
 

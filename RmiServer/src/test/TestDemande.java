@@ -25,8 +25,9 @@ public class TestDemande
 		//TestUpdate();
 		//displayMany(demandeService.findBy("iduser", 3L));
 		//demandeService.deleteAll();
-		testAdd();
-		TestSelectAll();
+		//testAdd();
+		displayOne(demandeService.findOneById(1L));
+		//TestSelectAll();
 
 	}
 

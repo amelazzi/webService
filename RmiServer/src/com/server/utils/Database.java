@@ -112,7 +112,7 @@ public class Database {
 		try {
 			Statement sql = db.createStatement();
 			StringBuffer query = new StringBuffer("INSERT INTO "+delimit(tableName)+" VALUES( "+row[0]+" ");
-			
+
 			for (int i = 1; i < row.length; i++) {
 				query.append(","+row[i]+" ");
 			}

@@ -23,7 +23,7 @@ public class NotificationRmi extends UnicastRemoteObject implements INotificatio
     @Override
     public INotification add(Notification entity) throws RemoteException {
         if(entity!=null) {
-            service.save(entity);
+            service.add(entity);
             return entity;
         }
 

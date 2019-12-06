@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.server.entities.interfaces.INotification;
+import com.server.utils.DateTool;
 
 @SuppressWarnings("serial")
 @Entity
@@ -72,7 +73,7 @@ public class Notification implements Serializable, INotification {
 
 	@Override
 	public void setDemande(Demande demande) {
-
+		this.demande = demande;
 	}
 	
 	@Override
@@ -87,8 +88,8 @@ public class Notification implements Serializable, INotification {
 
 	@Override
 	public String toString() {
-		return "Notification [IdNotification=" + idNotification + ", message=" + message + ", sendAt=" + sendAt
-				+ ", isRead=" + isRead  + "]";
+		return idNotification + "," + isRead + ",'" + message + "','" +
+				DateTool.dateToString(sendAt) + "'," + demande.getIdDemande();
 	}
 	
 	

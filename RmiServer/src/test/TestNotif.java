@@ -15,9 +15,26 @@ public class TestNotif {
     static DemandeService demandeService = new DemandeService();
 
     public static void main(String[] args) throws RemoteException {
-        displayMany(notificationService.findAll());
-        displayMany(notificationService.findBy("iddemande", 2L));
-        displayOne(notificationService.findOneById(1L));
+        testAdd();
+        //displayMany(notificationService.findAll());
+    }
+
+    public static void testAdd(){
+        Notification notification = new Notification();
+        notification.setMessage("new Notification");
+        notification.setDemande(demandeService.findOneById(1L));
+
+        Notification notification2 = new Notification();
+        notification2.setMessage("Second new Notification");
+        notification2.setDemande(demandeService.findOneById(3L));
+
+        Notification notification3 = new Notification();
+        notification3.setMessage("your demande is ready");
+        notification3.setDemande(demandeService.findOneById(2L));
+
+        notificationService.add(notification);
+        notificationService.add(notification2);
+        notificationService.add(notification3);
     }
 
 

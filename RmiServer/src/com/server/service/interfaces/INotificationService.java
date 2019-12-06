@@ -6,7 +6,10 @@ import com.server.entities.impl.Notification;
 import com.server.entities.impl.UserImpl;
 
 public interface INotificationService {
-	public Notification save(Notification entity);
+
+	public long getMaxId();
+
+	public Notification add(Notification entity);
 	
 	public Notification update(Notification entity);
 	

@@ -20,17 +20,22 @@ public class NotificationService implements INotificationService{
     public NotificationDaoImpl notificationDao() {
         return notificationDao;
     }
-    
-    @Override
-    public Notification save(Notification entity) {
+
+	@Override
+	public long getMaxId() {
+		return notificationDao.getMaxId();
+	}
+
+	@Override
+    public Notification add(Notification entity) {
     	try {
     		if(entity!=null) {
-    			notificationDao.openCurrentSessionwithTransaction();
-                notificationDao.persist(entity);
-                notificationDao.closeCurrentSessionwithTransaction();
+    			//notificationDao.openCurrentSessionwithTransaction();
+                notificationDao.add(entity);
+                //notificationDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();	
 		}
     	return null;

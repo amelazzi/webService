@@ -27,7 +27,6 @@ public class NotificationDaoImpl implements INotificationDao<Notification, Long>
  
     public NotificationDaoImpl() {
         PostgresDataSource postgresDataSource = new PostgresDataSource();
-
         database = new Database(postgresDataSource);
     }
     
@@ -76,10 +75,22 @@ public class NotificationDaoImpl implements INotificationDao<Notification, Long>
     public void setCurrentTransaction(Transaction currentTransaction) {
         this.currentTransaction = currentTransaction;
     }
-    
+
     @Override
-    public void persist(Notification entity) {
-        getCurrentSession().save(entity);
+    public long getMaxId() {
+        long id;
+        String[][] data = database.executeQuery("select max(idNotification) as max from notification");
+        if(data[1][0]!=null)
+            id = Long.parseLong(data[1][0]);
+        else
+            id = 0L;
+        return id;
+    }
+
+    @Override
+    public void add(Notification entity) {
+        entity.setIdNotification(this.getMaxId()+1);
+        database.insert("notification", entity);
     }
     
     @Override
