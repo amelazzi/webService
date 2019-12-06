@@ -14,8 +14,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
+			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
@@ -27,5 +28,6 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="D:/Coding/Projets/WebService/RmiClient/scribejava-apis-6.8.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="D:/Coding/Projets/WebService/RmiClient/scribejava-core-6.8.1.jar"/>
+	<classpathentry kind="lib" path="/Users/macos/Desktop/Upem/Service_Web_REST/webService/serverPackages.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

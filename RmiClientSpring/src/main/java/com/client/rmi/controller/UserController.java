@@ -54,38 +54,38 @@ public class UserController {
 	
 	@RequestMapping(value = {"/admin/user/{id}" }, method = RequestMethod.GET)
 	public String detail(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
-		Product product = new Product();
+		UserImpl user = new UserImpl();
 		if(null!=id){
-			long idProduct = Long.parseLong(id);
-			product = (Product) ProductStub.getStub().findOneById(idProduct);
+			long idUser = Long.parseLong(id);
+			user = (UserImpl) UserStub.getStub().findOneById(idUser);
 		}else {
 			System.out.println("Element introuvable");
 			return "redirect:/admin/user/";
 		}
 		
-		model.addAttribute("product", product);
+		model.addAttribute("user", user);
 		return "admin/user/details";
 	}
 	
 	@RequestMapping(value = {"/admin/user/{id}/edit" }, method = RequestMethod.GET)
 	public String edit(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
-		Product product = new Product();
+		UserImpl user = new UserImpl();
 		if(null!=id){
-			long idProduct = Long.parseLong(id);
-			product = (Product) ProductStub.getStub().findOneById(idProduct);
+			long idUser = Long.parseLong(id);
+			user = (UserImpl) UserStub.getStub().findOneById(idUser);
 		}
 		
-		model.addAttribute("product", product);
+		model.addAttribute("user", user);
 		return "admin/user/save";
 	}
 	
 	@RequestMapping(value = {"/admin/user/{id}/delete" }, method = RequestMethod.POST)
 	public String delete(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
-		Product product = new Product();
+		UserImpl user = new UserImpl();
 		if(null!=id){
-			long idProduct = Long.parseLong(id);
-			product = (Product) ProductStub.getStub().findOneById(idProduct);
-			ProductStub.getStub().remove(product);
+			long idUser = Long.parseLong(id);
+			user = (UserImpl) UserStub.getStub().findOneById(idUser);
+			UserStub.getStub().remove(user);
 		}
 		
 		return "redirect:/admin/user/";

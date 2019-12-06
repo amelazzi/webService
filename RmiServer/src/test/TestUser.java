@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 
+import com.server.dao.impl.UserDaoImpl;
 import com.server.entities.impl.UserImpl;
 import com.server.service.impl.UserService;
 import com.server.utils.EncodeSha;
@@ -13,16 +14,18 @@ public class TestUser
 {	
 	
 	static UserService userService = new UserService();
+	static UserDaoImpl userDao = new UserDaoImpl();
 	
 	public static void main(String[] args) throws RemoteException {
 		//TestSelectAll();
 		//TestUpdate();
 		//TestAdd();
-		userService.delete(userService.findOneById(2L));
+		//userService.delete(userService.findOneById(2L));
 		//testLoginCheck("ea_azzi@esi.dz","amel");
 		//userService.findAll();
 		//displayMany(userService.findAll());
-		//displayOne(userService.findOneById(2L));
+		displayOne(userService.findOneById(4L));
+		//System.out.println("max id: " + userDao.getMaxId());
 		
 	}
 	
@@ -35,7 +38,7 @@ public class TestUser
 
 		user.setBirthday(new Date());
 		user.setDomain("Sport");
-		user.setEmail("Bob@mail.com");
+		user.setEmail("adel@mail.com");
 		user.setFirstName("bob");
 		user.setLastName("mastigas");
 		user.setGraduate("M2");
@@ -48,7 +51,7 @@ public class TestUser
 
 		user2.setBirthday(new Date());
 		user2.setDomain("SSIO");
-		user2.setEmail("amel@mail.com");
+		user2.setEmail("faycal@mail.com");
 		user2.setFirstName("amel");
 		user2.setLastName("azzi");
 		user2.setGraduate("M2");
@@ -61,7 +64,7 @@ public class TestUser
 
 		user3.setBirthday(new Date());
 		user3.setDomain("SSIO");
-		user3.setEmail("mamadou@mail.com");
+		user3.setEmail("sadia@mail.com");
 		user3.setFirstName("mamadou");
 		user3.setLastName("hassimiou");
 		user3.setGraduate("M2");

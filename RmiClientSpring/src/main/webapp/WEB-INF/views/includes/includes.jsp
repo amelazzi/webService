@@ -13,12 +13,7 @@
 		//return;
 		//request.getRequestDispatcher( "index.jsp" ).forward( request, response );
 	}
-	
-	Date today = null;
-	Date createdAt = new Date();
-	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-	today = sdf.parse((new Date()).toString());
-	int diff=today.getDay()-createdAt.getDay(); 
+
 
 %>
 <c:set var="baseURL" value="${pageContext.request.contextPath}" />
