@@ -53,6 +53,11 @@ public class CommentRmi extends UnicastRemoteObject implements ICommentRmi {
     }
 
     @Override
+    public List<Comment> findBy(String field, Object value) throws RemoteException {
+        return service.findBy(field, value);
+    }
+
+    @Override
     public List<Comment> findAll() throws RemoteException {
         return service.findAll();
     }

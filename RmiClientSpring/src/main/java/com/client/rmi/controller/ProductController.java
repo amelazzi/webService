@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.client.rmi.stub.CommentStub;
 import com.client.rmi.stub.ProductStub;
 import com.client.utils.FileManager;
+import com.server.entities.impl.Comment;
 import com.server.entities.impl.Product;
-import com.sun.org.apache.xpath.internal.operations.And;
 
 @Controller
 public class ProductController {
@@ -31,7 +32,7 @@ public class ProductController {
 			e.printStackTrace();
 		}
 		
-		model.addAttribute("products", produits );
+		model.addAttribute("products", produits);
 		return "admin/product/list";
 	}
 	
@@ -46,15 +47,21 @@ public class ProductController {
 	@RequestMapping(value = {"/product/{id}" }, method = RequestMethod.GET)
 	public String detail(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
 		Product product = new Product();
+		List<Comment> comments = new ArrayList<Comment>();
 		if(null!=id){
 			long idProduct = Long.parseLong(id);
 			product = (Product) ProductStub.getStub().findOneById(idProduct);
+			System.out.println("product: " + product.toString());
+			comments = CommentStub.getStub().findAll();
+			
 		}else {
 			System.out.println("Element introuvable");
 			return "redirect:/home";
 		}
 		
+		
 		model.addAttribute("product", product);
+		model.addAttribute("comments", comments);
 		return "admin/product/details";
 	}
 	
@@ -102,6 +109,6 @@ public class ProductController {
 		model.addAttribute("product", product);
 		return "redirect:/admin/product/";
 	}
-	
+
 	
 }

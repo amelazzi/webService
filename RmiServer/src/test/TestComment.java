@@ -19,8 +19,8 @@ public class TestComment {
         //testAdd();
         //Comment comment = commentService.findOneById(3L);
         //comment.setContent("third comment updated");
-        commentService.deleteAll();
-        displayMany(commentService.findAll());
+        //commentService.deleteAll();
+        displayMany(commentService.findBy("idProduct", 6L));
     }
 
     public static void testAdd(){
@@ -32,10 +32,10 @@ public class TestComment {
         Comment c1 = new Comment();
         c1.setContent("second comment");
         c1.setProduct(productService.findOneById(6L));
-        c1.setUser(userService.findOneById(2L));
+        c1.setUser(userService.findOneById(4L));
 
         Comment c2 = new Comment();
-        c2.setContent("second comment");
+        c2.setContent("third comment");
         c2.setProduct(productService.findOneById(9L));
         c2.setUser(userService.findOneById(3L));
 

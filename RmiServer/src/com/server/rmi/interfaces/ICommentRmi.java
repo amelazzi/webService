@@ -16,6 +16,8 @@ public interface ICommentRmi extends Remote {
 
     public IComment findOneById(Long id) throws RemoteException;
 
+    public List<Comment> findBy(String field, Object value) throws RemoteException;
+
     public List<Comment> findAll() throws RemoteException;
 
     public void removeAll() throws RemoteException;
