@@ -11,7 +11,6 @@
 			    <li class="breadcrumb-item"><a href="#"><fmt:message key="common.dashboard"/></a></li>
 			  </ol>
 			</nav>
-			<img src="https://farm66.static.flickr.com/65535/49184633278_81b35aa624_z.jpg"/>
 			<div class="row">
 				<c:forEach var="product" items="${products}" >
 					<div class="col-md-4">

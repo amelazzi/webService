@@ -179,24 +179,21 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
 
 	@Override
     public Boolean checkLogin(String email, String password){
-        openCurrentSession();
-        Criteria criteria = getCurrentSession().createCriteria(UserImpl.class);
-        UserImpl user = (UserImpl) criteria.add(Restrictions.eq("email", email))
-                .uniqueResult();
-        closeCurrentSession();
-        if(user!=null){
-            if(user.getPassword().equals(EncodeSha.getHash(password))) {
-                System.out.println("mot de passe correcte");
-                return true;
-            }else{
-                System.out.println("mot de passe incorrecte");
-                return false;
-            }
-        }else{
-            System.out.println("l'utilisateur n'existe pas");
-            //return null;
-            return false;
+        String p= EncodeSha.getHash(password);
+        List<UserImpl> usersList = new ArrayList<UserImpl>();
+        String[][] data = database.executeQuery("select * from userimpl where email='"+email+"' and password='"+p+"'");
+        for(int i=1; i<data.length; i++){
+            usersList.add(parseUser(data,i));
         }
+        if(usersList.size()>0){
+            return true;
+        }
+
+        for(UserImpl u:usersList){
+            System.out.println(u.toString());
+        }
+        System.out.println(usersList.size());
+        return false;
     }
 
 }

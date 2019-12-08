@@ -8,8 +8,8 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.omg.CORBA.UserException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +22,7 @@ import com.client.rmi.stub.ProductStub;
 import com.client.rmi.stub.UserStub;
 import com.server.entities.impl.Product;
 import com.server.entities.impl.UserImpl;
+import com.sun.net.httpserver.Authenticator.Success;
 
 /**
  * Handles requests for the application home page.
@@ -30,14 +31,44 @@ import com.server.entities.impl.UserImpl;
 public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index(Locale locale, Model model) {
+	public String index(Locale locale, Model model, UserImpl user) {
 		
+		model.addAttribute("user", user);
+		return "index";
+	}
+	
+	@RequestMapping(value = "/signin", method = RequestMethod.POST)
+	public String signin(Locale local, Model model, UserImpl user, 
+			@RequestParam("password") String password, HttpServletRequest request) throws RemoteException, Exception {
+		HttpSession session = request.getSession();
+		String errors=null;
+		if(user.getEmail() !=null && !user.getEmail().isEmpty()) {
+			if(password !=null && !password.isEmpty()) {
+				try {
+					if(UserStub.getStub().login(user.getEmail(), password)) {
+						List<UserImpl> users = (List<UserImpl>) UserStub.getStub().findBy("email",user.getEmail());
+						user=users.get(0);
+						session.setAttribute("user", user);
+						return "redirect:/home";
+					}else {
+						errors="Erreur identifiant incorrecte, vérifier votre email et mot de passe";
+					}
+				} catch (Exception e) {
+					errors=e.getMessage();
+					e.printStackTrace();
+				}
+			}
+		}else{
+			errors="Erreur de connexion, l'eamil et le mot de passe ne doivent pas être vide";
+		}
+		
+		model.addAttribute("error_msg",errors);
+		model.addAttribute("user", user);
 		return "index";
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(Locale locale, Model model, UserImpl user) {
-		//UserImpl user= new UserImpl();
 		
 		model.addAttribute("user", user);
 		return "register";
@@ -68,7 +99,6 @@ public class HomeController {
 				}
 				
 				try {
-					System.out.println("Identique");
 					request.setAttribute("success_msg", success);
 					UserStub.getStub().add(user);
 					success="Incription reussi veuillez vous connecter avec vos identifiants";
