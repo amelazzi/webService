@@ -68,7 +68,7 @@ public class EmpruntRmi extends UnicastRemoteObject implements IEmpruntRmi {
     }
 
     @Override
-    public int emprunter(Product product, UserImpl user) throws RemoteException{
+    public int emprunter(Product product, UserImpl user) throws Exception {
         return service.emprunter(product, user);
     }
 

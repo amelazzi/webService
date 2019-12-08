@@ -50,9 +50,10 @@
 						<div class="action">
 							<c:choose>
 			                  	<c:when test="${product.getQuantity()>0}">
-			                  		<a href="" class="btn btn-sm btn-primary">
+			                  		<a href="<c:url value="/emprunter/${product.getIdProduct()}"/>" class="btn btn-sm btn-primary">
 			                  			<i class="fas fa-book-reader"></i> 
-			                  		<fmt:message key="common.lending"/></a>
+			                  			<fmt:message key="common.lending"/>
+			                  		</a>
 			                  		<a href="" class="btn btn-sm btn-outline-secondary">
 			                  			<i class="fa fa-shopping-cart"></i> <fmt:message key="common.buying"/>
 			                  		</a>

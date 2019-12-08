@@ -37,6 +37,16 @@ public class HomeController {
 		return "index";
 	}
 	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(Locale locale, Model model, UserImpl user, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+        session.invalidate();
+		
+		model.addAttribute("user", user);
+		return "index";
+	}
+	
+	
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
 	public String signin(Locale local, Model model, UserImpl user, 
 			@RequestParam("password") String password, HttpServletRequest request) throws RemoteException, Exception {
@@ -48,7 +58,7 @@ public class HomeController {
 					if(UserStub.getStub().login(user.getEmail(), password)) {
 						List<UserImpl> users = (List<UserImpl>) UserStub.getStub().findBy("email",user.getEmail());
 						user=users.get(0);
-						
+						session.setAttribute("user", user);
 						return "redirect:/home";
 					}else {
 						session.setAttribute("user", null);

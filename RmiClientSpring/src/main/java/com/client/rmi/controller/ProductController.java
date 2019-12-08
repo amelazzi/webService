@@ -46,15 +46,12 @@ public class ProductController {
 	
 	@RequestMapping(value = {"/product/{id}" }, method = RequestMethod.GET)
 	public String detail(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
-		System.out.println("hello");
 		Product product = new Product();
 		List<Comment> comments = new ArrayList<Comment>();
 		if(null!=id){
 			long idProduct = Long.parseLong(id);
 			product = (Product) ProductStub.getStub().findOneById(idProduct);
-			System.out.println("product: " + product.toString());
-			comments = CommentStub.getStub().findAll();
-			
+			comments = CommentStub.getStub().findAll();			
 		}else {
 			System.out.println("Element introuvable");
 			return "redirect:/home";

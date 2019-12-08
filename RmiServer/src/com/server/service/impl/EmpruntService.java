@@ -126,9 +126,9 @@ public class EmpruntService implements IEmpruntService{
 		List<Emprunt> emprunts = empruntDao.findBy("iduser", Long.toString(user.getIdUser()));
 		for(Emprunt e:emprunts){
 			if((product.getIdProduct()==e.getProduct().getIdProduct()) && (e.getIsReturned()))
-				return true;
+				return false;
 		}
-		return false;
+		return true;
 	}
 
 	@Override
@@ -158,7 +158,8 @@ public class EmpruntService implements IEmpruntService{
 	}
 	
 	@Override
-	public int emprunter(Product p, UserImpl u) {
+	public int emprunter(Product p, UserImpl u) throws Exception {
+    	//On vérifie s'il a droit d'emprunter le livre ( qu'il a rendu le livre)
     	if(checkEmprunt(p, u)){
 			if(p.getQuantity()>=1){
 				Emprunt emprunt = new Emprunt();
@@ -170,23 +171,19 @@ public class EmpruntService implements IEmpruntService{
 					productService.update(p);
 					System.out.println("Emprunter accorder");
 				}catch (Exception e){
-					System.out.println("Impossible d'emprunter");
-					return 0;
+					throw new Exception("Impossible d'emprunter");
 				}
 				return 1;
 			}else{
 				try{
 					//add(demande);
 				}catch (Exception e){
-					System.out.println("Impossible de faire une demande");
-					return 0;
+					throw new Exception("Impossible de faire une demande");
 				}
-				System.out.println("demande en attente...");
-				return -1;
+				throw new Exception("demande en attente...");
 			}
 		}else{
-			System.out.println("vous avez deja empruntere ce livre");
-			return 0;
+			throw new Exception("vous avez deja empruntere ce livre");
 		}
 
 

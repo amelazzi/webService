@@ -52,8 +52,8 @@
 			                  	<c:when test="${product.getQuantity()>0}">
 			                  		<c:url value="/emprunt/save" var ="urlSave" />
 				                  	<f:form modelAttribute="emprunt" action="${urlSave}" method="post">
-				                  		<f:hidden path="user"/>
-										<f:hidden path="product"/>
+				                  		<input type="hidden" name="idUser" value="${user.getIdUser()}">
+				                  		<input type="hidden" name="idProduct" value="${product.getIdProduct()}">
 				                  		<button class="btn btn-sm btn-primary">
 			                  				<i class="fas fa-book-reader"></i> 
 			                  				<fmt:message key="common.validate"/>
@@ -65,6 +65,10 @@
 			                  	</c:otherwise>
 				            </c:choose>
 						</div>
+						<c:if test="${!empty error_msg}">
+							<br>
+				      		<div class="alert alert-danger" role="alert">${error_msg}</div>
+				      	</c:if>
 					</div>
 				</div>
 	    	<!-- /Details -->

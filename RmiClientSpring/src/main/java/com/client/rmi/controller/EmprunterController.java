@@ -32,7 +32,7 @@ public class EmprunterController {
 	@RequestMapping(value = "/emprunter/{idproduct}", method = RequestMethod.GET)
 	public String confirmation(Locale locale, Model model, HttpServletRequest request, @PathVariable String idproduct) {
 		HttpSession session = request.getSession();
-		UserImpl user =null;
+		UserImpl user=null;
 		Product product = null;
 		Emprunt emprunt = new Emprunt();
 		
@@ -40,15 +40,15 @@ public class EmprunterController {
 			System.out.println("Vous devez être connecté");
 			return "redirect:/";
 		}
-		
-		user = (UserImpl) session.getAttribute("user");
-		emprunt.setUser(user);
 				
 		if(null!=idproduct){
-			long id = Long.parseLong(idproduct);
+			long idP = Long.parseLong(idproduct);
+			long idUser = ((UserImpl) session.getAttribute("user")).getIdUser();
 			try {
-				product = (Product) ProductStub.getStub().findOneById(id);
+				product = (Product) ProductStub.getStub().findOneById(idP);
+				user= (UserImpl) UserStub.getStub().findOneById(idUser);
 				emprunt.setProduct(product);
+				emprunt.setUser(user);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -66,12 +66,43 @@ public class EmprunterController {
 	}
 	
 	@RequestMapping(value = "/emprunt/save", method = RequestMethod.POST)
-	public String save(Locale local, Model model, Emprunt emprunt) throws RemoteException, Exception {
-		System.out.println(emprunt);
+	public String save(Locale local, Model model, Emprunt emprunt, @RequestParam("idProduct") String idProduct, @RequestParam("idUser") String idUser) throws RemoteException, Exception {
+		Product product = null;
+		UserImpl user=null;
+		String error_msg=null;
+		
 		EmpruntStub.getStub().add(emprunt);
-	
+		if(null!=idProduct && idUser!=null){
+			long idP = Long.parseLong(idProduct);
+			long idU = Long.parseLong(idUser);
+			try {
+				product = (Product) ProductStub.getStub().findOneById(idP);
+				user= (UserImpl) UserStub.getStub().findOneById(idU);
+				emprunt.setProduct(product);
+				emprunt.setUser(user);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			System.out.println(emprunt.toString());
+			System.out.println("Produit of emprunt: "+ emprunt.getProduct());
+			System.out.println("User of emprunt: "+ emprunt.getUser());
+		}
+		
+		if(user!=null && product!=null) {
+			try {
+				EmpruntStub.getStub().emprunter(product, user);
+				return "redirect:/emprunt";
+			} catch (Exception e) {
+				error_msg=e.getMessage();
+				model.addAttribute("error_msg", error_msg);
+			}
+			
+		}
+		
+		model.addAttribute("user", user);
+		model.addAttribute("product", product);
 		model.addAttribute("emprunt", emprunt);
-		return "redirect:/emprunt";
+		return "emprunt/confirm";
 	}
 	
 	@RequestMapping(value = "/emprunt", method = RequestMethod.GET)

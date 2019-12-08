@@ -24,7 +24,7 @@
 	        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
 	          <a class="dropdown-item" href="#">Profil</a>
 	          <div class="dropdown-divider"></div>
-	          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+	          <a class="dropdown-item" href="<c:url value="/logout"/>" data-toggle="modal" data-target="#logoutModal">Logout</a>
 	        </div>
 	      </li>
 	    </ul>

@@ -27,7 +27,7 @@ public interface IEmpruntService {
 
 	public boolean checkEmprunt(Product product, UserImpl user);
 	
-	public int emprunter(Product product, UserImpl user);
+	public int emprunter(Product product, UserImpl user) throws Exception;
 	
 	public boolean restituer(Emprunt emprunt);
 	

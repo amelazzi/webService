@@ -22,7 +22,7 @@ public interface IEmpruntRmi extends Remote {
 
     public void removeAll() throws RemoteException;
 
-    public int emprunter(Product product, UserImpl user) throws RemoteException;
+    public int emprunter(Product product, UserImpl user) throws Exception;
 
     public boolean restituer(Emprunt emprunt) throws RemoteException;
 }
