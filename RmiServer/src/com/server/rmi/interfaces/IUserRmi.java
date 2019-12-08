@@ -1,8 +1,6 @@
 package com.server.rmi.interfaces;
 
-import com.server.entities.impl.Product;
 import com.server.entities.impl.UserImpl;
-import com.server.entities.interfaces.IProduct;
 import com.server.entities.interfaces.IUser;
 
 import java.rmi.Remote;
@@ -19,6 +17,8 @@ public interface IUserRmi extends Remote {
     public IUser findOneById(Long id) throws RemoteException;
 
     public List<UserImpl> findAll() throws RemoteException;
+
+    public List<UserImpl> findBy(String field, Object value) throws RemoteException;
 
     public void removeAll() throws RemoteException;
 

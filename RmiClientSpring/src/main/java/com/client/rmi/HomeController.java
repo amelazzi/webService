@@ -1,5 +1,6 @@
 package com.client.rmi;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +45,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signup(Locale local, Model model, UserImpl user, 
-			@RequestParam("confirm") String confirm, HttpServletRequest request) {
+			@RequestParam("confirm") String confirm, HttpServletRequest request) throws RemoteException, Exception {
 		String errors=null;
 		String success=null;
 		
@@ -57,14 +58,22 @@ public class HomeController {
 			user.setStatus("student");
 			user.setDomain("non defini");
 			
+			model.addAttribute("user", user);
+			
 			if(!confirm.isEmpty()&&user.getPassword().equals(confirm)) {
+				if(UserStub.getStub().findBy("email", user.getEmail()).size()>0) {
+					errors="Erreur d'inscription, cette adresse email existe déjà";
+					request.setAttribute("error_msg", errors);
+					return "register";
+				}
+				
 				try {
 					System.out.println("Identique");
 					request.setAttribute("success_msg", success);
-					//UserStub.getStub().add(user);
+					UserStub.getStub().add(user);
 					success="Incription reussi veuillez vous connecter avec vos identifiants";
 					request.setAttribute("success_msg", success);
-					//return "redirect:/";
+					return "redirect:/";
 				} catch (Exception e) {
 					errors=e.getMessage();
 					request.setAttribute("error_msg", errors);
@@ -72,13 +81,13 @@ public class HomeController {
 				}
 				
 			}else {
-				errors="Erreur de connexion, les mot de passe ne sont pas confirmes";
+				errors="Erreur d'inscription, les mot de passe ne sont pas confirmes";
 				request.setAttribute("error_msg", errors);
 			}
 			
 		}
-		System.out.println("Registratio, "+user);
-		return "/register";
+		
+		return "register";
 	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
