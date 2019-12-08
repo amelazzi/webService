@@ -16,7 +16,7 @@ public class TestMedia {
     public static void main(String[] args) throws RemoteException {
         Media image = new Media();
         image.setIdMedia(1L);
-        image.setImage(new File("/Users/macos/Desktop/Upem/Service_Web_REST/webService/RmiServer/src/resources/test.png"));
+        //image.setImage(new File("/Users/macos/Desktop/Upem/Service_Web_REST/webService/RmiServer/src/resources/test.png"));
         image.setName("test");
         image.setProduct(productService.findOneById(6L));
 

@@ -159,6 +159,7 @@ public class ProductDaoImpl implements IProductDao<Product, Long> {
         product.setPrice(Float.parseFloat(data[i][4]));
         product.setQuantity(Integer.valueOf(data[i][5]));
         product.setTitle(data[i][6]);
+        product.setImage(data[i][7]);
 
         return product;
     }

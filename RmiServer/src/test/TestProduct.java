@@ -15,11 +15,11 @@ public class TestProduct
 	
 	public static void main(String[] args) throws RemoteException {
 		//testUpdate();
-		testDelete(12);
+		//testDelete(12);
 		//TestUpdate();
 		//TestAdd();
 		//TestSelectAll();
-		displayMany(productService.saleProduct(6));
+		displayMany(productService.findAll());
 		
 	}
 	

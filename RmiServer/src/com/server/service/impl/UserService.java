@@ -31,11 +31,16 @@ public class UserService implements IUserService{
                 //userDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();	
 		}
     	return null;
     }
+
+	@Override
+	public long getMaxId() {
+		return userDao.getMaxId();
+	}
     
     @Override
     public UserImpl update(UserImpl entity) {
@@ -49,7 +54,7 @@ public class UserService implements IUserService{
     			}
     		}
     		
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     	return null;
@@ -87,10 +92,15 @@ public class UserService implements IUserService{
 
     @Override
     public List<UserImpl> findAll() {
-    		//userDao.openCurrentSession();
-            List<UserImpl> users = userDao.findAll();
-            //userDao.closeCurrentSession();
-            return users;
+    	try {
+			//userDao.openCurrentSession();
+			List<UserImpl> users = userDao.findAll();
+			//userDao.closeCurrentSession();
+			return users;
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return null;
     }
     
     @Override
@@ -121,7 +131,7 @@ public class UserService implements IUserService{
 	public List<UserImpl> findBy(String[] fields, Object[] values) {
 		// TODO Auto-generated method stub
 		List<UserImpl> users = userDao.findBy(fields, values);
-		return null;
+		return userDao.findBy(fields, values);
 	}
 
 	@Override
@@ -129,17 +139,6 @@ public class UserService implements IUserService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public int totalEmprunt(List<UserImpl> listUser) {
-		/*
-		 SELECT count(*)
-		 FROM `user` u, emprunt e 
-		 WHERE u.iduser = e.idemprunt
-		 		and e.isdone=false;
-		 */
-		
-		
-		return 0;
-	}
+
 }
 

@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
-<t:template title="List Product">
+<t:template title="List User">
 	<jsp:attribute name="content">
 	    <!-- Main content -->
 	    <section class="content pt-3">

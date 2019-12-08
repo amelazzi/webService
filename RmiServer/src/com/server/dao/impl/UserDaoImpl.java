@@ -27,13 +27,7 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
     private Database database;
  
     public UserDaoImpl() {
-        String hostname = "localhost";
-        String dbName = "rmidb";
-        String user = "postgres";
-        String pwd = "";
-
-        PostgresDataSource postgresDataSource = new PostgresDataSource(
-                hostname, dbName, user, pwd);
+        PostgresDataSource postgresDataSource = new PostgresDataSource();
 
         database = new Database(postgresDataSource);
     }
