@@ -1,5 +1,6 @@
 package com.server.entities.impl;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.server.entities.interfaces.IMedia;
+import com.server.utils.DateTool;
 
 @SuppressWarnings("serial")
 @Entity
@@ -18,35 +20,30 @@ public class Media implements Serializable, IMedia {
 	
 	public Media() {
 		this.uploadedAt = new Date();
-		this.type=Type.image.name();
-	}
-	
-	public enum Type{
-	      image, video, document
 	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idMedia;
 	
-	private String url;
+	private String name;
 	private Date uploadedAt;
-	private String type;
+	private byte[] image;
 	
 	@ManyToOne
 	@JoinColumn(name="idProduct")
 	private Product product;
-	
+
 	@Override
-	public String getUrl() {
-		return url;
+	public String getName() {
+		return this.name;
 	}
-	
+
 	@Override
-	public void setUrl(String url) {
-		this.url = url;
+	public void setName(String name) {
+		this.name = name;
 	}
-	
+
 	@Override
 	public Date getUploadedAt() {
 		return uploadedAt;
@@ -71,21 +68,26 @@ public class Media implements Serializable, IMedia {
 	public long getIdMedia() {
 		return idMedia;
 	}
-	
+
 	@Override
-	public String getType() {
-		return type;
+	public void setIdMedia(long idMedia) {
+		this.idMedia = idMedia;
 	}
-	
+
 	@Override
-	public void setType(String type) {
-		this.type = type;
+	public byte[] getImage() {
+		return this.image;
 	}
-	
+
+	@Override
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
 	@Override
 	public String toString() {
-		return "Media [idMedia=" + idMedia + ", url=" + url + ", uploadedAt=" + uploadedAt + ", type=" + type
-				+ ", product=" + product + "]";
+		return idMedia + ",'" + name + "','" + DateTool.dateToString(uploadedAt) + "'," + product.getIdProduct()
+				+ "," + image;
 	}
 	
 }

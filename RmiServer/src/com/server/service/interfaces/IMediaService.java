@@ -5,7 +5,7 @@ import java.util.List;
 import com.server.entities.impl.Media;
 
 public interface IMediaService {
-	public Media save(Media entity);
+	public Media add(Media entity);
 	
 	public Media update(Media entity);
 	
