@@ -1,4 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/includes.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,9 +35,10 @@
 		<c:if test="${!empty error_msg}">
       		<div class="alert alert-danger" role="alert">${error_msg}</div>
       	</c:if>
-      <form action="" method="post">
+      <c:url value="/signup" var ="urlSave" />
+	  <f:form action="${urlSave}" modelAttribute="user" method="POST" role="form">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" value="${user.getFirstName()}" placeholder="<fmt:message key="common.firstname"/>" name="firstname" required="required">
+          <f:input path="firstName" type="text" id="firstname" class="form-control" placeholder="Prénom" required="required" />
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -42,7 +46,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" value="${user.getLastName()}" placeholder="<fmt:message key="common.lastname"/>" name="lastname" required="required">
+          <f:input path="lastName" type="text" class="form-control" placeholder="Nom" name="lastname" required="required"/>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -50,7 +54,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" value="${user.getEmail()}" placeholder="<fmt:message key="common.email"/>" name="email" required="required">
+          <f:input path="email" type="email" class="form-control" placeholder="Email" name="email" required="required"/>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -58,7 +62,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control <c:if test="${!empty error_msg}">is-invalid</c:if>" placeholder="<fmt:message key="common.password"/>" name="password" required="required">
+          <f:input path="password" type="password" class="form-control" placeholder="Mot de passe" required="required"/>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -66,7 +70,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control <c:if test="${!empty error_msg}">is-invalid</c:if>" placeholder="<fmt:message key="common.password.confirm"/>" name="confirm" required="required">
+          <input name="confirm" type="password" class="form-control <c:if test="${!empty error_msg}">is-invalid</c:if>" placeholder="<fmt:message key="common.password.confirm"/>" required="required">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -88,7 +92,7 @@
           </div>
           <!-- /.col -->
         </div>
-      </form>
+      </f:form>
 
       <a href="<c:url value="/" />" class="text-center"><fmt:message key="index.hasAcount"/></a>
     </div>

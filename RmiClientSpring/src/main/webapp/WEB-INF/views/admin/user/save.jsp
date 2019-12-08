@@ -105,7 +105,7 @@
 					          </div>
 					          
 					          <div class="d-flex justify-content-between pt-5">
-					          	<a class="btn btn-danger btn-6" href="<c:url value="/admin/product"/>" tabindex= -1><fmt:message key="common.cancel"/></a>
+					          	<a class="btn btn-danger btn-6" href="<c:url value="/admin/user"/>" tabindex= -1><fmt:message key="common.cancel"/></a>
 					          	<button class="btn btn-primary" type="submit"><i class="fa fa-save">&nbsp;</i><fmt:message key="common.save"/></button>
 					          </div>
 					        </f:form>	
