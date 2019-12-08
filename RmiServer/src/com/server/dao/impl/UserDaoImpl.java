@@ -189,10 +189,6 @@ public class UserDaoImpl implements IUserDao<UserImpl, Long> {
             return true;
         }
 
-        for(UserImpl u:usersList){
-            System.out.println(u.toString());
-        }
-        System.out.println(usersList.size());
         return false;
     }
 

@@ -5,11 +5,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" isELIgnored="false" %>
 <%@ page session="true" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<c:url value="/" var="home"/>
 <%
 	String locale =(session.getAttribute("local")==null)? "fr_FR": session.getAttribute("local").toString();
 	
-	if(session.getAttribute("login")==null){
-		//response.sendRedirect("index.jsp");
+	if(session.getAttribute("user")==null){
+		response.sendRedirect("/");
 		//return;
 		//request.getRequestDispatcher( "index.jsp" ).forward( request, response );
 	}

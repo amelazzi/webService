@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.client.rmi.stub.ProductStub;
 import com.client.utils.FileManager;
 import com.server.entities.impl.Product;
-import com.sun.org.apache.xpath.internal.operations.And;
 
 @Controller
 public class ProductController {

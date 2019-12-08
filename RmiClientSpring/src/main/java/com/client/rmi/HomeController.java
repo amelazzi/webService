@@ -48,9 +48,10 @@ public class HomeController {
 					if(UserStub.getStub().login(user.getEmail(), password)) {
 						List<UserImpl> users = (List<UserImpl>) UserStub.getStub().findBy("email",user.getEmail());
 						user=users.get(0);
-						session.setAttribute("user", user);
+						
 						return "redirect:/home";
 					}else {
+						session.setAttribute("user", null);
 						errors="Erreur identifiant incorrecte, vérifier votre email et mot de passe";
 					}
 				} catch (Exception e) {
@@ -62,6 +63,7 @@ public class HomeController {
 			errors="Erreur de connexion, l'eamil et le mot de passe ne doivent pas être vide";
 		}
 		
+		session.setAttribute("user", user);
 		model.addAttribute("error_msg",errors);
 		model.addAttribute("user", user);
 		return "index";
@@ -129,9 +131,6 @@ public class HomeController {
 			e.printStackTrace();
 		}
 		
-		for(Product p:products) {
-			System.out.println(p.toString());
-		}
 		model.addAttribute("products", products );
 		
 		return "home";
