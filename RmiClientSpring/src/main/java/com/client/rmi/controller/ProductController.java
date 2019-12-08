@@ -10,9 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.client.rmi.stub.ProductStub;
+import com.client.utils.FileManager;
 import com.server.entities.impl.Product;
+import com.sun.org.apache.xpath.internal.operations.And;
 
 @Controller
 public class ProductController {
@@ -79,9 +83,15 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/admin/product/save", method = RequestMethod.POST)
-	public String save(Locale local, Model model, Product product) throws RemoteException, Exception {
+	public String save(Locale local, Model model, Product product, @RequestParam("photo") MultipartFile file) throws RemoteException, Exception {
 		if(product!=null) {
-			product.setImage("https://x.kinja-static.com/assets/images/logos/placeholders/default.png");
+			String urlPhoto="https://farm66.static.flickr.com/65535/49185014886_2998070a66_z.jpg";
+			if (!file.isEmpty() && file!=null) {
+				urlPhoto=FileManager.upload(file);
+			}
+			product.setImage(urlPhoto);
+			int max =(product.getDescription().length()<254)?product.getDescription().length():254;
+			product.setDescription(product.getDescription().substring(0, max));
 			if(product.getIdProduct()!=0L) {
 				ProductStub.getStub().update(product);
 			}else {

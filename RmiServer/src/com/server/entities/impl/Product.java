@@ -48,7 +48,6 @@ public class Product implements IProduct, Serializable {
 	
 	
 	public Product(){
-		this.image="assets/img/default.png";
 		this.createdAt = new Date();
 		this.rates = new ArrayList<Rate>();
 		this.comments = new ArrayList<Comment>();

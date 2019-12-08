@@ -1,5 +1,6 @@
 <%-- <%@ include file="/WEB-INF/views/includes/includes.jsp" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
 <t:template title="Home">
 	<jsp:attribute name="content">
@@ -10,11 +11,12 @@
 			    <li class="breadcrumb-item"><a href="#"><fmt:message key="common.dashboard"/></a></li>
 			  </ol>
 			</nav>
+			<img src="https://farm66.static.flickr.com/65535/49184633278_81b35aa624_z.jpg"/>
 			<div class="row">
 				<c:forEach var="product" items="${products}" >
 					<div class="col-md-4">
 			          <div class="card mb-4 shadow-sm">
-			            <img class="bd-placeholder-img card-img-top" src="https://x.kinja-static.com/assets/images/logos/placeholders/default.png" width="100%" height="225" focusable="false" role="img" aria-label="Placeholder: ${product.getTitle()}">
+			            <img class="card-img-top" src="${product.getImage()}" width="100%" height="225">
 			            <div class="card-body">
 			              <h5 class="card-title">${product.getTitle()}</h5>
 			              <p class="card-text"><c:out value="${product.getDescription()}" /></p>
@@ -35,7 +37,7 @@
 				              </c:choose>
 			                </div>
 			                <div class="btn-group">
-			                	<small class="btn btn-sm btn-dark">+Détails</small>
+			                	<a href="<c:url value="/product/${product.getIdProduct()}"/>" class="btn btn-sm btn-dark">+Détails</a>
 			                </div>
 			                
 			              </div>

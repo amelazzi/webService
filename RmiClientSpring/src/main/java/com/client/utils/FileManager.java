@@ -1,12 +1,15 @@
 package com.client.utils;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
+import java.nio.charset.Charset;
+import java.util.Random;
 
-
-import com.server.utils.EncodeSha;
+import org.springframework.web.multipart.MultipartFile;
 
 public class FileManager {
 	
@@ -19,14 +22,13 @@ public class FileManager {
 	 * @param file
 	 * @return
 	 */
-	public static String upload(File file) {
-		/*String url=null;
-		String id = EncodeSha.getHash((new Date()).toString());
+	public static String upload(MultipartFile file) {
+		String url=null;
 		if(file!=null) {
 			InputStream stream = null;
 			try {
-				stream = file.getInputStream();;
-				url=FlickrService.upload(stream, "image_"+id);
+				stream = file.getInputStream();
+				url=FlickrService.upload(stream, genarateRandomString());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}finally {
@@ -36,9 +38,35 @@ public class FileManager {
 					e.printStackTrace();
 				}
 			}
-			
-			//return url;
-		}*/
-		return null;
+		}
+		return url;
+	}
+	
+	public static byte[] savePicture(MultipartFile file) {
+		byte[] data=null;
+		if(file!=null) {
+			InputStream stream = null;
+					ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+					int nRead;
+					try {
+						data = file.getBytes();
+						while ((nRead = stream.read(data, 0, data.length)) != -1) {
+							  buffer.write(data, 0, nRead);
+						}
+						data=buffer.toByteArray();
+						return data;
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		}
+		return data;
+	}
+	
+	private static String genarateRandomString() {
+		byte[] array = new byte[7];
+	    new Random().nextBytes(array);
+	    String generatedString = new String(array, Charset.forName("UTF-8"));
+	    return generatedString;
 	}
 }

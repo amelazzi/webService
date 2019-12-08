@@ -28,6 +28,5 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="D:/Coding/Projets/WebService/RmiClient/scribejava-apis-6.8.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="D:/Coding/Projets/WebService/RmiClient/scribejava-core-6.8.1.jar"/>
-	<classpathentry kind="lib" path="/Users/macos/Desktop/Upem/Service_Web_REST/webService/serverPackages.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

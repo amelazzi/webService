@@ -1,4 +1,3 @@
-<%@page import="com.server.entities.impl.Product"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="f" %>
@@ -17,7 +16,7 @@
 			<div class="wrapper row">
 					<div class="preview col-md-8">
 						<div class="preview-pic tab-content">
-						  <div class="tab-pane active" id="pic-1"><img src="http://placekitten.com/400/252" width="100%"/></div>
+						  <div class="tab-pane active" id="pic-1"><img src="${product.getImage()}" width="100%"/></div>
 						</div>
 					</div>
 					<div class="details col-md-4">

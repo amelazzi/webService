@@ -4,6 +4,9 @@ import java.io.InputStream;
 
 import javax.swing.JOptionPane;
 
+import org.scribe.model.Token;
+import org.scribe.model.Verifier;
+
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.REST;
 import com.flickr4java.flickr.RequestContext;
@@ -11,23 +14,17 @@ import com.flickr4java.flickr.auth.Auth;
 import com.flickr4java.flickr.auth.AuthInterface;
 import com.flickr4java.flickr.auth.Permission;
 import com.flickr4java.flickr.uploader.UploadMetaData;
-import com.github.scribejava.core.model.OAuth1RequestToken;
-import com.github.scribejava.core.model.OAuth1Token;
 
 
 public class FlickrService{
-	
-	private FlickrService() {
-		
-	}
 	
 	private static Flickr flick;
 	
 	private static UploadMetaData data = new UploadMetaData();
 	
-	private static String apiKey = "f74e0f5bc25f9e0204c90b671580c10c";
+	private static final String apiKey = "f74e0f5bc25f9e0204c90b671580c10c";
 	
-	private static String sharedSecret = "f14434e07b44b9b0";
+	private static final String sharedSecret = "f14434e07b44b9b0";
 	
 	private static final String token = "72157711614887766-38ec13de10bd3a1d";
 	
@@ -52,9 +49,10 @@ public class FlickrService{
 	}
 	
 	public static void getToken() {
-		/*Flickr flickr = new Flickr(apiKey, sharedSecret, new REST());
+		Flickr flickr = new Flickr(apiKey, sharedSecret, new REST());
 		AuthInterface authInterface = flickr.getAuthInterface();
-		OAuth1RequestToken token = authInterface.getRequestToken();
+		//OAuth1RequestToken token = authInterface.getRequestToken();
+		Token token = authInterface.getRequestToken();
 		
 		System.out.println("Token: "+token);
 		
@@ -64,8 +62,9 @@ public class FlickrService{
 		
 		String tokenKey = JOptionPane.showInputDialog(null);
 		
-		OAuth1Token requestToken = authInterface.getAccessToken(token, tokenKey);
-		
+		//OAuth1Token requestToken = authInterface.getAccessToken(token, tokenKey);
+		Token requestToken = authInterface.getAccessToken(token, new Verifier(tokenKey));
+				
 		Auth auth = null;
 		try {
 			auth = authInterface.checkToken(requestToken);
@@ -74,11 +73,12 @@ public class FlickrService{
 		}
 		
 		System.out.println("Token: "+requestToken.getToken());
-		System.out.println("Secret: "+requestToken.getTokenSecret());
+		//System.out.println("Secret: "+requestToken.getTokenSecret());
+		System.out.println("Secret: "+requestToken.getSecret());
 		System.out.println("usid: "+auth.getUser().getId());
 		System.out.println("RealName: "+auth.getUser().getRealName());
 		System.out.println("Username: "+auth.getUser().getUsername());
-		System.out.println("Permission: " + auth.getPermission().getType());*/
+		System.out.println("Permission: " + auth.getPermission().getType());
 	}
 
 }

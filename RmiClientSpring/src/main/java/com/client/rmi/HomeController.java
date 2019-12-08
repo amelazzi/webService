@@ -37,15 +37,17 @@ public class HomeController {
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		List<Product> produits=new ArrayList<Product>();
+		List<Product> products=new ArrayList<Product>();
 		try {
-			produits=ProductStub.getStub().findAll();
+			products=ProductStub.getStub().findAll();
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 		}
 		
-		model.addAttribute("products", produits );
+		for(Product p:products) {
+			System.out.println(p.toString());
+		}
+		model.addAttribute("products", products );
 		
 		return "home";
 	}

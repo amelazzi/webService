@@ -23,7 +23,7 @@
 					      <div class="card-header"><fmt:message key="product.create"/></div>
 					      <div class="card-body">
 					      	<c:url value="/admin/product/save" var ="urlSave" />
-					      	<f:form action="${urlSave}" modelAttribute="product" method="POST" role="form">
+					      	<f:form action="${urlSave}" modelAttribute="product" method="POST" role="form" enctype="multipart/form-data">
 					          <f:hidden path="idProduct"/>
 					          <f:hidden path="image"/>
 					          <div class="form-group">
@@ -65,12 +65,12 @@
 									    </select>
 					                </div>
 					              </div>
-					              <!-- <div class="col-md-6">
+					              <div class="col-md-6">
 					                <div class="form-label-group">
-					                	<label for="image"><fmt:message key="common.image"/></label>
-					                  	<f:input path="image" type="file" id="image" class="form-control" placeholder="image"/>
+					                	<label for="photo"><fmt:message key="common.image"/></label>
+					                  	<input name="photo" type="file" id="photo" class="form-control" placeholder="Photo Couverture"/>
 					                </div>
-					              </div>-->
+					              </div>
 					            </div>
 					          </div>
 					          <div class="d-flex justify-content-between">
