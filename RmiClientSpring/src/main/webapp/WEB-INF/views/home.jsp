@@ -11,7 +11,6 @@
 			    <li class="breadcrumb-item"><a href="#"><fmt:message key="common.dashboard"/></a></li>
 			  </ol>
 			</nav>
-			<img src="https://farm66.static.flickr.com/65535/49184633278_81b35aa624_z.jpg"/>
 			<div class="row">
 				<c:forEach var="product" items="${products}" >
 					<div class="col-md-4">
@@ -24,9 +23,10 @@
 			                <div class="btn-group">
 			                  <c:choose>
 			                  	<c:when test="${product.getQuantity()>0}">
-			                  		<a href="" class="btn btn-sm btn-primary">
+			                  		<a href="<c:url value="/emprunter/${product.getIdProduct()}"/>" class="btn btn-sm btn-primary">
 			                  			<i class="fas fa-book-reader"></i> 
-			                  		<fmt:message key="common.lending"/></a>
+			                  			<fmt:message key="common.lending"/>
+			                  		</a>
 			                  		<a href="" class="btn btn-sm btn-outline-secondary">
 			                  			<i class="fa fa-shopping-cart"></i> <fmt:message key="common.buying"/>
 			                  		</a>

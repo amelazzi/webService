@@ -61,6 +61,11 @@ public class UserRmi extends UnicastRemoteObject implements IUserRmi {
     }
 
     @Override
+    public List<UserImpl> findBy(String field, Object value) throws RemoteException {
+        return service.findBy(field, value);
+    }
+
+    @Override
     public void removeAll() throws RemoteException {
         service.deleteAll();
     }

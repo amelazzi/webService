@@ -1,4 +1,7 @@
 <%@ include file="/WEB-INF/views/includes/includes.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,9 +39,10 @@
       	<c:if test="${!empty success_msg}">
       		<div class="alert alert-success" role="alert">${success_msg}</div>
       	</c:if>
-      <form action="/login" method="post">
+      	<c:url value="/signin" var ="urllogin" />
+      <f:form action="${urllogin}" modelAttribute="user" method="POST" >
         <div class="input-group mb-3">
-          <input type="email" class="form-control <c:if test="${!empty error_msg}">is-invalid</c:if>" placeholder="<fmt:message key="common.email"/>" name="email" required="required">
+          <f:input type="email" class="form-control" placeholder="email" path="email" required="required"/>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -63,7 +67,7 @@
           </div>
           <!-- /.col -->
         </div>
-      </form>
+      </f:form>
       
     </div>
     <!-- /.login-card-body -->

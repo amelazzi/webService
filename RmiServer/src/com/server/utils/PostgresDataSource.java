@@ -4,7 +4,7 @@ public class PostgresDataSource extends DataSource{
 	private static final String HOSTNAME = "localhost";
 	private static final String DB_NAME = "rmidb";
 	private static final String USER = "postgres";
-	private static final String PWD = "toor";
+	private static final String PWD = "";
 
 	public static final String POSTGRES_DRIVER = "org.postgresql.Driver";
 	public static final String POSTGRESL_BRIDGE = "jdbc:postgresql:";

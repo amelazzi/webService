@@ -46,6 +46,7 @@ public class ProductController {
 	
 	@RequestMapping(value = {"/product/{id}" }, method = RequestMethod.GET)
 	public String detail(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
+		System.out.println("hello");
 		Product product = new Product();
 		List<Comment> comments = new ArrayList<Comment>();
 		if(null!=id){
