@@ -10,26 +10,26 @@ import com.server.service.interfaces.IMediaService;
  
 public class MediaService implements IMediaService{
  
-    private static MediaDaoImpl productDao;
+    private static MediaDaoImpl mediaDao;
  
     public MediaService() {
-        productDao = new MediaDaoImpl();
+		mediaDao = new MediaDaoImpl();
     }
     
     public MediaDaoImpl productDao() {
-        return productDao;
+        return mediaDao;
     }
     
     @Override
-    public Media save(Media entity) {
+    public Media add(Media entity) {
     	try {
     		if(entity!=null) {
-    			productDao.openCurrentSessionwithTransaction();
-                productDao.persist(entity);
-                productDao.closeCurrentSessionwithTransaction();
+    			//productDao.openCurrentSessionwithTransaction();
+				mediaDao.add(entity);
+                //productDao.closeCurrentSessionwithTransaction();
                 return entity;
     		}
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			e.printStackTrace();	
 		}
     	return null;
@@ -40,9 +40,9 @@ public class MediaService implements IMediaService{
     	try {
     		if(entity!=null) {
     			if(entity.getIdMedia()!=0L) {
-    				productDao.openCurrentSessionwithTransaction();
-    	            productDao.update(entity);
-    	            productDao.closeCurrentSessionwithTransaction();
+					//mediaDao.openCurrentSessionwithTransaction();
+					mediaDao.update(entity);
+					//mediaDao.closeCurrentSessionwithTransaction();
     	            return entity;
     			}
     		}
@@ -57,10 +57,10 @@ public class MediaService implements IMediaService{
 	public void delete(Long id) {
 		try {
 			if(id!=0L) {
-				productDao.openCurrentSessionwithTransaction();
-		        Media media = productDao.findOneById(id);
-		        productDao.delete(media);
-		        productDao.closeCurrentSessionwithTransaction();
+				mediaDao.openCurrentSessionwithTransaction();
+		        Media media = mediaDao.findOneById(id);
+				mediaDao.delete(media);
+				mediaDao.closeCurrentSessionwithTransaction();
 			}
 			
 		} catch (HibernateException e) {
@@ -72,9 +72,9 @@ public class MediaService implements IMediaService{
 	public Media findOneById(Long id) {
 		try {
 			if(id!=0L) {
-				productDao.openCurrentSession();
-		        Media product = productDao.findOneById(id);
-		        productDao.closeCurrentSession();
+				mediaDao.openCurrentSession();
+		        Media product = mediaDao.findOneById(id);
+				mediaDao.closeCurrentSession();
 		        return product;
 			}
 		} catch (HibernateException e) {
@@ -86,9 +86,9 @@ public class MediaService implements IMediaService{
     @Override
     public List<Media> findAll() {
     	try {
-    		productDao.openCurrentSession();
-            List<Media> products = productDao.findAll();
-            productDao.closeCurrentSession();
+			mediaDao.openCurrentSession();
+            List<Media> products = mediaDao.findAll();
+			mediaDao.closeCurrentSession();
             return products;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -99,9 +99,9 @@ public class MediaService implements IMediaService{
     @Override
     public void deleteAll() {
     	try {
-    		productDao.openCurrentSessionwithTransaction();
-            productDao.deleteAll();
-            productDao.closeCurrentSessionwithTransaction();
+			mediaDao.openCurrentSessionwithTransaction();
+			mediaDao.deleteAll();
+			mediaDao.closeCurrentSessionwithTransaction();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}

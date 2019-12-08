@@ -1,7 +1,11 @@
 package com.server.dao.impl;
 
+
+import java.sql.*;
 import java.util.List;
 
+import com.server.utils.Database;
+import com.server.utils.PostgresDataSource;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,14 +14,20 @@ import com.server.dao.interfaces.IMediaDao;
 import com.server.entities.impl.Media;
 import org.hibernate.cfg.Configuration;
 
+import javax.sql.rowset.serial.SerialBlob;
+
 
 public class MediaDaoImpl implements IMediaDao<Media, Long> {
  
     private Session currentSession;
-     
     private Transaction currentTransaction;
+
+    private Database database;
  
     public MediaDaoImpl() {
+        PostgresDataSource postgresDataSource = new PostgresDataSource();
+
+        database = new Database(postgresDataSource);
     }
     
     public Session openCurrentSession() {
@@ -65,10 +75,41 @@ public class MediaDaoImpl implements IMediaDao<Media, Long> {
     public void setCurrentTransaction(Transaction currentTransaction) {
         this.currentTransaction = currentTransaction;
     }
-    
+
     @Override
-    public void persist(Media entity) {
-        getCurrentSession().save(entity);
+    public Blob arrayByteToBlob(byte[] picture) throws SQLException {
+        Blob pictureBlob = new SerialBlob(picture);
+        return pictureBlob;
+    }
+
+    @Override
+    public byte[] blobToArrayByte(Blob picture) throws SQLException {
+        //Blob blob = resultat.getBlob("photo");
+        int blobLength = (int) picture.length();
+        byte[] pictureByte = picture.getBytes(1, blobLength);
+        return pictureByte;
+    }
+
+    @Override
+    public void add(Media entity) {//throws IOException, SQLException {
+        /*File file = entity.getImage();
+        FileInputStream fis = new FileInputStream(entity.getImage());
+
+        String url = "jdbc:postgresql://localhost:5432/rmidb";
+        String user = "postgres";
+        String password = "";
+        Connection conn = DriverManager.getConnection(url, user, password);
+        //Statement st = con.createStatement();
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO media VALUES (?, ?, ?, ?, ?)");
+        //PreparedStatement ps = conn.prepareStatement("INSERT INTO images VALUES (?, ?)");
+        ps.setLong(1, entity.getIdMedia());
+        ps.setString(2, entity.getName());
+        ps.setDate(3,null);
+        ps.setLong(4, entity.getProduct().getIdProduct());
+        ps.setBinaryStream(5, fis, (int)file.length());
+        ps.executeUpdate();
+        ps.close();
+        fis.close();*/
     }
     
     @Override

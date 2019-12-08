@@ -25,7 +25,7 @@ public class MediaRmi extends UnicastRemoteObject implements IMediaRmi {
     @Override
     public IMedia add(Media entity) throws RemoteException {
         if(entity!=null) {
-            service.save(entity);
+            service.add(entity);
             return entity;
         }
 
