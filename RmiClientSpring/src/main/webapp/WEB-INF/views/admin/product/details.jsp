@@ -93,10 +93,12 @@
 	        			<hr>
 	        			<h4><fmt:message key="common.new"/></h4>
 			        	<div>
-			        		<f:form action="" method="POST" modelAttribute="comment">
+			        	<c:url value="/comment/add" var="urlComment"/>
+			        		<f:form action="${urlComment}" method="POST" modelAttribute="comment">
+			       
 			        			<div class="form-group">
 						            <div class="form-group">
-						        		<textarea class="form-control" rows="5"placeholder="Votre avis ici" required="required"></textarea>
+						        		<textarea name="content" class="form-control" rows="5" required="required"></textarea>
 					        		</div>
 					        	</div>
 					        	<div class="d-flex justify-content-end">

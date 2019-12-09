@@ -25,24 +25,25 @@ public class TestDemande
 		//TestUpdate();
 		//displayMany(demandeService.findBy("iduser", 3L));
 		//demandeService.deleteAll();
-		//testAdd();
-		displayOne(demandeService.findOneById(1L));
+		testAdd();
+		displayMany(demandeService.findAll());
+		//displayOne(demandeService.findOneById(1L));
 		//TestSelectAll();
 
 	}
 
 	public static void testAdd(){
 		Demande demande = new Demande();
-		demande.setProduct(productService.findOneById(12L));
+		demande.setProduct(productService.findOneById(14L));
 		demande.setUser(userService.findOneById(3L));
 
 		Demande demande2 = new Demande();
 		demande2.setProduct(productService.findOneById(11L));
-		demande2.setUser(userService.findOneById(3L));
+		demande2.setUser(userService.findOneById(7L));
 
 		Demande demande3 = new Demande();
 		demande3.setProduct(productService.findOneById(15L));
-		demande3.setUser(userService.findOneById(2L));
+		demande3.setUser(userService.findOneById(7L));
 
 		demandeService.add(demande);
 		demandeService.add(demande2);

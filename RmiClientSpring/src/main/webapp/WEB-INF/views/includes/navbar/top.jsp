@@ -4,10 +4,23 @@
         <a class="mr-0 text-light h3" href="">WebService | Rmi</a>
         
         <ul class="navbar-nav ml-auto ml-md-0">
+        	<li class="nav-item dropdown no-arrow mx-1">
+	        <a class="nav-link dropdown-toggle" href="" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          
+	          <i class="fas fa-globe-africa fa-2x" style="color:#ffffff"></i>
+	        </a>
+	        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
+	          <c:url value="/user/notification"/>
+	          <c:forEach var="notification" items="${notifications}">
+	          	<a class="dropdown-item"><c:out value="${notification.getMessage()}" /></a>
+	          </c:forEach>
+	          	
+	        </div>
+	      </li>
           <li class="nav-item dropdown no-arrow mx-1">
 	        <a class="nav-link dropdown-toggle" href="" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	          
-	          <i class="fas fa-globe-africa fa-2x" style="color:#383530"></i>
+	          <i class="fas fa-globe-africa fa-2x" style="color:#ffffff"></i>
 	        </a>
 	        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
 	        	<c:url value="/langue/fr_FR" var="fr"/>
@@ -19,7 +32,7 @@
 	      
 	      <li class="nav-item dropdown no-arrow">
 	        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          <i class="fas fa-user-circle fa-fw fa-2x" style="color:#383530"></i>
+	          <i class="fas fa-user-circle fa-fw fa-2x" style="color:#ffffff"></i>
 	        </a>
 	        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
 	          <a class="dropdown-item" href="#">Profil</a>

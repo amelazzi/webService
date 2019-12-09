@@ -18,14 +18,15 @@ public class TestNotif {
         //Notification notification = notificationService.findOneById(10L);
         //notification.setMessage("Im update");
         //notification.setRead(true);
-        notificationService.deleteAll();
+        //notificationService.deleteAll();
+        testAdd();
         displayMany(notificationService.findAll());
     }
 
     public static void testAdd(){
         Notification notification = new Notification();
         notification.setMessage("new Notification");
-        notification.setDemande(demandeService.findOneById(1L));
+        notification.setDemande(demandeService.findOneById(4L));
 
         Notification notification2 = new Notification();
         notification2.setMessage("Second new Notification");
@@ -33,7 +34,7 @@ public class TestNotif {
 
         Notification notification3 = new Notification();
         notification3.setMessage("your demande is ready");
-        notification3.setDemande(demandeService.findOneById(2L));
+        notification3.setDemande(demandeService.findOneById(5L));
 
         notificationService.add(notification);
         notificationService.add(notification2);
