@@ -19,6 +19,8 @@ public interface IDemandeRmi extends Remote {
 
     public IDemande findOneById(Long id) throws RemoteException;
 
+    public List<Demande> findBy(String field, Object value) throws RemoteException;
+
     public List<Demande> findAll() throws RemoteException;
 
     public void removeAll() throws RemoteException;

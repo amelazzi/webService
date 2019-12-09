@@ -10,7 +10,7 @@
 	String locale =(session.getAttribute("local")==null)? "fr_FR": session.getAttribute("local").toString();
 	
 	if(session.getAttribute("user")==null){
-		response.sendRedirect("/");
+		//response.sendRedirect("/");
 		//return;
 		//request.getRequestDispatcher( "index.jsp" ).forward( request, response );
 	}

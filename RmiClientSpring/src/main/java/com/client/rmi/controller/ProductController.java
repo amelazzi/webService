@@ -1,9 +1,13 @@
 package com.client.rmi.controller;
 
+
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +22,14 @@ import com.client.rmi.stub.ProductStub;
 import com.client.utils.FileManager;
 import com.server.entities.impl.Comment;
 import com.server.entities.impl.Product;
+import com.server.entities.impl.UserImpl;
 
 @Controller
 public class ProductController {
 	
 	@RequestMapping(value = "/admin/product", method = RequestMethod.GET)
 	public String index(Locale locale, Model model) {
+		System.out.println("hello");
 		List<Product> produits=new ArrayList<Product>();
 		try {
 			produits=ProductStub.getStub().findAll();
@@ -45,13 +51,24 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = {"/product/{id}" }, method = RequestMethod.GET)
-	public String detail(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
+	public String detail(Locale locale, Model model, @PathVariable String id, HttpServletRequest request) throws RemoteException, Exception {
+		System.out.println("hello");
+		HttpSession httpSession = request.getSession();
+		UserImpl user = new UserImpl();
+		if(httpSession.getAttribute("user")==null) {
+			return "redirect:/";
+		}
+		user = (UserImpl) httpSession.getAttribute("user");
+		
 		System.out.println("hello");
 		Product product = new Product();
+		Comment comment = new Comment();
 		List<Comment> comments = new ArrayList<Comment>();
 		if(null!=id){
 			long idProduct = Long.parseLong(id);
 			product = (Product) ProductStub.getStub().findOneById(idProduct);
+			comment.setProduct(product);
+			comment.setUser(user);
 			System.out.println("product: " + product.toString());
 			comments = CommentStub.getStub().findAll();
 			
@@ -60,9 +77,11 @@ public class ProductController {
 			return "redirect:/home";
 		}
 		
-		
 		model.addAttribute("product", product);
+		model.addAttribute("user", user);
+		model.addAttribute("comment", comment);
 		model.addAttribute("comments", comments);
+		
 		return "admin/product/details";
 	}
 	

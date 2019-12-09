@@ -57,6 +57,11 @@ public class DemandeRmi extends UnicastRemoteObject implements IDemandeRmi {
     }
 
     @Override
+    public List<Demande> findBy(String field, Object value) throws RemoteException {
+        return service.findBy(field, value);
+    }
+
+    @Override
     public List<Demande> findAll() throws RemoteException {
         return service.findAll();
     }
