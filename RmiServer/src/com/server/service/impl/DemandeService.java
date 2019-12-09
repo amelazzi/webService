@@ -97,6 +97,16 @@ public class DemandeService implements IDemandeService{
 		}
         return null;
     }
+
+    @Override
+	public List<Demande> findByProduct(Long idProduct, boolean isDone){
+    	try{
+			return demandeDao.findByProduct(idProduct, isDone);
+		}catch (Exception e){
+    		e.printStackTrace();
+		}
+    	return null;
+	}
     
     @Override
     public void deleteAll() {
@@ -126,11 +136,6 @@ public class DemandeService implements IDemandeService{
 	public List<Demande> findAllSortedBy(String field, String order) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	
-	@Override
-	public List<Demande> findByProduct(Product product){
-		return demandeDao.findByProduct(product);
 	}
 	
 	@Override

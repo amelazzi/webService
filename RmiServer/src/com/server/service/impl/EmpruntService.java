@@ -1,10 +1,9 @@
 package com.server.service.impl;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
+import com.server.dao.impl.DemandeDaoImpl;
 import org.hibernate.HibernateException;
 
 import com.server.dao.impl.EmpruntDaoImpl;
@@ -19,15 +18,18 @@ import com.server.service.interfaces.IEmpruntService;
 public class EmpruntService implements IEmpruntService{
  
     private static EmpruntDaoImpl empruntDao;
+    private static DemandeDaoImpl demandeDao;
     private static ProductService productService;
     private static DemandeService demandeService;
     private static NotificationService notificationService;
  
     public EmpruntService() {
         empruntDao = new EmpruntDaoImpl();
+        demandeDao = new DemandeDaoImpl();
         productService= new ProductService();
         demandeService= new DemandeService();
         notificationService= new NotificationService();
+
     }
     
     public EmpruntDaoImpl empruntDao() {
@@ -189,7 +191,10 @@ public class EmpruntService implements IEmpruntService{
 				return 1;
 			}else{
 				try{
-					//add(demande);
+					Demande demande = new Demande();
+					demande.setProduct(p);
+					demande.setUser(u);
+					demandeService.add(demande);
 				}catch (Exception e){
 					throw new Exception("Impossible de faire une demande");
 				}
@@ -198,37 +203,6 @@ public class EmpruntService implements IEmpruntService{
 		}else{
 			throw new Exception("vous avez deja empruntere ce livre");
 		}
-
-
-    	/*if(p.getQuantity()>=1) {
-    		//procedure d'emprunt
-    		Emprunt emprunt = new Emprunt();
-    		emprunt.setProduct(p);
-    		emprunt.setUser(u);
-    		
-    		try {
-        		this.add(emprunt);
-        		p.setQuantity(p.getQuantity()-1);
-        		productService.update(p);
-        		return 1;
-			} catch (Exception e) {
-				System.out.println("Impossible d'emprunter");
-				return 0;
-			}
-    	}else {
-    		//procedure de mise en attente parmis les demandes
-    		Demande demande = new Demande();
-    		demande.setProduct(p);
-    		demande.setUser(u);
-    		
-    		try {
-				demandeService.save(demande);
-			} catch (Exception e) {
-				System.out.println("Impossible de le mettre dans les attentes");
-				return 0;
-			}
-    		return -1;
-    	}*/
     }
     
 	@Override
@@ -239,100 +213,71 @@ public class EmpruntService implements IEmpruntService{
     		update(emprunt);
     		emprunt.getProduct().setQuantity(emprunt.getProduct().getQuantity()+1);
     		productService.update(emprunt.getProduct());
+			notifier(emprunt);
     		return true;
 		}else
 			return false;
-    	/*if(!emprunt.getIsReturned()) {
-    		emprunt.setReturnedAt(new Date());
-    		emprunt.setIsReturned(true);
-    		try {
-				this.update(emprunt);
-				Product product = emprunt.getProduct();
-				product.setQuantity(product.getQuantity()+1);
-				productService.update(product);
-				
-				//notification au user..
-				try {
-					UserImpl user =this.checkPriority(emprunt);
-					//System.out.println("-"+user.toString());
-					if(user!=null) {
-						System.out.println("here");	
-						Notification notification = new Notification();
-						notification.setMessage("Notification demande: Le produit que vous avez souhait� "
-								+ "emprunter est maintenant disponible. Veuillez valider l'emprunt");
-						notificationService.save(notification);
-					}
-				} catch (Exception e) {
-					System.out.println("Impossible de notifier");
-					e.printStackTrace();
-					return false;
+    }
+
+    public void notifier(Emprunt emprunt){
+		List<UserImpl> students=new ArrayList<UserImpl>();
+		List<UserImpl> teachers=new ArrayList<UserImpl>();
+		List<Notification> notifications=new ArrayList<Notification>();
+
+		//trouver les demandes relative à ce produit.
+		List<Demande> demandes = demandeService.findByProduct(emprunt.getProduct().getIdProduct(), false);
+		//Extraire les utilisateurs de ces demandes en
+		if(demandes!=null){
+			for(Demande d:demandes){
+				if(d.getUser().getStatus()=="teacher"){
+					teachers.add(d.getUser());
 				}
-				
-				
-				return true;
-			} catch (Exception e) {
-				System.out.println("Impossible de restituer");
-				//e.printStackTrace();
-				return false;
+
+				if(d.getUser().getStatus()=="student"){
+					students.add(d.getUser());
+				}
+				Notification notif= new Notification();
+				notif.setMessage("Le livre <<"+emprunt.getProduct().getTitle().toUpperCase()+">> que vous avez demandé est maintenant disponible");
+				notif.setDemande(d);
+				notifications.add(notif);
 			}
-    	}*/
+
+			//S'il y a des demandes Envoyer des notifications à ces utilisateur
+			if(teachers!=null)
+				sendNotif(teachers, notifications, emprunt);
+			else
+				if(students!=null)
+					sendNotif(students, notifications, emprunt);
+		}
+	}
+
+    public void sendNotif(List<UserImpl> users, List<Notification> notifications, Emprunt emprunt){
+		if(users.size()>1){
+			Map<Long, Integer> list=new HashMap<Long, Integer>();
+			for(UserImpl t: users)
+				list.put(t.getIdUser(), t.getTotalEmprunt());
+
+			Integer min = Collections.min(list.values());
+			Long key= getKeyByValue(list,min);
+			for(Notification n:notifications)
+				if(n.getDemande().getUser().getIdUser()==key)
+					if(n.getDemande().getProduct()==emprunt.getProduct())
+						notificationService.add(n);
+
+		}else
+			for(Notification n:notifications)
+				if(n.getDemande().getUser()==users.get(0))
+					notificationService.add(n);
     }
-    
-    public List<UserImpl> getWaitingUsers(Emprunt emprunt) {
-    	Product product =emprunt.getProduct();
-    	List<Demande> listDemandes =demandeService.findByProduct(product);
-    	List<UserImpl> waitingUsers = new ArrayList<UserImpl>();
-    	if(listDemandes!=null) {
-    		waitingUsers = demandeService.findWaitingUserByProduct(product);
-    		return waitingUsers;
-    	}
-    	return null;
-    }
-    
-    @SuppressWarnings("unused")
-	public UserImpl checkPriority(Emprunt emprunt) {
-    	List<UserImpl> students = new ArrayList<>();
-    	List<UserImpl> teachers = new ArrayList<>();
-    	List<UserImpl> users = this.getWaitingUsers(emprunt);
-     	
-    	UserImpl user = new UserImpl();
-    	
-    	if(users!=null) {
-    		for(UserImpl u:users) {
-        		if("teacher".equals(u.getStatus())) {
-        			teachers.add(u);
-        		}else {
-        			students.add(u);
-        		}
-        	}
-    		
-    		if(teachers!=null) {
-    			return lessEmprunt(teachers);
-    		}
-    		
-    		if(students!=null) {
-    			return lessEmprunt(students);
-    		}
-			
-    	}
-    	
+
+	public static <T, E> T getKeyByValue(Map<T, E> map, E value) {
+		for (Map.Entry<T, E> entry : map.entrySet()) {
+			if (Objects.equals(value, entry.getValue())) {
+				return entry.getKey();
+			}
+		}
 		return null;
 	}
-    
-    public UserImpl lessEmprunt(List<UserImpl> users) {
-    	Collections.sort(users,new Comparator<UserImpl>() {
-    				public int compare(UserImpl u1, UserImpl u2) {
-    					return Integer.valueOf(u1.getTotalEmprunt()).compareTo(u2.getTotalEmprunt());
-    				}
-    			});
-    	for(UserImpl u:users) {
-    		System.out.println("-"+u.toString());
-    	}
-    	
-    	
-    	return (users.size()>0)?users.get(0):null;
-    }
-    
-    
+
 }
 

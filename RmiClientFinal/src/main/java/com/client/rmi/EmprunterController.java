@@ -30,7 +30,7 @@ import com.server.entities.interfaces.IEmprunt;
 
 @Controller
 public class EmprunterController {
-	@RequestMapping(value = "/emprunter/{idproduct}", method = RequestMethod.GET)
+	@RequestMapping(value ="/emprunter/{idproduct}", method = RequestMethod.GET)
 	public String confirmation(Locale locale, Model model, HttpServletRequest request, @PathVariable String idproduct) {
 		HttpSession session = request.getSession();
 		UserImpl user=null;

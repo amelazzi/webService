@@ -35,18 +35,7 @@
 							${product.getDescription()}
 						</p>
 						<h4 class="price"><fmt:message key="product.price"/> <span>${product.getPrice()}</span></h4>
-						<!-- <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>  -->
-						<!-- <h5 class="sizes">sizes:
-							<span class="size" data-toggle="tooltip" title="small">s</span>
-							<span class="size" data-toggle="tooltip" title="medium">m</span>
-							<span class="size" data-toggle="tooltip" title="large">l</span>
-							<span class="size" data-toggle="tooltip" title="xtra large">xl</span>
-						</h5>
-						<h5 class="colors">colors:
-							<span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
-							<span class="color green"></span>
-							<span class="color blue"></span>
-						</h5>-->
+					
 						<div class="action">
 							<c:choose>
 			                  	<c:when test="${product.getQuantity()>0}">
@@ -59,7 +48,7 @@
 			                  		</a>
 			                  	</c:when>
 				              	<c:otherwise>
-			                  		<a href="" class="btn btn-sm btn-outline-primary"><i class="fab fa-buffer"></i> <fmt:message key="common.reserve"/></a>
+			                  		<a href="<c:url value="/emprunter/${product.getIdProduct()}"/>" class="btn btn-sm btn-outline-primary"><i class="fab fa-buffer"></i> <fmt:message key="common.reserve"/></a>
 			                  	</c:otherwise>
 				            </c:choose>
 							<!--<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>-->

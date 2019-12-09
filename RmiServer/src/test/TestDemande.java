@@ -72,12 +72,12 @@ public class TestDemande
 	   }
 	
    public static String TestFindByProduct(){
-	  Product prod = productService.findOneById((long) 2);  
-      List<Demande> listDemandes=demandeService.findByProduct(prod);
-      displayMany(listDemandes);
+	  //Product prod = productService.findOneById((long) 2);
+      //List<Demande> listDemandes=demandeService.findByProduct(prod.getIdProduct(),true);
+     // displayMany(listDemandes);
       
       return "success";
-      
+
    }
    
    public static void displayOne(Demande demande) {

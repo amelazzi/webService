@@ -21,10 +21,10 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<c:url value="/demande"/>">
                 	<i class="fab fa-buffer"></i>
                     <span data-feather="shopping-cart"></span>
-                    <fmt:message key="user.lend.request"/>
+                    <fmt:message key="user.lend.request.notification"/>
                 </a>
             </li>
             <li class="nav-item">

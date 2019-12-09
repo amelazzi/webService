@@ -26,8 +26,8 @@ public interface IDemandeDao<T, Id extends Serializable> {
     public List<T> findAll();
     
     public List<T> findAllSortedBy(String field, String order);
-    
-    public List<Demande> findByProduct(Product product);
+
+    public List<Demande> findByProduct(Long idProduct, boolean isDone);
     
     public List<UserImpl> findWaitingUserByProduct(Product product);
      

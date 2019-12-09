@@ -22,8 +22,8 @@ public interface IDemandeService {
     public List<Demande> findAll();
     
     public List<Demande> findAllSortedBy(String field, String order);
-    
-    public List<Demande> findByProduct(Product product);
+
+	public List<Demande> findByProduct(Long idProduct, boolean isDone);
     
     public List<UserImpl> findWaitingUserByProduct(Product product);
 	

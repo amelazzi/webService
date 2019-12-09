@@ -57,7 +57,7 @@ public class TestEmprunt
 	public static void testCheckPriority() {
 		Emprunt emprunt = empruntService.findOneById((long)5);
 		UserImpl user = null;
-		user = empruntService.checkPriority(emprunt);
+		//user = empruntService.checkPriority(emprunt);
 		displayOne(emprunt);
 		//System.out.println("-User: " + user.toString());
 	}

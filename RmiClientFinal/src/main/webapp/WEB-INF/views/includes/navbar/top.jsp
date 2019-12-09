@@ -4,34 +4,6 @@
         <a class="mr-0 text-light h3" href="">WebService | Rmi</a>
         
         <ul class="navbar-nav ml-auto ml-md-0">
-        	<!-- <li class="nav-item dropdown no-arrow mx-1">
-	        <a class="nav-link dropdown-toggle" href="" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          
-	          <i class="fas fa-globe-africa fa-2x" style="color:#ffffff"></i>
-	        </a>
-	        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-	          <c:url value="/user/notification"/>
-	          <c:forEach var="notification" items="${notifications}">
-	          	<a class="dropdown-item"><c:out value="${notification.getMessage()}" /></a>
-	          </c:forEach>
-	          	
-	        </div>
-	      </li>-->
-	      
-	      
-		  <li class="nav-item dropdown no-arrow mx-1">
-	        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          <i class="fas fa-bell fa-fw fa-2x" style="color:#ffffff"></i>
-	          <span class="badge badge-dark">9+</span>
-	        </a>
-	        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-	          <a class="dropdown-item" href="#">Le livre LE ROI LION que vous avz rservé est maintenant disponible</a>
-	          <a class="dropdown-item" href="#">Restitution effectuté avec succes</a>
-	          <a class="dropdown-item" href="#">Le livre READY FOR PLAY ONE que vous avz rservé est maintenant disponible</a>
-	          <a class="dropdown-item" href="#">Restitution effectuté avec succes</a>
-	        </div>
-	      </li>
-	      
           <li class="nav-item dropdown no-arrow mx-1">
 	        <a class="nav-link dropdown-toggle" href="" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	          

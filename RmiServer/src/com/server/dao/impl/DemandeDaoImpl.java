@@ -111,6 +111,29 @@ public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
     }
 
     @Override
+    public List<Demande> findByProduct(Long idProduct,  boolean isDone) {
+        String[][] data = database.executeQuery("select * from demande where idProduct="+idProduct);
+        List<Demande> demandes = new ArrayList<>();
+        for(int i=1; i<data.length; i++){
+            demandes.add(parseDemande(data,i));
+        }
+
+        List<Demande> ret=new ArrayList<Demande>();
+        if(isDone){
+            for(Demande d:demandes){
+                if(d.getIsDone()){
+                    ret.add(d);
+                }
+            }
+        }else{
+            ret=demandes;
+        }
+
+        return ret;
+    }
+
+
+    @Override
     public Demande parseDemande(String[][] data, int i) {
         Demande demande = new Demande();
 
@@ -177,37 +200,17 @@ public class DemandeDaoImpl implements IDemandeDao<Demande, Long> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	@SuppressWarnings("unchecked")
+
 	@Override
-	public List<Demande> findByProduct(Product product) {
-		openCurrentSession();
-		List<Demande> demandes = null;
-		
-		try {
-			@SuppressWarnings("deprecation")
-			Criteria criteria = getCurrentSession().createCriteria(Demande.class);
-			criteria.add(Restrictions.eq("product", product));
-			criteria.add(Restrictions.eq("isDone", false));
-			demandes = criteria.list();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		closeCurrentSession();
-		return demandes;
-	}
-	
-	@Override
-	public List<UserImpl> findWaitingUserByProduct(Product product){
-		List<Demande> demandes = this.findByProduct(product);
+    public List<UserImpl> findWaitingUserByProduct(Product product){
+		/*List<Demande> demandes = this.findByProduct(product);
 		List<UserImpl> users = new ArrayList<UserImpl>();
 		if(demandes!=null) {
 			for(Demande d:demandes) {
 				users.add(d.getUser());
 			}
-		}
+		}*/
 		
-		return users;
+		return null;
 	}
 }

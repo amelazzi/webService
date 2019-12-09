@@ -20,38 +20,36 @@ import com.server.entities.impl.Notification;
 import com.server.entities.impl.UserImpl;
 
 @Controller
-public class NotificationController {
-	public NotificationController() {}
+public class DemandeNotificationController {
+	public DemandeNotificationController() {}
 	
-	@RequestMapping(value = "/user/notification", method = RequestMethod.GET)
+	@RequestMapping(value = "/demande", method = RequestMethod.GET)
 	public String index(Locale locale, Model model, HttpServletRequest request) throws RemoteException, Exception {
-		
-		System.out.println("hello from notification");
-		
 		HttpSession httpSession = request.getSession();
+		
 		UserImpl user = new UserImpl();
 		if(httpSession.getAttribute("user")==null) {
 			return "redirect:/";
 		}
+		
 		user = (UserImpl) httpSession.getAttribute("user");
 		
-		List<Demande> userDemandes = new ArrayList<Demande>();
-		userDemandes = DemandeStub.getStub().findBy("iduser", user.getIdUser());
+		List<Demande> demandes = new ArrayList<Demande>();
+		demandes = DemandeStub.getStub().findBy("iduser", user.getIdUser());
 		
 		List<Notification> notifications = new ArrayList<Notification>();
 		try {
-			for(Demande d: userDemandes) {
+			for(Demande d: demandes) {
 				notifications.add((Notification)NotificationStub.getStub().findBy("idDemande", d.getIdDemande()));
-				System.out.println("demande: " + d.toString());
 			}
 			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
-		System.out.println("size: " + notifications.size());
 		
+		model.addAttribute("demandes", demandes);
 		model.addAttribute("notifications", notifications);
-		return "redirect:/home";
+		return "demande/index";
 	}
 }
