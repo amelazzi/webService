@@ -127,6 +127,31 @@ public class EmprunterController {
 		return "emprunt/index";
 	}
 	
+	@RequestMapping(value = "/admin/emprunt", method = RequestMethod.GET)
+	public String listAll(Locale locale, Model model, HttpServletRequest request) {
+		List<Emprunt> emprunts=new ArrayList<Emprunt>();
+		HttpSession session=request.getSession();
+		
+		if(session.getAttribute("user")==null) {
+			/*UserImpl user= (UserImpl) session.getAttribute("user");
+			if(user.getRole()!="admin") {
+				System.out.println("Vous avez pas les droits d'admin");
+				return "redirect:/home";
+			}*/
+			System.out.println("Vous devez être connecté");
+			return "redirect:/";
+		}
+		
+		try {
+			emprunts=EmpruntStub.getStub().findAll();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("emprunts", emprunts);
+		return "admin/emprunt/list";
+	}
+	
 	@RequestMapping(value = "/emprunt/restitution/{idEmprunt}", method = RequestMethod.GET)
 	public String restituer(Locale locale, Model model, HttpServletRequest request, @PathVariable String idEmprunt) {
 		Emprunt emprunt=new Emprunt();

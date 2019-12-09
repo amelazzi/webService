@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +21,7 @@ import com.client.rmi.stub.ProductStub;
 import com.client.utils.FileManager;
 import com.server.entities.impl.Comment;
 import com.server.entities.impl.Product;
+import com.server.entities.impl.UserImpl;
 
 @Controller
 public class ProductController {
@@ -45,8 +49,20 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = {"/product/{id}" }, method = RequestMethod.GET)
-	public String detail(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
+	public String detail(Locale locale, Model model, @PathVariable String id, HttpServletRequest request) throws RemoteException, Exception {
+		HttpSession session=request.getSession();
 		Product product = new Product();
+		Comment comment = new Comment();
+		UserImpl user=new UserImpl();
+		
+		if(session.getAttribute("user")==null) {
+			session.setAttribute("error_msg", "Vous devez être connecté");
+			System.out.println("Vous devez être connecté");
+			return "redirect:/";
+		}
+		
+		user=(UserImpl) session.getAttribute("user");
+		
 		List<Comment> comments = new ArrayList<Comment>();
 		if(null!=id){
 			long idProduct = Long.parseLong(id);
@@ -57,9 +73,11 @@ public class ProductController {
 			return "redirect:/home";
 		}
 		
-		
+		model.addAttribute("user", user);
+		model.addAttribute("comment", comment);
 		model.addAttribute("product", product);
 		model.addAttribute("comments", comments);
+		
 		return "admin/product/details";
 	}
 	

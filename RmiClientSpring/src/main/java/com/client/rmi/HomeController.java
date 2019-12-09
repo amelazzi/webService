@@ -146,7 +146,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = {"/langue/{l}" }, method = RequestMethod.POST)
+	@RequestMapping(value = {"/langue/{l}" }, method = RequestMethod.GET)
 	public String changelocal(Locale locale, Model model,@PathVariable String l, HttpServletRequest request, HttpServletResponse response) {
 		String local= l;
 		if(!local.isEmpty()) {

@@ -95,7 +95,8 @@
 			        	<div>
 			        	<c:url value="/comment/add" var="urlComment"/>
 			        		<f:form action="${urlComment}" method="POST" modelAttribute="comment">
-			       
+			       				<input name="idProduct" type="hidden" value="${product.getIdProduct()}">
+			       				<input name="idUser" type="hidden" value="${user.getIdUser()}">
 			        			<div class="form-group">
 						            <div class="form-group">
 						        		<textarea name="content" class="form-control" rows="5" required="required"></textarea>
