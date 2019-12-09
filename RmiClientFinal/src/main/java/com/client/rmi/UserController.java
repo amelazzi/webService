@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -24,8 +25,13 @@ import com.server.entities.impl.UserImpl;
 public class UserController {
 	
 	@RequestMapping(value = "/admin/user", method = RequestMethod.GET)
-	public String index(Locale locale, Model model) {
+	public String index(Locale locale, Model model, HttpServletRequest request) {
 		List<UserImpl> users=new ArrayList<UserImpl>();
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user")==null) {
+			System.out.println("Vous devez être connecté");
+			return "redirect:/";
+		}
 		try {
 			users=UserStub.getStub().findAll();
 		} catch (Exception e) {
@@ -46,8 +52,14 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = {"/admin/user/{id}" }, method = RequestMethod.GET)
-	public String detail(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
+	public String detail(Locale locale, Model model, @PathVariable String id, HttpServletRequest request) throws RemoteException, Exception {
 		UserImpl user = new UserImpl();
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user")==null) {
+			System.out.println("Vous devez être connecté");
+			return "redirect:/";
+		}
+		
 		if(null!=id){
 			long idUser = Long.parseLong(id);
 			user = (UserImpl) UserStub.getStub().findOneById(idUser);
@@ -61,8 +73,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = {"/admin/user/{id}/edit" }, method = RequestMethod.GET)
-	public String edit(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
+	public String edit(Locale locale, Model model, @PathVariable String id, HttpServletRequest request) throws RemoteException, Exception {
 		UserImpl user = new UserImpl();
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user")==null) {
+			System.out.println("Vous devez être connecté");
+			return "redirect:/";
+		}
 		if(null!=id){
 			long idUser = Long.parseLong(id);
 			user = (UserImpl) UserStub.getStub().findOneById(idUser);

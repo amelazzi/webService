@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.client.i18n.Internationnalization;
+import com.client.rmi.stub.CommentStub;
+import com.client.rmi.stub.EmpruntStub;
 import com.client.rmi.stub.ProductStub;
 import com.client.rmi.stub.UserStub;
+import com.server.entities.impl.Comment;
+import com.server.entities.impl.Emprunt;
 import com.server.entities.impl.Product;
 import com.server.entities.impl.UserImpl;
 
@@ -37,12 +41,14 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
-	public String logout(Locale locale, Model model, UserImpl user, HttpServletRequest request) {
+	public String logout(Locale locale, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-        session.invalidate();
+		if(session!=null) {
+			session.removeAttribute("user");
+			session.invalidate();
+		}
 		
-		model.addAttribute("user", user);
-		return "index";
+		return "redirect:/";
 	}
 	
 	
@@ -132,15 +138,31 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user")==null) {
+			System.out.println("Vous devez être connecté");
+			return "redirect:/";
+		}
+		
 		List<Product> products=new ArrayList<Product>();
+		List<UserImpl> users = new ArrayList<UserImpl>();
+		List<Emprunt> emprunts= new ArrayList<Emprunt>();
+		List<Comment> comments= new ArrayList<Comment>();
 		try {
 			products=ProductStub.getStub().findAll();
+			users=UserStub.getStub().findAll();
+			emprunts=EmpruntStub.getStub().findAll();
+			comments=CommentStub.getStub().findAll();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		model.addAttribute("products", products );
+		model.addAttribute("users", users);
+		model.addAttribute("emprunts", emprunts);
+		model.addAttribute("comments", comments);
 		
 		return "home";
 	}

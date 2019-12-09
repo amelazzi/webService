@@ -1,20 +1,15 @@
 package com.client.rmi;
 
 import java.rmi.RemoteException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,17 +21,17 @@ import com.client.rmi.stub.UserStub;
 import com.server.entities.impl.Emprunt;
 import com.server.entities.impl.Product;
 import com.server.entities.impl.UserImpl;
-import com.server.entities.interfaces.IEmprunt;
 
 @Controller
 public class EmprunterController {
 	@RequestMapping(value ="/emprunter/{idproduct}", method = RequestMethod.GET)
 	public String confirmation(Locale locale, Model model, HttpServletRequest request, @PathVariable String idproduct) {
-		HttpSession session = request.getSession();
+		
 		UserImpl user=null;
 		Product product = null;
 		Emprunt emprunt = new Emprunt();
 		
+		HttpSession session = request.getSession();
 		if(session.getAttribute("user")==null) {
 			System.out.println("Vous devez être connecté");
 			return "redirect:/";

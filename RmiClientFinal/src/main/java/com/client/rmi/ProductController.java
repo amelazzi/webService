@@ -27,7 +27,15 @@ import com.server.entities.impl.UserImpl;
 public class ProductController {
 	
 	@RequestMapping(value = "/admin/product", method = RequestMethod.GET)
-	public String index(Locale locale, Model model) {
+	public String index(Locale locale, Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user")==null) {
+			System.out.println("Vous devez être connecté");
+			return "redirect:/";
+		}
+		
+		
 		List<Product> produits=new ArrayList<Product>();
 		try {
 			produits=ProductStub.getStub().findAll();
@@ -41,8 +49,13 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = {"/admin/product/add"}, method = RequestMethod.GET)
-	public String add(Locale locale, Model model) throws RemoteException, Exception {
+	public String add(Locale locale, Model model, HttpServletRequest request) throws RemoteException, Exception {
 		Product product = new Product();
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user")==null) {
+			System.out.println("Vous devez être connecté");
+			return "redirect:/";
+		}
 		
 		model.addAttribute("product", product);
 		return "admin/product/save";
@@ -56,8 +69,7 @@ public class ProductController {
 		UserImpl user=new UserImpl();
 		
 		if(session.getAttribute("user")==null) {
-			session.setAttribute("error_msg", "Vous devez Ãªtre connectÃ©");
-			System.out.println("Vous devez Ãªtre connectÃ©");
+			session.setAttribute("error_msg", "Vous devez être connecté");
 			return "redirect:/";
 		}
 		
@@ -82,8 +94,14 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = {"/admin/product/{id}/edit" }, method = RequestMethod.GET)
-	public String edit(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
+	public String edit(Locale locale, Model model, @PathVariable String id, HttpServletRequest request) throws RemoteException, Exception {
 		Product product = new Product();
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user")==null) {
+			System.out.println("Vous devez être connecté");
+			return "redirect:/";
+		}
+		
 		if(null!=id){
 			long idProduct = Long.parseLong(id);
 			product = (Product) ProductStub.getStub().findOneById(idProduct);
