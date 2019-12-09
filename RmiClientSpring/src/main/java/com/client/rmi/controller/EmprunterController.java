@@ -26,6 +26,7 @@ import com.client.rmi.stub.UserStub;
 import com.server.entities.impl.Emprunt;
 import com.server.entities.impl.Product;
 import com.server.entities.impl.UserImpl;
+import com.server.entities.interfaces.IEmprunt;
 
 @Controller
 public class EmprunterController {
@@ -124,6 +125,33 @@ public class EmprunterController {
 		
 		model.addAttribute("emprunts", emprunts);
 		return "emprunt/index";
+	}
+	
+	@RequestMapping(value = "/emprunt/restitution/{idEmprunt}", method = RequestMethod.GET)
+	public String restituer(Locale locale, Model model, HttpServletRequest request, @PathVariable String idEmprunt) {
+		Emprunt emprunt=new Emprunt();
+		String error_msg=null;
+		String succes_msg=null;
+		if(idEmprunt!=null){
+			long id=Long.parseLong(idEmprunt);
+			
+			try {
+				emprunt = (Emprunt) EmpruntStub.getStub().findOneById(id);
+				System.out.println(emprunt);
+				if(EmpruntStub.getStub().restituer(emprunt)) {
+					succes_msg="Restitution effectuée avec succes";
+				}else {
+					error_msg="Une erreur s'est produite lors de la restitution";
+				}
+			} catch (Exception e) {
+				error_msg=e.getMessage();
+				e.printStackTrace();
+			}
+		}
+		
+		model.addAttribute("errors_msg",error_msg);
+		model.addAttribute("success_msg",succes_msg);
+		return "redirect:/emprunt";
 	}
 	
 }

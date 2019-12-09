@@ -19,8 +19,7 @@
 			        <!-- Page Content -->
 			        <h1><fmt:message key="lend.my"/></h1>
 			        <hr>
-			        
-			        
+			      
 			         <!-- DataTables Example -->
 			        <div class="card mb-3">
 			          <div class="card-header">
@@ -60,10 +59,11 @@
 				                    <td>${emprunt.getToGiveBackAt()}</td>
 				                    <td>${emprunt.getIsReturned()}</td>
 				                    <td>
-						        		<form method="POST" action="<c:url value="/emprunt/restitution/${emprunt.getProduct().getIdProduct()}"/>" style="display: inline-block"
-						                      onsubmit="return confirm('Êtes vous sure de vouloir éffectuer la suppression? ')" >
-						                    <button class="btn btn-outline-dark">Restituer</button>
-						                </form>
+				                    	<c:if test="${!emprunt.getIsReturned()}">
+				                    		<a onClick="return confirm('Confirmer vous la restitution?')"  class="btn btn-outline-dark" href="<c:url value="/emprunt/restitution/${emprunt.getIdEmprunt()}"/>">
+				                    			Restituer
+				                    		</a>
+				                    	</c:if>
 				                    </td>
 				                  </tr>
 			                  </c:forEach>

@@ -233,7 +233,7 @@ public class EmpruntService implements IEmpruntService{
     
 	@Override
     public boolean restituer(Emprunt emprunt) {
-    	if(!emprunt.getIsReturned()){
+    	if(emprunt!=null && !emprunt.getIsReturned()){
     		emprunt.setIsReturned(true);
     		emprunt.setReturnedAt(new Date());
     		update(emprunt);
