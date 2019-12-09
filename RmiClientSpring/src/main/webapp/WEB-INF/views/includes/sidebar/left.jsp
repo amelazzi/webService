@@ -14,7 +14,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<c:url value="/emprunt"/>">
                 	<i class="fas fa-book-reader"></i>
                     <span data-feather="file"></span>
                     <fmt:message key="user.lend"/>

@@ -97,6 +97,19 @@ public class EmpruntService implements IEmpruntService{
 		return null;
 	}
 
+	@Override
+	public List<Emprunt> findByUser(Long idUser){
+		try {
+			//empruntDao.openCurrentSession();
+			List<Emprunt> emprunts = empruntDao.findByUser(idUser);
+			//empruntDao.closeCurrentSession();
+			return emprunts;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
     @Override
     public List<Emprunt> findAll() {
     	try {

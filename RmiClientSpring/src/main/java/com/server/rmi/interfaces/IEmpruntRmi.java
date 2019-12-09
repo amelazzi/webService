@@ -19,6 +19,8 @@ public interface IEmpruntRmi extends Remote {
     public IEmprunt findOneById(Long id) throws RemoteException;
 
     public List<Emprunt> findAll() throws RemoteException;
+    
+    public List<Emprunt> findByUser(Long idUser) throws RemoteException;
 
     public void removeAll() throws RemoteException;
 

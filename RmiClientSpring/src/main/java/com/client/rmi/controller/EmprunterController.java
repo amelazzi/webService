@@ -106,96 +106,24 @@ public class EmprunterController {
 	}
 	
 	@RequestMapping(value = "/emprunt", method = RequestMethod.GET)
-	public String index(Locale locale, Model model) {
+	public String index(Locale locale, Model model, HttpServletRequest request) {
 		List<Emprunt> emprunts=new ArrayList<Emprunt>();
+		HttpSession session=request.getSession();
+		
+		if(session.getAttribute("user")==null) {
+			System.out.println("Vous devez être connecté");
+			return "redirect:/";
+		}
+		
+		UserImpl user= (UserImpl) session.getAttribute("user");
+		try {
+			emprunts=EmpruntStub.getStub().findByUser(user.getIdUser());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		model.addAttribute("emprunts", emprunts);
 		return "emprunt/index";
 	}
-	/*
-	@RequestMapping(value = "/emprunter", method = RequestMethod.GET)
-	public String index(Locale locale, Model model) {
-		List<UserImpl> users=new ArrayList<UserImpl>();
-		try {
-			users=UserStub.getStub().findAll();
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
-		
-		model.addAttribute("users", users );
-		return "admin/user/list";
-	}
-	
-	@RequestMapping(value = {"/admin/user/add"}, method = RequestMethod.GET)
-	public String add(Locale locale, Model model) throws RemoteException, Exception {
-		UserImpl user= new UserImpl();
-		
-		model.addAttribute("user", user);
-		return "admin/user/save";
-	}
-	
-	@RequestMapping(value = {"/admin/user/{id}" }, method = RequestMethod.GET)
-	public String detail(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
-		UserImpl user = new UserImpl();
-		if(null!=id){
-			long idUser = Long.parseLong(id);
-			user = (UserImpl) UserStub.getStub().findOneById(idUser);
-		}else {
-			System.out.println("Element introuvable");
-			return "redirect:/admin/user/";
-		}
-		
-		model.addAttribute("user", user);
-		return "admin/user/details";
-	}
-	
-	@RequestMapping(value = {"/admin/user/{id}/edit" }, method = RequestMethod.GET)
-	public String edit(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
-		UserImpl user = new UserImpl();
-		if(null!=id){
-			long idUser = Long.parseLong(id);
-			user = (UserImpl) UserStub.getStub().findOneById(idUser);
-		}
-		
-		model.addAttribute("user", user);
-		return "admin/user/save";
-	}
-	
-	@RequestMapping(value = {"/admin/user/{id}/delete" }, method = RequestMethod.POST)
-	public String delete(Locale locale, Model model, @PathVariable String id) throws RemoteException, Exception {
-		UserImpl user = new UserImpl();
-		if(null!=id){
-			long idUser = Long.parseLong(id);
-			user = (UserImpl) UserStub.getStub().findOneById(idUser);
-			UserStub.getStub().remove(user);
-		}
-		
-		return "redirect:/admin/user/";
-	}
-	
-	@RequestMapping(value = "/admin/user/save", method = RequestMethod.POST)
-	public String save(Locale local, Model model, UserImpl user) throws RemoteException, Exception {
-		if(user!=null) {
-			user.setPassword("password");
-			if(user.getIdUser()!=0L) {
-				UserStub.getStub().update(user);
-			}else {
-				UserStub.getStub().add(user);
-			}
-		}
-		
-		model.addAttribute("user", user);
-		return "redirect:/admin/user/";
-	}
-	
-	@InitBinder
-    public void initBinder(HttpServletRequest request, ServletRequestDataBinder binder)
-    {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, null,  new CustomDateEditor(dateFormat, true));
-    }
-	*/
 	
 }

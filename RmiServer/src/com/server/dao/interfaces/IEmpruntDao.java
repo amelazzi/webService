@@ -25,6 +25,8 @@ public interface IEmpruntDao<T, Id extends Serializable> {
     public List<T> findBy(String[] fields, Object[] values);
      
     public List<T> findAll();
+
+    public List<Emprunt> findByUser(Long idUser);
     
     public List<T> findAllSortedBy(String field, String order);
      

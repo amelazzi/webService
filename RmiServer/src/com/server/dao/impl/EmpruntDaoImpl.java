@@ -105,13 +105,13 @@ public class EmpruntDaoImpl implements IEmpruntDao<Emprunt, Long> {
         Emprunt emprunt = new Emprunt();
 
         emprunt.setIdEmprunt(Long.parseLong(data[i][0]));
-        emprunt.setCreatedAt(DateTool.stringToDate(data[i][1]));
+        emprunt.setCreatedAt(DateTool.stringToDate(data[i][1],"yyyy-MM-dd"));
 
         boolean isReturned = data[i][2].equals("t")? true:false;
         emprunt.setIsReturned(isReturned);
 
-        emprunt.setReturnedAt(DateTool.stringToDate(data[i][3]));
-        emprunt.setToGiveBackAt(DateTool.stringToDate(data[i][4]));
+        emprunt.setReturnedAt(DateTool.stringToDate(data[i][3],"yyyy-MM-dd"));
+        emprunt.setToGiveBackAt(DateTool.stringToDate(data[i][4],"yyyy-MM-dd"));
         emprunt.setProduct(productService.findOneById(Long.parseLong(data[i][5])));
         emprunt.setUser(userService.findOneById(Long.parseLong(data[i][6])));
 
@@ -122,6 +122,16 @@ public class EmpruntDaoImpl implements IEmpruntDao<Emprunt, Long> {
     public Emprunt findOneById(Long id) {
         Emprunt emprunt = findBy("idemprunt", id).get(0);
         return emprunt;
+    }
+
+    @Override
+    public List<Emprunt> findByUser(Long idUser) {
+        String[][] data= database.executeQuery("select * from emprunt where iduser="+idUser);
+        List <Emprunt> empruntsList = new ArrayList<>();
+        for(int i=1; i<data.length; i++){
+            empruntsList.add(parseEmprunt(data,i));
+        }
+        return empruntsList;
     }
     
     @Override
@@ -134,7 +144,6 @@ public class EmpruntDaoImpl implements IEmpruntDao<Emprunt, Long> {
     public List<Emprunt> findAll() {
         String[][] emprunts = database.select("emprunt");
         List<Emprunt>empruntsList = new ArrayList<>();
-
         for(int i=1; i<emprunts.length; i++){
             empruntsList.add(parseEmprunt(emprunts,i));
         }

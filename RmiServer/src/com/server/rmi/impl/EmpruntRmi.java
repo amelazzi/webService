@@ -63,6 +63,11 @@ public class EmpruntRmi extends UnicastRemoteObject implements IEmpruntRmi {
     }
 
     @Override
+    public List<Emprunt> findByUser(Long idUser) throws RemoteException{
+        return service.findByUser(idUser);
+    }
+
+    @Override
     public void removeAll() throws RemoteException {
         service.deleteAll();
     }

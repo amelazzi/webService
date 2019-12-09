@@ -20,6 +20,8 @@ public interface IEmpruntRmi extends Remote {
 
     public List<Emprunt> findAll() throws RemoteException;
 
+    public List<Emprunt> findByUser(Long idUser) throws RemoteException;
+
     public void removeAll() throws RemoteException;
 
     public int emprunter(Product product, UserImpl user) throws Exception;
