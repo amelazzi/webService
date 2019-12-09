@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database Connection Settings -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+
+        <property name="connection.url">jdbc:postgresql://localhost:5432/rmidb</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">toor</property>
+
+        <!-- SQL Dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
+
+        <!-- Echo All Executed SQL to stdout -->
+        <property name="show_sql">true</property>
+
+        <!-- DB schema will be updated if needed -->
+        <property name="hibernate.hbm2ddl.auto">create</property>
+		
+		<property name="hibernate.current_session_context_class">thread</property>
+		
+        <!-- mapping entities -->
+        <mapping class="com.server.entities.impl.Product"/>
+        <mapping class="com.server.entities.impl.Comment"/>
+        <mapping class="com.server.entities.impl.Demande"/>
+        <mapping class="com.server.entities.impl.Emprunt"/>
+        <mapping class="com.server.entities.impl.Media"/>
+        <mapping class="com.server.entities.impl.Rate"/>
+        <mapping class="com.server.entities.impl.UserImpl"/>
+        <mapping class="com.server.entities.impl.Notification"/>
+        
+    </session-factory>
+</hibernate-configuration>
