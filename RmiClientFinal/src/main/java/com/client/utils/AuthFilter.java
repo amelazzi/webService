@@ -25,17 +25,22 @@ public class AuthFilter implements Filter {
         this.context.log("AuthenticationFilter initialized");
     }
 
+	@SuppressWarnings("null")
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
         HttpSession session = req.getSession(false);
-        UserImpl user= (UserImpl) session.getAttribute("user");
+        UserImpl user= new UserImpl();
+        user = (UserImpl) session.getAttribute("user");
         
         if (user == null){
-            this.context.log("Access denied: you are not loged or not an admin");
-            res.sendRedirect(req.getContextPath() + "/index.jsp");
+        	if(user.getRole()!="admin") {
+        		this.context.log("Access denied: you are not loged or not an admin");
+                res.sendRedirect(req.getContextPath() + "/index.jsp");
+        		//res.sendRedirect("/");
+        	}
         } else {
             // pass the request along the filter chain
             chain.doFilter(request, response);

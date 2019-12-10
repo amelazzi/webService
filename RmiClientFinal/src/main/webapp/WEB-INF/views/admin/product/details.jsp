@@ -28,6 +28,16 @@
 								<span class="fa fa-star checked"></span>
 								<span class="fa fa-star"></span>
 								<span class="fa fa-star"></span>
+								<font class="badge badge-pill badge-secondary">3,7</font>
+								<form action="<c:url value="/rating"/>" method="post">
+									<input type="hidden" value="${product.getIdProduct()}">
+									<select name="rateValue">
+										<c:forEach var="i" begin="1" end="5" step="1">
+											<option value="${i}">${i}</option>
+										</c:forEach>
+									</select>
+									<button class="btn btn-outline-dark">Voter</button>
+								</form>
 							</div>
 							<span class="review-no">${comments.size()} commentaire(s)</span>
 						</div>

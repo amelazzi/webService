@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.client.rmi.stub.CommentStub;
 import com.client.rmi.stub.EmpruntStub;
 import com.client.rmi.stub.ProductStub;
 import com.client.rmi.stub.UserStub;
+import com.server.entities.impl.Comment;
 import com.server.entities.impl.Emprunt;
 import com.server.entities.impl.Product;
 import com.server.entities.impl.UserImpl;
@@ -36,7 +38,7 @@ public class EmprunterController {
 			System.out.println("Vous devez être connecté");
 			return "redirect:/";
 		}
-				
+		
 		if(null!=idproduct){
 			long idP = Long.parseLong(idproduct);
 			long idUser = ((UserImpl) session.getAttribute("user")).getIdUser();

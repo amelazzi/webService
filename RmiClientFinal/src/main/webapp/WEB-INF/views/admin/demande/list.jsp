@@ -11,13 +11,13 @@
 			  <ol class="breadcrumb">
 			    <li class="breadcrumb-item"><a href="<c:url value="/home"/>"><fmt:message key="common.dashboard"/></a></li>
 			    <li class="breadcrumb-item"><a href="#"><fmt:message key="common.setting"/></a></li>
-			    <li class="breadcrumb-item active" aria-current="page"><fmt:message key="lend.my"/></li>
+			    <li class="breadcrumb-item active" aria-current="page"><fmt:message key="request.list"/></li>
 			  </ol>
 			</nav>
 	    	<div class="row">
 	    		<div class="container-fluid">
 			        <!-- Page Content -->
-			        <h1><fmt:message key="user.lend.request"/></h1>
+			        <h1><fmt:message key="request.list"/></h1>
 			        <hr>
 			      	 	<!-- DataTables Demande -->
 				        <div class="card mb-3">
@@ -30,7 +30,7 @@
 				              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 				                <thead class="thead-dark">
 				                  <tr>
-				                  	<th><fmt:message key="common.user"/></th>
+				                  	<th><fmt:message key="user"/></th>
 				                    <th><fmt:message key="common.product"/></th>
 				                    <th><fmt:message key="common.createdAt"/></th>
 				                    <th><fmt:message key="common.status"/></th>
@@ -39,7 +39,7 @@
 				                </thead>
 				                <tfoot>
 				                  <tr>
-				                  	<th><fmt:message key="common.user"/></th>
+				                  	<th><fmt:message key="user"/></th>
 				                    <th><fmt:message key="common.product"/></th>
 				                    <th><fmt:message key="common.createdAt"/></th>
 				                    <th><fmt:message key="common.status"/></th>
@@ -51,7 +51,7 @@
 					                  <tr>
 					                  	<td>
 					                    	<a href="<c:url value="/product/${demande.getUser().getIdUser()}"/>">
-					                    		${demande.getUser().getFirstName()} ${demande.getUser().getLaststName()}
+					                    		${demande.getUser().getFirstName()} ${demande.getUser().getLastName()}
 					                    	</a>
 					                    </td>
 					                    <td>

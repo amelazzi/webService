@@ -42,7 +42,7 @@
                     <fmt:message key="user.buy"/>
                 </a>
             </li>
-
+			
 		    <li class="nav-item dropdown">
 			  <a class="dropdown-toggle nav-link" href="#" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			    <i class="fas fa-tools"></i>
@@ -52,7 +52,7 @@
 			    <a class="dropdown-item" href="<c:url value="/admin/product"/>"><fmt:message key="common.product"/></a>
 			    <a class="dropdown-item" href="<c:url value="/admin/user"/>"><fmt:message key="user"/></a>
 			    <a class="dropdown-item" href="<c:url value="/admin/emprunt"/>"><fmt:message key="common.lend"/></a>
-			    <a class="dropdown-item" href=""><fmt:message key="common.lend.request"/></a>
+			    <a class="dropdown-item" href="<c:url value="/admin/demande"/>"><fmt:message key="common.lend.request"/></a>
 			  </div>
 			</li>
         </ul>

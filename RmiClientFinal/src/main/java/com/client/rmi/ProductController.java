@@ -18,9 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.client.rmi.stub.CommentStub;
 import com.client.rmi.stub.ProductStub;
+import com.client.rmi.stub.RateStub;
 import com.client.utils.FileManager;
 import com.server.entities.impl.Comment;
 import com.server.entities.impl.Product;
+import com.server.entities.impl.Rate;
 import com.server.entities.impl.UserImpl;
 
 @Controller
@@ -67,6 +69,8 @@ public class ProductController {
 		Product product = new Product();
 		Comment comment = new Comment();
 		UserImpl user=new UserImpl();
+		Rate rate = new Rate();
+		
 		
 		if(session.getAttribute("user")==null) {
 			session.setAttribute("error_msg", "Vous devez être connecté");
@@ -79,12 +83,14 @@ public class ProductController {
 		if(null!=id){
 			long idProduct = Long.parseLong(id);
 			product = (Product) ProductStub.getStub().findOneById(idProduct);
+			rate.setProduct(product);
 			comments = CommentStub.getStub().findAll();			
 		}else {
 			System.out.println("Element introuvable");
 			return "redirect:/home";
 		}
 		
+		model.addAttribute("rate", rate);
 		model.addAttribute("user", user);
 		model.addAttribute("comment", comment);
 		model.addAttribute("product", product);
@@ -142,6 +148,28 @@ public class ProductController {
 		
 		model.addAttribute("product", product);
 		return "redirect:/admin/product/";
+	}
+	
+	@RequestMapping(value = "/rating", method = RequestMethod.POST)
+	public String rating(Locale local, Model model, 
+			@RequestParam("rateValue") String rateValue, 
+			@RequestParam("photo") String idProduct) throws RemoteException, Exception {
+		
+		Product product = new Product();
+		Rate rate = new Rate();
+		
+		if(null!=idProduct){
+			long idP= Long.parseLong(idProduct);
+			product = (Product) ProductStub.getStub().findOneById(idP);
+			ProductStub.getStub().remove(product);
+			if(rateValue!=null) {
+				rate.setProduct(product);
+				rate.setValue(Integer.parseInt(rateValue));
+				RateStub.getStub().add(rate);
+			}
+		}
+		
+		return "redirect:/product/"+idProduct;
 	}
 
 	

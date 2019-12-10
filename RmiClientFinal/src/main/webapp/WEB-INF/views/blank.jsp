@@ -14,7 +14,6 @@
 			<div class="row">
 				<h1>Blank page</h1>
 			</div>
-		
 	    </section>
 	</jsp:attribute>
 </t:template>
