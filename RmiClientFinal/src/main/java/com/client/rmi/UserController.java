@@ -18,7 +18,11 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.client.rmi.stub.ProductStub;
 import com.client.rmi.stub.UserStub;
+import com.server.entities.impl.Emprunt;
+import com.server.entities.impl.Product;
 import com.server.entities.impl.UserImpl;
 
 @Controller
@@ -29,7 +33,7 @@ public class UserController {
 		List<UserImpl> users=new ArrayList<UserImpl>();
 		HttpSession session = request.getSession();
 		if(session.getAttribute("user")==null) {
-			System.out.println("Vous devez être connecté");
+			System.out.println("Vous devez ï¿½tre connectï¿½");
 			return "redirect:/";
 		}
 		try {
@@ -56,7 +60,7 @@ public class UserController {
 		UserImpl user = new UserImpl();
 		HttpSession session = request.getSession();
 		if(session.getAttribute("user")==null) {
-			System.out.println("Vous devez être connecté");
+			System.out.println("Vous devez ï¿½tre connectï¿½");
 			return "redirect:/";
 		}
 		
@@ -77,7 +81,7 @@ public class UserController {
 		UserImpl user = new UserImpl();
 		HttpSession session = request.getSession();
 		if(session.getAttribute("user")==null) {
-			System.out.println("Vous devez être connecté");
+			System.out.println("Vous devez ï¿½tre connectï¿½");
 			return "redirect:/";
 		}
 		if(null!=id){
@@ -123,6 +127,24 @@ public class UserController {
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, null,  new CustomDateEditor(dateFormat, true));
     }
+	
+	@RequestMapping(value ="/user/profil", method = RequestMethod.GET)
+	public String profil(Locale locale, Model model, HttpServletRequest request) {
+		
+		UserImpl user = null;
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user")==null) {
+			System.out.println("Vous devez Ãªtre connectÃ©");
+			return "redirect:/";
+		}else {
+			user = (UserImpl) session.getAttribute("user");
+		}
+
+		model.addAttribute("user",user);
+		
+		return "admin/user/profil";
+	}
 	
 	
 }
