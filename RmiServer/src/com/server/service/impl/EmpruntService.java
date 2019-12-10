@@ -183,6 +183,7 @@ public class EmpruntService implements IEmpruntService{
 				try{
 					add(emprunt);
 					p.setQuantity(p.getQuantity()-1);
+					if(p.getQuantity()==0) p.setAvailable(false);
 					productService.update(p);
 					System.out.println("Emprunter accorder");
 				}catch (Exception e){
@@ -211,8 +212,9 @@ public class EmpruntService implements IEmpruntService{
     		emprunt.setIsReturned(true);
     		emprunt.setReturnedAt(new Date());
     		update(emprunt);
-    		emprunt.getProduct().setQuantity(emprunt.getProduct().getQuantity()+1);
-    		productService.update(emprunt.getProduct());
+    		Product p = emprunt.getProduct();
+    		p.setQuantity(p.getQuantity()+1);
+    		productService.update(p);
 			notifier(emprunt);
     		return true;
 		}else
@@ -236,22 +238,22 @@ public class EmpruntService implements IEmpruntService{
 				if(d.getUser().getStatus()=="student"){
 					students.add(d.getUser());
 				}
-				Notification notif= new Notification();
-				notif.setMessage("Le livre <<"+emprunt.getProduct().getTitle().toUpperCase()+">> que vous avez demandé est maintenant disponible");
-				notif.setDemande(d);
-				notifications.add(notif);
 			}
 
 			//S'il y a des demandes Envoyer des notifications à ces utilisateur
-			if(teachers!=null)
-				sendNotif(teachers, notifications, emprunt);
-			else
-				if(students!=null)
-					sendNotif(students, notifications, emprunt);
+			if(teachers!=null) {
+				sendNotif(teachers, emprunt);
+				System.out.println("Teacher : " + teachers.size());
+			}else {
+				if (students != null){
+					sendNotif(students, emprunt);
+				}
+				System.out.println("Students : " + students.size());
+			}
 		}
 	}
 
-    public void sendNotif(List<UserImpl> users, List<Notification> notifications, Emprunt emprunt){
+    public void sendNotif(List<UserImpl> users, Emprunt emprunt){
 		if(users.size()>1){
 			Map<Long, Integer> list=new HashMap<Long, Integer>();
 			for(UserImpl t: users)
@@ -259,16 +261,25 @@ public class EmpruntService implements IEmpruntService{
 
 			Integer min = Collections.min(list.values());
 			Long key= getKeyByValue(list,min);
-			for(Notification n:notifications)
-				if(n.getDemande().getUser().getIdUser()==key)
-					if(n.getDemande().getProduct()==emprunt.getProduct())
-						notificationService.add(n);
+			send(emprunt);
 
-		}else
-			for(Notification n:notifications)
-				if(n.getDemande().getUser()==users.get(0))
-					notificationService.add(n);
+		}else{
+			send(emprunt);
+		}
     }
+
+    public void send(Emprunt emprunt){
+		Notification notification = new Notification();
+		Demande demande = new Demande();
+		demande.setUser(emprunt.getUser());
+		demande.setProduct(emprunt.getProduct());
+		notification.setMessage("Le livre <<"+emprunt.getProduct().getTitle().toUpperCase()+">> que vous avez demandé est maintenant disponible");
+
+		notification.setDemande(demande);
+		notificationService.add(notification);
+		System.out.println("Notif: "+notification.toString());
+
+	}
 
 	public static <T, E> T getKeyByValue(Map<T, E> map, E value) {
 		for (Map.Entry<T, E> entry : map.entrySet()) {

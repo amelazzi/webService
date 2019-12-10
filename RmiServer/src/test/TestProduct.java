@@ -20,6 +20,10 @@ public class TestProduct
 		//TestAdd();
 		//TestSelectAll();
 		displayMany(productService.findAll());
+		Product p = new Product();
+		p = productService.findOneById(9L);
+		p.setDescription("updated product");
+		productService.update(p);
 		
 	}
 	

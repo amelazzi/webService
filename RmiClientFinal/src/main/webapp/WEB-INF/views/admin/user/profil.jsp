@@ -8,7 +8,7 @@
 	    	<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
 			    <li class="breadcrumb-item"><a href="<c:url value="/home/user/profil"/>"><fmt:message key="common.dashboard"/></a></li>
-			    <li class="breadcrumb-item active" aria-current="page">Library</li>
+			    <li class="breadcrumb-item active" aria-current="page">Profil</li>
 			  </ol>
 			</nav>
 			<div class="row">

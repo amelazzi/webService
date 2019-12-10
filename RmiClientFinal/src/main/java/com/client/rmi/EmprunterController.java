@@ -58,7 +58,6 @@ public class EmprunterController {
 		model.addAttribute("product",product);
 		model.addAttribute("user",user);
 		model.addAttribute("emprunt",emprunt);
-		System.out.println(emprunt.toString());
 		
 		return "emprunt/confirm";
 	}
@@ -173,7 +172,7 @@ public class EmprunterController {
 		
 		model.addAttribute("errors_msg",error_msg);
 		model.addAttribute("success_msg",succes_msg);
-		return "redirect:/emprunt";
+		return "redirect:/admin/emprunt";
 	}
 	
 }

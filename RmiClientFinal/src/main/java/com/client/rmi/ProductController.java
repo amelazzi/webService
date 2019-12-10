@@ -137,7 +137,7 @@ public class ProductController {
 				urlPhoto=FileManager.upload(file);
 			}
 			product.setImage(urlPhoto);
-			int max =(product.getDescription().length()<254)?product.getDescription().length():254;
+			int max =(product.getDescription().length()<250)?product.getDescription().length():250;
 			product.setDescription(product.getDescription().substring(0, max));
 			if(product.getIdProduct()!=0L) {
 				ProductStub.getStub().update(product);
@@ -153,7 +153,7 @@ public class ProductController {
 	@RequestMapping(value = "/rating", method = RequestMethod.POST)
 	public String rating(Locale local, Model model, 
 			@RequestParam("rateValue") String rateValue, 
-			@RequestParam("photo") String idProduct) throws RemoteException, Exception {
+			@RequestParam("idProduct") String idProduct) throws RemoteException, Exception {
 		
 		Product product = new Product();
 		Rate rate = new Rate();
@@ -161,14 +161,13 @@ public class ProductController {
 		if(null!=idProduct){
 			long idP= Long.parseLong(idProduct);
 			product = (Product) ProductStub.getStub().findOneById(idP);
-			ProductStub.getStub().remove(product);
 			if(rateValue!=null) {
 				rate.setProduct(product);
 				rate.setValue(Integer.parseInt(rateValue));
 				RateStub.getStub().add(rate);
 			}
 		}
-		
+		System.out.println(rate.toString());
 		return "redirect:/product/"+idProduct;
 	}
 

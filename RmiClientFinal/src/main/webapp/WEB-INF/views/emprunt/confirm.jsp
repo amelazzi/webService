@@ -61,7 +61,15 @@
 				                  	</f:form>
 			                  	</c:when>
 				              	<c:otherwise>
-			                  		<a href="" class="btn btn-sm btn-outline-primary"><i class="fab fa-buffer"></i> <fmt:message key="common.reserve"/></a>
+				              		<c:url value="/emprunt/save" var ="urlSave" />
+				                  	<f:form modelAttribute="emprunt" action="${urlSave}" method="post">
+				                  		<input type="hidden" name="idUser" value="${user.getIdUser()}">
+				                  		<input type="hidden" name="idProduct" value="${product.getIdProduct()}">
+				                  		<button class="btn btn-sm btn-outline-primary">
+			                  				<i class="fab fa-buffer"></i> 
+			                  				<fmt:message key="common.reserve"/>
+			                  			</button>
+				                  	</f:form>
 			                  	</c:otherwise>
 				            </c:choose>
 						</div>
