@@ -22,7 +22,7 @@
 	          <i class="fas fa-user-circle fa-fw fa-2x" style="color:#ffffff"></i>
 	        </a>
 	        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-	          <a class="dropdown-item" href="#">Profil</a>
+	          <a class="dropdown-item" href="<c:url value="/user/profil"/>">Profil</a>
 	          <div class="dropdown-divider"></div>
 	          <a class="dropdown-item" href="<c:url value="/logout"/>">
 	          	<i class="fas fa-sign-out-alt"></i>&nbsp;
