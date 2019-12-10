@@ -99,7 +99,7 @@
 			                  		</a>
 			                  	</c:when>
 				              	<c:otherwise>
-			                  		<a href="" class="btn btn-sm btn-outline-primary"><i class="fab fa-buffer"></i> <fmt:message key="common.reserve"/></a>
+			                  		<a href="<c:url value="/emprunter/${product.getIdProduct()}"/>" class="btn btn-sm btn-outline-primary"><i class="fab fa-buffer"></i> <fmt:message key="common.reserve"/></a>
 			                  	</c:otherwise>
 				              </c:choose>
 			                </div>

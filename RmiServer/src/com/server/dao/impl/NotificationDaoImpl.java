@@ -105,7 +105,7 @@ public class NotificationDaoImpl implements INotificationDao<Notification, Long>
         notif.setIdNotification(Long.parseLong(data[i][0]));
 
         boolean isread = data[i][1].equals("t")? true:false;;
-        notif.setRead(isread);
+        notif.setIsRead(isread);
 
         notif.setMessage(data[i][2]);
         notif.setSendAt(DateTool.stringToDate(data[i][3]));

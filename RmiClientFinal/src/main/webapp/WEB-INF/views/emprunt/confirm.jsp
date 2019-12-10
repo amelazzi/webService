@@ -29,7 +29,7 @@
 								<span class="fa fa-star"></span>
 								<span class="fa fa-star"></span>
 							</div>
-							<span class="review-no">41 reviews </span>
+							<span class="review-no">${product.getComment().size()} comment(s)</span>
 						</div>
 						<p class="product-description">
 							${product.getDescription()}

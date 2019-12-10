@@ -41,7 +41,7 @@ public class Notification implements Serializable, INotification {
 	}
 	
 	@Override
-	public boolean isRead() {
+	public boolean getIsRead() {
 		return isRead;
 	}
 	

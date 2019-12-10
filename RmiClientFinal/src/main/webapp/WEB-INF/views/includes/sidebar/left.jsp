@@ -24,7 +24,15 @@
                 <a class="nav-link" href="<c:url value="/demande"/>">
                 	<i class="fab fa-buffer"></i>
                     <span data-feather="shopping-cart"></span>
-                    <fmt:message key="user.lend.request.notification"/>
+                    <fmt:message key="user.lend.request"/>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/notification"/>">
+                	<i class="fas fa-bell"></i>
+                    <span data-feather="shopping-cart"></span>
+                    <fmt:message key="common.notif"/>
+                    <span class="badge badge-pill badge-info"><%= session.getAttribute("notifications") %></span> 
                 </a>
             </li>
             <li class="nav-item">

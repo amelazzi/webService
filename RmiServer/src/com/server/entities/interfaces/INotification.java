@@ -15,9 +15,9 @@ public interface INotification {
 
 	public void setSendAt(Date sendAt);
 
-	public boolean isRead();
+	public void setIsRead(boolean isRead);
 
-	public void setRead(boolean isRead);
+	public boolean getIsRead();
 
 	public Demande getDemande();
 

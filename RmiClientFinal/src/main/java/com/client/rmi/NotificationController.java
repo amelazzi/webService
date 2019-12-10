@@ -20,10 +20,10 @@ import com.server.entities.impl.Notification;
 import com.server.entities.impl.UserImpl;
 
 @Controller
-public class DemandeNotificationController {
-	public DemandeNotificationController() {}
+public class NotificationController {
+	public NotificationController() {}
 	
-	@RequestMapping(value = "/demande", method = RequestMethod.GET)
+	@RequestMapping(value = "/notification", method = RequestMethod.GET)
 	public String index(Locale locale, Model model, HttpServletRequest request) throws RemoteException, Exception {
 		HttpSession httpSession = request.getSession();
 		
@@ -48,8 +48,7 @@ public class DemandeNotificationController {
 			e.printStackTrace();
 		}
 		
-		model.addAttribute("demandes", demandes);
 		model.addAttribute("notifications", notifications);
-		return "demande/index";
+		return "notification/index";
 	}
 }

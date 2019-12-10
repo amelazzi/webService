@@ -58,11 +58,11 @@
 				                    <td>${emprunt.getToGiveBackAt()}</td>
 				                    <td>${emprunt.getIsReturned()}</td>
 				                    <td>
-				                    	<c:if test="${!emprunt.getIsReturned()}">
+				                    	<!--<c:if test="${!emprunt.getIsReturned()}">
 				                    		<a onClick="return confirm('Confirmer vous la restitution?')"  class="btn btn-outline-dark" href="<c:url value="/emprunt/restitution/${emprunt.getIdEmprunt()}"/>">
 				                    			Restituer
 				                    		</a>
-				                    	</c:if>
+				                    	</c:if>-->
 				                    </td>
 				                  </tr>
 			                  </c:forEach>

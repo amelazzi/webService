@@ -3,14 +3,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
-<t:template title="Demandes">
+<t:template title="List emprunt">
 	<jsp:attribute name="content">
 	    <!-- Main content -->
 	    <section class="content pt-3">
 	    	<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
 			    <li class="breadcrumb-item"><a href="<c:url value="/home"/>"><fmt:message key="common.dashboard"/></a></li>
-			    <li class="breadcrumb-item active" aria-current="page"><fmt:message key="user.lend.request.notification"/></li>
+			    <li class="breadcrumb-item"><a href="#"><fmt:message key="common.setting"/></a></li>
+			    <li class="breadcrumb-item active" aria-current="page"><fmt:message key="lend.my"/></li>
 			  </ol>
 			</nav>
 	    	<div class="row">
@@ -29,6 +30,7 @@
 				              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 				                <thead class="thead-dark">
 				                  <tr>
+				                  	<th><fmt:message key="common.user"/></th>
 				                    <th><fmt:message key="common.product"/></th>
 				                    <th><fmt:message key="common.createdAt"/></th>
 				                    <th><fmt:message key="common.status"/></th>
@@ -37,6 +39,7 @@
 				                </thead>
 				                <tfoot>
 				                  <tr>
+				                  	<th><fmt:message key="common.user"/></th>
 				                    <th><fmt:message key="common.product"/></th>
 				                    <th><fmt:message key="common.createdAt"/></th>
 				                    <th><fmt:message key="common.status"/></th>
@@ -46,6 +49,11 @@
 				                <tbody>
 				                  <c:forEach items="${demandes}" var="demande">
 					                  <tr>
+					                  	<td>
+					                    	<a href="<c:url value="/product/${demande.getUser().getIdUser()}"/>">
+					                    		${demande.getUser().getFirstName()} ${demande.getUser().getLaststName()}
+					                    	</a>
+					                    </td>
 					                    <td>
 					                    	<a href="<c:url value="/product/${demande.getProduct().getIdProduct()}"/>">
 					                    		${demande.getProduct().getTitle()}
